@@ -16,3 +16,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.sparkle-container {
+  position: relative;
+}
+
+.sparkle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  animation: sparkle-animation 2s infinite ease-in-out;
+  z-index: 1;
+}
+
+@keyframes sparkle-animation {
+  0%, 100% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5) rotate(45deg);
+    opacity: 1;
+  }
+}
