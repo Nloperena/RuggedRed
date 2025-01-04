@@ -4,7 +4,7 @@ import HeroBottle2 from "../assets/HeroBottle2.png";
 
 const Hero = () => {
   return (
-    <section id="hero" className="bg-white min-h-screen flex items-center">
+    <section id="hero" className="bg-white min-h-[75vh] flex items-center">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         {/* Text Section */}
         <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
