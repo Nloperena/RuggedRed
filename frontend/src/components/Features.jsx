@@ -28,9 +28,8 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="bg-[#D3242A] py-16 px-6">
+    <section className="relative bg-[#D3242A] py-16 px-6">
       <div className="container mx-auto text-center">
-        {/* Section Title */}
         <motion.h2
           className="text-white text-5xl font-extrabold mb-16"
           initial={{ opacity: 0, y: -20 }}
@@ -40,7 +39,6 @@ const Features = () => {
           Why Choose Rugged Red?
         </motion.h2>
 
-        {/* Feature Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <motion.div
@@ -49,7 +47,7 @@ const Features = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: index * 0.3, // Sequential delay
+                delay: index * 0.3,
                 duration: 0.6,
                 ease: "easeOut",
               }}
@@ -57,14 +55,13 @@ const Features = () => {
                 boxShadow: "0 15px 30px rgba(0, 0, 0, 0.2)",
               }}
             >
-              {/* Icon */}
               <motion.div
                 className="w-16 h-16 flex items-center justify-center rounded-full mb-6"
                 style={{ backgroundColor: "#D3242A" }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{
-                  delay: index * 0.3 + 0.2, // Slightly offset for the icon
+                  delay: index * 0.3 + 0.2,
                   duration: 0.5,
                   ease: "easeOut",
                 }}
@@ -72,13 +69,12 @@ const Features = () => {
                 <FontAwesomeIcon icon={feature.icon} className="text-white text-4xl" />
               </motion.div>
 
-              {/* Title */}
               <motion.h3
                 className="text-xl font-bold text-[#171717] mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  delay: index * 0.3 + 0.4, // Offset for title
+                  delay: index * 0.3 + 0.4,
                   duration: 0.5,
                   ease: "easeOut",
                 }}
@@ -86,13 +82,12 @@ const Features = () => {
                 {feature.title}
               </motion.h3>
 
-              {/* Description */}
               <motion.p
                 className="text-gray-600 text-sm"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{
-                  delay: index * 0.3 + 0.6, // Offset for description
+                  delay: index * 0.3 + 0.6,
                   duration: 0.5,
                   ease: "easeOut",
                 }}
