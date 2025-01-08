@@ -4,6 +4,8 @@ import Hero from "./components/Hero";
 import WaveDivider from "./components/WaveDivider";
 import Footer from "./components/Footer";
 import Features from "./components/Features";
+import ProductsSection from "./components/ProductsSection";
+import FeaturesShowcase from "./components/FeatureShowcase";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
       <div className="relative z-0">
         <Features />
       </div>
+      <ProductsSection />
+      <FeaturesShowcase />
       <Footer />
     </div>
   );
