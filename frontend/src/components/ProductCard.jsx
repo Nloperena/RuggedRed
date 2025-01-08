@@ -1,11 +1,9 @@
-// ProductCard.jsx
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * Inline styles for our "shimmer" effect.
- * In a real project, you might move this into a CSS or Tailwind config.
+ * Mimics a shine moving across the skeleton.
  */
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
@@ -15,8 +13,7 @@ const shimmerStyle = {
 };
 
 /**
- * A small helper component for skeleton placeholders.
- * We use a <div> with our shimmer style to mimic a "shine" moving across.
+ * A small helper component for skeleton placeholders with shimmer effect.
  */
 function SkeletonBlock({ className, style }) {
   return (
@@ -28,24 +25,18 @@ function SkeletonBlock({ className, style }) {
 }
 
 const ProductCard = ({ product, delay = 0 }) => {
-  // Track if the image is done loading
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-  // Track if text fields (name, slogan, price, etc.) are ready
-  const [isTextLoaded, setIsTextLoaded] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false); // Track image loading
+  const [isTextLoaded, setIsTextLoaded] = useState(false); // Track text loading
 
-  // If product exists, we have real data
-  const hasProduct = !!product?.fields;
+  const hasProduct = !!product?.fields; // Check if product exists
 
-  // Once we have data, mark text as loaded (optionally add a small timeout)
   useEffect(() => {
     if (hasProduct) {
-      setIsTextLoaded(true);
+      setIsTextLoaded(true); // Mark text as loaded if product data exists
     }
   }, [hasProduct]);
 
-  // Extract fields from product
   const { name, slogan, price, amazonUrl, images } = product?.fields || {};
-  // If there are images, pick the first one
   const imageUrl =
     Array.isArray(images) && images.length > 0
       ? images[0].fields.file.url
@@ -55,7 +46,7 @@ const ProductCard = ({ product, delay = 0 }) => {
     <div
       className="
         relative
-        bg-white               /* White card background (swap for bg-[#F2F2F2] if you want light gray) */
+        bg-white
         rounded-xl
         p-6
         text-center
@@ -63,63 +54,72 @@ const ProductCard = ({ product, delay = 0 }) => {
         transition
         duration-200
         hover:-translate-y-1
-        
-        /* HARSH SHADOWS */
-        shadow-[8px_8px_0_rgba(0,0,0,1)]   /* Big offset black shadow */
+        shadow-[8px_8px_0_rgba(0,0,0,1)]
         hover:shadow-[12px_12px_0_rgba(0,0,0,1)]
       "
-      style={{ minHeight: "360px" }} // ensures enough space for skeleton placeholders
+      style={{ minHeight: "360px" }}
     >
-      {/** 1) Spinner Overlay for the Image **/}
+      {/* Skeleton Loading State */}
       <AnimatePresence>
-        {!isImageLoaded && imageUrl && (
+        {(!isImageLoaded || !isTextLoaded) && (
           <motion.div
-            key="spinner"
-            className="absolute inset-0 flex items-center justify-center bg-transparent"
+            key="skeleton"
+            className="absolute inset-0 flex flex-col items-center justify-center p-6 pointer-events-none"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }} // Fade out
           >
-            {/* Spinner in brand red (#D3242A) or black/white if you prefer */}
-            <div className="w-8 h-8 border-4 border-[#D3242A] border-t-transparent rounded-full animate-spin" />
+            {/* Skeleton for the image */}
+            {!isImageLoaded && (
+              <SkeletonBlock className="w-48 h-48 rounded-lg mb-4" />
+            )}
+
+            {/* Skeleton for the text */}
+            {!isTextLoaded && (
+              <>
+                <SkeletonBlock className="w-32 h-5 rounded-md mb-2" />
+                <SkeletonBlock className="w-48 h-4 rounded-md mb-2" />
+                <SkeletonBlock className="w-20 h-4 rounded-md mb-4" />
+                <SkeletonBlock className="w-32 h-8 rounded-full" />
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/** 2) Main Card Content (fade in once text & image are loaded) **/}
+      {/* Main Content: Fades in when loading is complete */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: isTextLoaded && isImageLoaded ? 1 : 0 }}
-        transition={{ delay, duration: 0.5 }}
+        animate={{ opacity: isImageLoaded && isTextLoaded ? 1 : 0 }}
+        transition={{ duration: 0.5 }} // Fade in
       >
-        {/* IMAGE */}
+        {/* Product Image */}
         {imageUrl && (
           <img
             src={imageUrl}
             alt={name || "Product Image"}
             className="mx-auto mb-4 w-48 h-48 object-cover rounded-lg"
-            onLoad={() => setIsImageLoaded(true)}
+            onLoad={() => setIsImageLoaded(true)} // Mark image as loaded
             style={{ display: isImageLoaded ? "block" : "none" }}
           />
         )}
 
-        {/* NAME (brand red for pop, or black if you prefer) */}
+        {/* Product Name */}
         {isTextLoaded && name && (
-          <h3 className="text-2xl font-bold mb-2 text-[#D3242A]">
-            {name}
-          </h3>
+          <h3 className="text-2xl font-bold mb-2 text-[#D3242A]">{name}</h3>
         )}
 
-        {/* SLOGAN */}
+        {/* Product Slogan */}
         {isTextLoaded && slogan && (
           <p className="text-black italic mb-2">{slogan}</p>
         )}
 
-        {/* PRICE */}
+        {/* Product Price */}
         {isTextLoaded && price && (
           <p className="text-black font-semibold mb-4">${price}</p>
         )}
 
-        {/* Black, round button for Amazon link */}
+        {/* Amazon Link Button */}
         {isTextLoaded && amazonUrl && (
           <a
             href={amazonUrl}
@@ -142,26 +142,6 @@ const ProductCard = ({ product, delay = 0 }) => {
           </a>
         )}
       </motion.div>
-
-      {/** 3) Skeleton Loading for text & image (shimmer effect) **/}
-      {(!isTextLoaded || !isImageLoaded) && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 pointer-events-none">
-          {/* Image skeleton */}
-          {!isImageLoaded && (
-            <SkeletonBlock className="w-48 h-48 rounded-lg mb-4" />
-          )}
-
-          {/* Text skeletons */}
-          {!isTextLoaded && (
-            <>
-              <SkeletonBlock className="w-32 h-5 rounded-md mb-2" />
-              <SkeletonBlock className="w-48 h-4 rounded-md mb-2" />
-              <SkeletonBlock className="w-20 h-4 rounded-md mb-4" />
-              <SkeletonBlock className="w-32 h-8 rounded-full" />
-            </>
-          )}
-        </div>
-      )}
     </div>
   );
 };

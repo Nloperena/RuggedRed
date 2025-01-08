@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Features from "./components/Features";
 import ProductsSection from "./components/ProductsSection";
 import FeaturesShowcase from "./components/FeatureShowcase";
+import ProductCard from "./components/ProductCard";
 
 const App = () => {
   return (

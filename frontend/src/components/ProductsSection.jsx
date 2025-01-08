@@ -1,22 +1,45 @@
-// ProductsSection.jsx
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import client from "../contentful";
-import ProductCard from "./ProductCard"; // <-- Import our new card
+import ProductCard from "./ProductCard";
+
+/**
+ * Skeleton placeholder for the entire products grid.
+ * Animated shimmer effect for placeholders.
+ */
+function SkeletonGrid() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+      {/* Render placeholders for 6 skeleton cards */}
+      {Array.from({ length: 6 }).map((_, index) => (
+        <motion.div
+          key={index}
+          className="bg-gray-300 rounded-lg p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+          <div className="w-full h-48 bg-gray-400 rounded-lg mb-4 shimmer" />
+          <div className="h-5 w-3/4 bg-gray-400 rounded mb-2 shimmer" />
+          <div className="h-4 w-1/2 bg-gray-400 rounded mb-4 shimmer" />
+          <div className="h-8 w-1/3 bg-gray-400 rounded-full shimmer" />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 const ProductsSection = () => {
-  // We keep a list of products in state
-  const [products, setProducts] = useState([]);
-  // We keep track of loading to show skeleton or spinner while fetching
-  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]); // State to store products
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   useEffect(() => {
-    // We ask for entries with content type ID "cleaningProduct"
+    // Fetch data from Contentful
     client
       .getEntries({ content_type: "cleaningProduct" })
       .then((response) => {
-        setProducts(response.items);
-        setIsLoading(false);
+        setProducts(response.items); // Store fetched products
+        setIsLoading(false); // Mark loading as complete
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -24,16 +47,17 @@ const ProductsSection = () => {
       });
   }, []);
 
-  // If still fetching from Contentful, show a placeholder
+  // Show skeleton while loading
   if (isLoading) {
     return (
-      <div className="p-8 text-center">
-        <p>Loading products...</p>
-      </div>
+      <section className="p-8">
+        <h2 className="text-3xl font-bold text-center mb-8">Our Products</h2>
+        <SkeletonGrid />
+      </section>
     );
   }
 
-  // If no products came back, show a message
+  // If no products are found
   if (!products.length) {
     return (
       <div className="p-8 text-center">
@@ -42,23 +66,20 @@ const ProductsSection = () => {
     );
   }
 
-  // Otherwise, display the product cards
+  // Show products once data is loaded
   return (
     <section className="p-8">
       <h2 className="text-3xl font-bold text-center mb-8">Our Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         {products.map((product, index) => (
-          <motion.div
-            key={product.sys.id || index}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            {/* We pass each product into our ProductCard */}
-            <ProductCard product={product} delay={index * 0.1} />
-          </motion.div>
+          <ProductCard key={product.sys.id || index} product={product} />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

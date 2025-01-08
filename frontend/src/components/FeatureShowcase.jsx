@@ -55,7 +55,7 @@ export default function FeaturesShowcase() {
           <div className="flex items-center justify-center">
             <img
               src="/path/to/image.jpg" // Replace with your actual image path
-              alt="Feature Image"
+              alt="Hand with Bottle Image"
               className="w-full max-w-sm shadow-lg rounded-lg"
             />
           </div>
