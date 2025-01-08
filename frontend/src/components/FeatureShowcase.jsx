@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import Hand from '../assets/blueragtransparent.png'
+import Flag from '../assets/usaflaggif.webp'
 
 export default function FeaturesShowcase() {
   useEffect(() => {
@@ -11,7 +13,7 @@ export default function FeaturesShowcase() {
   const features = [
     { icon: "fa-solid fa-bolt", label: "Powerful" },
     { icon: "fa-solid fa-leaf", label: "Non-Toxic" },
-    { icon: "fa-solid fa-flag", label: "Proudly Made in USA" },
+    { icon: {Flag}, label: "Proudly Made in USA" },
     { icon: "fa-solid fa-check-circle", label: "Proven" },
     { icon: "fa-solid fa-hand-sparkles", label: "Squeaky Clean" },
   ];
@@ -54,7 +56,7 @@ export default function FeaturesShowcase() {
           {/* Image Box */}
           <div className="flex items-center justify-center">
             <img
-              src="/path/to/image.jpg" // Replace with your actual image path
+              src={Hand} // Replace with your actual image path
               alt="Hand with Bottle Image"
               className="w-full max-w-sm shadow-lg rounded-lg"
             />
