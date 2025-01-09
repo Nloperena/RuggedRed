@@ -52,7 +52,6 @@ const Hero = () => {
         backgroundImage: `url(${Countertop})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        border: "2px solid blue", // Debugging border
       }}
       ref={(el) => {
         if (el) {
