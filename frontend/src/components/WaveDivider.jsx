@@ -9,8 +9,8 @@ const WaveDivider = ({ color, path, flip }) => {
         bottom: 0,
         left: 0,
         zIndex: 1000, // Debugging z-index
-        backgroundColor: "rgba(0, 0, 255, 0.2)", // Debugging background
-        border: "2px solid blue", // Debugging border
+
+
       }}
       ref={(el) => {
         if (el) {

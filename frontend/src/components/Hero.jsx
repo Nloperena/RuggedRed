@@ -72,7 +72,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-10 flex flex-col md:flex-row items-center">
         <div
           className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0"
-          style={{ border: "2px solid red" }} // Debugging border
+       
         >
           <div
             className="relative p-8 md:p-12 rounded-3xl shadow-lg"
