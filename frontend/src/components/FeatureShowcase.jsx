@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Hand from '../assets/blueragtransparent.png'
-import Flag from '../assets/usaflaggif.webp'
+import Hand from '../assets/blueragtransparent.png';
+import Flag from '../assets/usaflaggif.webp';
 
 export default function FeaturesShowcase() {
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function FeaturesShowcase() {
   const features = [
     { icon: "fa-solid fa-bolt", label: "Powerful" },
     { icon: "fa-solid fa-leaf", label: "Non-Toxic" },
-    { icon: {Flag}, label: "Proudly Made in USA" },
+    { image: Flag, label: "Proudly Made in USA" },
     { icon: "fa-solid fa-check-circle", label: "Proven" },
     { icon: "fa-solid fa-hand-sparkles", label: "Squeaky Clean" },
   ];
@@ -31,10 +31,21 @@ export default function FeaturesShowcase() {
         {/* Icon Row */}
         <div className="flex justify-center items-center mb-12 space-x-8">
           {features.map((feature, i) => (
-            <div key={i} className="text-center">
+            <div key={i} className="text-center flex items-center justify-center flex-col">
+            {feature.icon ? (
               <i className={`${feature.icon} text-3xl text-black mb-2`} />
-              <p className="text-black font-bold">{feature.label}</p>
-            </div>
+            ) : (
+              <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
+                <img
+                  src={feature.image}
+                  alt={feature.label}
+                  className="object-contain max-w-full max-h-full"
+                />
+              </div>
+            )}
+            <p className="text-black font-bold mt-2">{feature.label}</p>
+          </div>
+          
           ))}
         </div>
 
@@ -56,7 +67,7 @@ export default function FeaturesShowcase() {
           {/* Image Box */}
           <div className="flex items-center justify-center">
             <img
-              src={Hand} // Replace with your actual image path
+              src={Hand}
               alt="Hand with Bottle Image"
               className="w-full max-w-sm shadow-lg rounded-lg"
             />
