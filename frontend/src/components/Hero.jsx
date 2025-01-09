@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import HeroBottle from "../assets/HeroBottle1.png";
 import Countertop from "../assets/countertop.webp";
 
 const Hero = () => {
@@ -53,26 +52,12 @@ const Hero = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      ref={(el) => {
-        if (el) {
-          const styles = window.getComputedStyle(el);
-          const boundingBox = el.getBoundingClientRect();
-          console.log("Hero Section Debugging Info:", {
-            position: styles.position,
-            zIndex: styles.zIndex,
-            boundingBox,
-          });
-        }
-      }}
     >
       <div className="absolute inset-0 pointer-events-none z-0">
         {generateStars(30, [5, 15], [3, 6], [0.4, 0.9])}
       </div>
       <div className="container mx-auto px-4 py-10 flex flex-col md:flex-row items-center">
-        <div
-          className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0"
-       
-        >
+        <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
           <div
             className="relative p-8 md:p-12 rounded-3xl shadow-lg"
             style={{
@@ -97,9 +82,9 @@ const Hero = () => {
         </div>
         <div className="w-full md:w-1/2 flex justify-center mt-6 md:mt-0">
           <img
-            src={HeroBottle}
+            src="https://images.ctfassets.net/hdznx4p7ef81/6wqdD2LcrXiHoKHFzExEtz/abcb41e3f9d66cbe030c4810e68f480a/RRBottleHeroAnimation_1.gif"
             alt="Hero Bottle"
-            className="max-w-xs md:max-w-md lg:max-w-lg"
+            className="max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl"
           />
         </div>
       </div>
