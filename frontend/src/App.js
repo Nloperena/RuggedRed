@@ -7,6 +7,8 @@ import Features from "./components/Features";
 import ProductsSection from "./components/ProductsSection";
 import FeaturesShowcase from "./components/FeatureShowcase";
 import ProductCard from "./components/ProductCard";
+import AboutRed from "./components/AboutRed";
+import BenefitsSection from "./components/Benefits";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
         />
       </div>
       <div className="relative z-0">
+        <AboutRed />
+        <BenefitsSection />
         <Features />
       </div>
       <ProductsSection />

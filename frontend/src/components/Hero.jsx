@@ -69,7 +69,7 @@ const Hero = () => {
               A Proven Powerful Clean
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 mb-8 leading-relaxed">
-              Experience Rugged Red: a powerful, non-toxic cleaning solution
+              Rugged Red is a powerful, non-toxic cleaning solution
               that works hard, so you don’t have to.
             </p>
             <a

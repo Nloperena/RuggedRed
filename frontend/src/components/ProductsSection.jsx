@@ -4,25 +4,23 @@ import client from "../contentful";
 import ProductCard from "./ProductCard";
 
 /**
- * Skeleton placeholder for the entire products grid.
- * Animated shimmer effect for placeholders.
+ * Skeleton placeholder for the products grid.
  */
 function SkeletonGrid() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
-      {/* Render placeholders for 6 skeleton cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {Array.from({ length: 6 }).map((_, index) => (
         <motion.div
           key={index}
-          className="bg-gray-300 rounded-lg p-6"
+          className="bg-gray-700 rounded-lg p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-          <div className="w-full h-48 bg-gray-400 rounded-lg mb-4 shimmer" />
-          <div className="h-5 w-3/4 bg-gray-400 rounded mb-2 shimmer" />
-          <div className="h-4 w-1/2 bg-gray-400 rounded mb-4 shimmer" />
-          <div className="h-8 w-1/3 bg-gray-400 rounded-full shimmer" />
+          <div className="w-full h-64 bg-gray-600 rounded-lg mb-4 shimmer" />
+          <div className="h-5 w-3/4 bg-gray-600 rounded mb-2 shimmer" />
+          <div className="h-4 w-1/2 bg-gray-600 rounded mb-4 shimmer" />
+          <div className="h-8 w-1/3 bg-gray-600 rounded-full shimmer" />
         </motion.div>
       ))}
     </div>
@@ -30,16 +28,15 @@ function SkeletonGrid() {
 }
 
 const ProductsSection = () => {
-  const [products, setProducts] = useState([]); // State to store products
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch data from Contentful
     client
       .getEntries({ content_type: "cleaningProduct" })
       .then((response) => {
-        setProducts(response.items); // Store fetched products
-        setIsLoading(false); // Mark loading as complete
+        setProducts(response.items);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -47,39 +44,46 @@ const ProductsSection = () => {
       });
   }, []);
 
-  // Show skeleton while loading
   if (isLoading) {
     return (
-      <section className="p-8">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Products</h2>
-        <SkeletonGrid />
+      <section className="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-white mb-12">
+            Our Products
+          </h2>
+          <SkeletonGrid />
+        </div>
       </section>
     );
   }
 
-  // If no products are found
   if (!products.length) {
     return (
-      <div className="p-8 text-center">
-        <p>No products found!</p>
-      </div>
+      <section className="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-white text-lg">No products found!</p>
+        </div>
+      </section>
     );
   }
 
-  // Show products once data is loaded
   return (
-    <section className="p-8">
-      <h2 className="text-3xl font-bold text-center mb-8">Our Products</h2>
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        {products.map((product, index) => (
-          <ProductCard key={product.sys.id || index} product={product} />
-        ))}
-      </motion.div>
+    <section className="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+      <div className="container mx-auto px-6">
+        <h2 className="text-4xl font-bold text-center text-white mb-12">
+          Our Products
+        </h2>
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {products.map((product, index) => (
+            <ProductCard key={product.sys.id || index} product={product} />
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 };

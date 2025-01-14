@@ -6,11 +6,9 @@ const WaveDivider = ({ color, path, flip }) => {
     <div
       className={`absolute w-full ${flip ? "rotate-180" : ""}`}
       style={{
-        bottom: 0,
+        bottom: "-10px", // Moved down by 10px
         left: 0,
         zIndex: 1000, // Debugging z-index
-
-
       }}
       ref={(el) => {
         if (el) {

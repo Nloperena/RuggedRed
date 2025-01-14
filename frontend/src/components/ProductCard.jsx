@@ -1,42 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/**
- * Inline styles for our "shimmer" effect.
- * Mimics a shine moving across the skeleton.
- */
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
   background:
-    "linear-gradient(to right, #A9AAAC 8%, #CCCCCC 18%, #A9AAAC 33%)",
+    "linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%)",
   backgroundSize: "1000px 100%",
 };
 
 /**
- * A small helper component for skeleton placeholders with shimmer effect.
+ * Skeleton loader for loading states
  */
 function SkeletonBlock({ className, style }) {
   return (
     <div
-      className={`${className} relative overflow-hidden bg-[#A9AAAC]`}
+      className={`${className} relative overflow-hidden bg-gray-300`}
       style={{ ...shimmerStyle, ...style }}
     />
   );
 }
 
 const ProductCard = ({ product, delay = 0 }) => {
-  const [isImageLoaded, setIsImageLoaded] = useState(false); // Track image loading
-  const [isTextLoaded, setIsTextLoaded] = useState(false); // Track text loading
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isTextLoaded, setIsTextLoaded] = useState(false);
 
-  const hasProduct = !!product?.fields; // Check if product exists
+  const hasProduct = !!product?.fields;
 
   useEffect(() => {
     if (hasProduct) {
-      setIsTextLoaded(true); // Mark text as loaded if product data exists
+      setIsTextLoaded(true);
     }
   }, [hasProduct]);
 
-  const { name, slogan, price, amazonUrl, images } = product?.fields || {};
+  const { name, slogan, price, amazonUrl, productPageUrl, images } =
+    product?.fields || {};
   const imageUrl =
     Array.isArray(images) && images.length > 0
       ? images[0].fields.file.url
@@ -46,35 +43,32 @@ const ProductCard = ({ product, delay = 0 }) => {
     <div
       className="
         relative
-        bg-white
-        rounded-xl
+        bg-gradient-to-b from-gray-800 to-gray-900
+        rounded-lg
         p-6
         text-center
         overflow-hidden
         transition
-        duration-200
+        duration-300
         hover:-translate-y-1
-        shadow-[8px_8px_0_rgba(0,0,0,1)]
-        hover:shadow-[12px_12px_0_rgba(0,0,0,1)]
+        shadow-lg
+        hover:shadow-xl
       "
-      style={{ minHeight: "360px" }}
+      style={{ minHeight: "420px" }}
     >
-      {/* Skeleton Loading State */}
+      {/* Loading skeleton */}
       <AnimatePresence>
         {(!isImageLoaded || !isTextLoaded) && (
           <motion.div
             key="skeleton"
-            className="absolute inset-0 flex flex-col items-center justify-center p-6 pointer-events-none"
+            className="absolute inset-0 flex flex-col items-center justify-center p-6"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.5 } }} // Fade out
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
-            {/* Skeleton for the image */}
             {!isImageLoaded && (
               <SkeletonBlock className="w-48 h-48 rounded-lg mb-4" />
             )}
-
-            {/* Skeleton for the text */}
             {!isTextLoaded && (
               <>
                 <SkeletonBlock className="w-32 h-5 rounded-md mb-2" />
@@ -87,39 +81,38 @@ const ProductCard = ({ product, delay = 0 }) => {
         )}
       </AnimatePresence>
 
-      {/* Main Content: Fades in when loading is complete */}
+      {/* Main content */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isImageLoaded && isTextLoaded ? 1 : 0 }}
-        transition={{ duration: 0.5 }} // Fade in
+        transition={{ duration: 0.5 }}
       >
-        {/* Product Image */}
+        {/* Product image */}
         {imageUrl && (
           <img
             src={imageUrl}
             alt={name || "Product Image"}
             className="mx-auto mb-4 w-48 h-48 object-cover rounded-lg"
-            onLoad={() => setIsImageLoaded(true)} // Mark image as loaded
-            style={{ display: isImageLoaded ? "block" : "none" }}
+            onLoad={() => setIsImageLoaded(true)}
           />
         )}
 
-        {/* Product Name */}
+        {/* Product name */}
         {isTextLoaded && name && (
-          <h3 className="text-2xl font-bold mb-2 text-[#D3242A]">{name}</h3>
+          <h3 className="text-lg font-semibold text-white mb-2">{name}</h3>
         )}
 
-        {/* Product Slogan */}
+        {/* Product slogan */}
         {isTextLoaded && slogan && (
-          <p className="text-black italic mb-2">{slogan}</p>
+          <p className="text-gray-400 italic mb-2">{slogan}</p>
         )}
 
-        {/* Product Price */}
+        {/* Product price */}
         {isTextLoaded && price && (
-          <p className="text-black font-semibold mb-4">${price}</p>
+          <p className="text-xl font-bold text-gray-100 mb-4">${price}</p>
         )}
 
-        {/* Amazon Link Button */}
+        {/* Buy on Amazon button */}
         {isTextLoaded && amazonUrl && (
           <a
             href={amazonUrl}
@@ -128,17 +121,38 @@ const ProductCard = ({ product, delay = 0 }) => {
             className="
               inline-block
               mt-2
-              bg-black
+              bg-red-600
               text-white
               py-2
               px-6
               rounded-full
-              hover:bg-[#333333]
+              hover:bg-red-700
               transition
               duration-200
             "
           >
             Buy on Amazon
+          </a>
+        )}
+
+        {/* More information button */}
+        {isTextLoaded && productPageUrl && (
+          <a
+            href={productPageUrl}
+            className="
+              inline-block
+              mt-3
+              bg-gray-100
+              text-gray-900
+              py-2
+              px-6
+              rounded-full
+              hover:bg-gray-300
+              transition
+              duration-200
+            "
+          >
+            More Information
           </a>
         )}
       </motion.div>
