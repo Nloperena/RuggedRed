@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+/**
+ * Shimmer style for the skeleton loader.
+ * Uses a lighter gray gradient, but you could swap it for #A9AAAC if you prefer.
+ */
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
-  background:
-    "linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%)",
+  background: "linear-gradient(to right, #e0e0e0 8%, #f0f0f0 18%, #e0e0e0 33%)",
   backgroundSize: "1000px 100%",
 };
 
 /**
- * Skeleton loader for loading states
+ * Skeleton loader block for loading states
  */
 function SkeletonBlock({ className, style }) {
   return (
     <div
-      className={`${className} relative overflow-hidden bg-gray-300`}
+      className={`${className} relative overflow-hidden bg-[#A9AAAC]`}
       style={{ ...shimmerStyle, ...style }}
     />
   );
@@ -34,6 +37,7 @@ const ProductCard = ({ product, delay = 0 }) => {
 
   const { name, slogan, price, amazonUrl, productPageUrl, images } =
     product?.fields || {};
+
   const imageUrl =
     Array.isArray(images) && images.length > 0
       ? images[0].fields.file.url
@@ -43,7 +47,7 @@ const ProductCard = ({ product, delay = 0 }) => {
     <div
       className="
         relative
-        bg-gradient-to-b from-gray-800 to-gray-900
+        bg-[#D3242A]
         rounded-lg
         p-6
         text-center
@@ -104,12 +108,12 @@ const ProductCard = ({ product, delay = 0 }) => {
 
         {/* Product slogan */}
         {isTextLoaded && slogan && (
-          <p className="text-gray-400 italic mb-2">{slogan}</p>
+          <p className="text-white italic mb-2">{slogan}</p>
         )}
 
         {/* Product price */}
         {isTextLoaded && price && (
-          <p className="text-xl font-bold text-gray-100 mb-4">${price}</p>
+          <p className="text-xl font-bold text-white mb-4">${price}</p>
         )}
 
         {/* Buy on Amazon button */}
@@ -121,12 +125,12 @@ const ProductCard = ({ product, delay = 0 }) => {
             className="
               inline-block
               mt-2
-              bg-red-600
+              bg-black
               text-white
               py-2
               px-6
               rounded-full
-              hover:bg-red-700
+              hover:bg-[#000000e6]
               transition
               duration-200
             "
@@ -142,12 +146,12 @@ const ProductCard = ({ product, delay = 0 }) => {
             className="
               inline-block
               mt-3
-              bg-gray-100
-              text-gray-900
+              bg-white
+              text-black
               py-2
               px-6
               rounded-full
-              hover:bg-gray-300
+              hover:bg-[#A9AAAC]
               transition
               duration-200
             "
