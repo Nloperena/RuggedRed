@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * Shimmer style for the skeleton loader.
- * Uses a lighter gray gradient, but you could swap it for #A9AAAC if you prefer.
  */
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
@@ -12,7 +11,7 @@ const shimmerStyle = {
 };
 
 /**
- * Skeleton loader block for loading states
+ * Skeleton loader block for loading states.
  */
 function SkeletonBlock({ className, style }) {
   return (
@@ -48,7 +47,7 @@ const ProductCard = ({ product, delay = 0 }) => {
       className="
         relative
         bg-[#D3242A]
-        rounded-lg
+        rounded-3xl /* More rounded corners */
         p-6
         text-center
         overflow-hidden
@@ -58,7 +57,10 @@ const ProductCard = ({ product, delay = 0 }) => {
         shadow-lg
         hover:shadow-xl
       "
-      style={{ minHeight: "420px" }}
+      style={{
+        minHeight: "700px", // Increased height for balance
+        boxShadow: "inset 0 6px 12px rgba(0, 0, 0, 0.6)", // Harsher inlet shadow
+      }}
     >
       {/* Loading skeleton */}
       <AnimatePresence>
@@ -71,14 +73,14 @@ const ProductCard = ({ product, delay = 0 }) => {
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
             {!isImageLoaded && (
-              <SkeletonBlock className="w-48 h-48 rounded-lg mb-4" />
+              <SkeletonBlock className="w-96 h-96 rounded-lg mb-4" />
             )}
             {!isTextLoaded && (
               <>
-                <SkeletonBlock className="w-32 h-5 rounded-md mb-2" />
-                <SkeletonBlock className="w-48 h-4 rounded-md mb-2" />
-                <SkeletonBlock className="w-20 h-4 rounded-md mb-4" />
-                <SkeletonBlock className="w-32 h-8 rounded-full" />
+                <SkeletonBlock className="w-48 h-5 rounded-md mb-2" />
+                <SkeletonBlock className="w-64 h-4 rounded-md mb-2" />
+                <SkeletonBlock className="w-24 h-4 rounded-md mb-4" />
+                <SkeletonBlock className="w-40 h-8 rounded-full" />
               </>
             )}
           </motion.div>
@@ -96,24 +98,34 @@ const ProductCard = ({ product, delay = 0 }) => {
           <img
             src={imageUrl}
             alt={name || "Product Image"}
-            className="mx-auto mb-4 w-48 h-48 object-cover rounded-lg"
+            className="mx-auto mb-6 w-96 h-96 object-cover rounded-lg" // Increased size
             onLoad={() => setIsImageLoaded(true)}
           />
         )}
 
         {/* Product name */}
         {isTextLoaded && name && (
-          <h3 className="text-lg font-semibold text-white mb-2">{name}</h3>
+          <h3
+            className="text-3xl font-semibold text-white mb-4"
+            style={{ fontFamily: "Geogrotesque, sans-serif" }}
+          >
+            {name}
+          </h3>
         )}
 
         {/* Product slogan */}
         {isTextLoaded && slogan && (
-          <p className="text-white italic mb-2">{slogan}</p>
+          <p className="text-white italic mb-4">{slogan}</p>
         )}
 
         {/* Product price */}
         {isTextLoaded && price && (
-          <p className="text-xl font-bold text-white mb-4">${price}</p>
+          <p
+            className="text-2xl font-bold text-white mb-6"
+            style={{ fontFamily: "Geogrotesque, sans-serif" }}
+          >
+            ${price}
+          </p>
         )}
 
         {/* Buy on Amazon button */}
@@ -127,36 +139,39 @@ const ProductCard = ({ product, delay = 0 }) => {
               mt-2
               bg-black
               text-white
-              py-2
-              px-6
+              py-3
+              px-8
               rounded-full
               hover:bg-[#000000e6]
               transition
               duration-200
+              mr-4 /* Add spacing between buttons */
             "
           >
             Buy on Amazon
           </a>
         )}
 
-        {/* More information button */}
+        {/* View product details button */}
         {isTextLoaded && productPageUrl && (
           <a
             href={productPageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="
               inline-block
-              mt-3
+              mt-2
               bg-white
               text-black
-              py-2
-              px-6
+              py-3
+              px-8
               rounded-full
               hover:bg-[#A9AAAC]
               transition
               duration-200
             "
           >
-            More Information
+            View Product Page
           </a>
         )}
       </motion.div>

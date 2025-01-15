@@ -20,7 +20,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#D3242A] to-[#9B1218] text-white py-8">
+    <footer className="bg-gradient-to-b from-[#D3242A] to-[#9B1218] text-white py-8 px-4">
       <motion.div
         className="container mx-auto text-center"
         initial="hidden"
@@ -29,34 +29,41 @@ const Footer = () => {
         variants={contentVariants}
       >
         {/* Top Section: Subscription Updates */}
-        <h2 className="text-lg md:text-2xl font-bold mb-2">
-          GET UPDATES FROM THE CREATORS OF RUGGED RED
+        <h2
+          className="text-lg md:text-2xl font-bold mb-2"
+          style={{ fontFamily: "Geogrotesque, sans-serif" }}
+        >
+          Get Updates from the Creators of Rugged Red
         </h2>
-        <p className="text-sm md:text-base mb-6">
-          NEW DISCOUNTS, LAUNCH, AND MUCH MORE
+        <p
+          className="text-sm md:text-base mb-6"
+          style={{ fontFamily: "Geogrotesque, sans-serif" }}
+        >
+          New discounts, launches, and much more
         </p>
 
         {/* Subscription Form */}
-        <form className="flex justify-center mb-8">
+        <form className="flex flex-col sm:flex-row justify-center items-center mb-8 space-y-4 sm:space-y-0 sm:space-x-2">
           <motion.input
             type="email"
             placeholder="Enter Email"
-            className="px-4 py-2 w-64 text-gray-700 bg-white rounded-l-full shadow-lg outline-none"
+            className="px-4 py-2 w-full sm:w-64 text-gray-700 bg-white rounded-full shadow-lg outline-none focus:ring-2 focus:ring-red-400"
             whileHover="hover"
             variants={inputHover}
           />
           <motion.button
             type="submit"
-            className="bg-black text-white px-6 py-2 rounded-r-full shadow-lg hover:bg-gray-800"
+            className="bg-black text-white px-6 py-2 rounded-full shadow-lg hover:bg-gray-800 transition"
             whileHover="hover"
             variants={buttonHover}
+            style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
-            SUBSCRIBE
+            Subscribe
           </motion.button>
         </form>
 
         {/* Icon Row */}
-        <div className="flex justify-center space-x-6 mb-8">
+        <div className="flex justify-center space-x-6 mb-8 flex-wrap">
           {[
             { icon: "fa-solid fa-envelope", label: "Email" },
             { icon: "fa-brands fa-instagram", label: "Instagram" },
@@ -64,15 +71,19 @@ const Footer = () => {
             { icon: "fa-brands fa-twitter", label: "Twitter" },
             { icon: "fa-solid fa-image", label: "Image License Info" },
           ].map((item, index) => (
-            <div key={index} className="flex flex-col items-center">
-              {/* Apply hover interaction to only the icon */}
+            <div
+              key={index}
+              className="flex flex-col items-center text-center w-20 sm:w-auto"
+            >
               <motion.i
                 className={`${item.icon} text-2xl mb-1`}
                 whileHover="hover"
                 variants={iconHover}
               />
-              {/* Icon Label (static, no hover effects) */}
-              <span className="text-xs md:text-sm uppercase tracking-wide">
+              <span
+                className="text-xs md:text-sm uppercase tracking-wide"
+                style={{ fontFamily: "Geogrotesque, sans-serif" }}
+              >
                 {item.label}
               </span>
             </div>
@@ -81,19 +92,28 @@ const Footer = () => {
 
         {/* Bottom Section: Branding */}
         <motion.div variants={contentVariants}>
-          <div className="flex justify-center items-center space-x-2">
-            <p className="text-sm">
+          <div className="flex flex-col sm:flex-row justify-center items-center text-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <p
+              className="text-sm"
+              style={{ fontFamily: "Geogrotesque, sans-serif" }}
+            >
               Powered by{" "}
               <a
                 href="https://ForzaBuilt.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold hover:text-gray-300"
+                style={{ fontFamily: "Geogrotesque, sans-serif" }}
               >
                 ForzaBuilt
               </a>
             </p>
-            <p className="text-sm">&bull; © 2025 Rugged Red. All Rights Reserved.</p>
+            <p
+              className="text-sm"
+              style={{ fontFamily: "Geogrotesque, sans-serif" }}
+            >
+              &bull; © 2025 Rugged Red. All Rights Reserved.
+            </p>
           </div>
         </motion.div>
       </motion.div>

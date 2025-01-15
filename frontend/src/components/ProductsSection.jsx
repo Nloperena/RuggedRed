@@ -48,7 +48,10 @@ const ProductsSection = () => {
     return (
       <section className="bg-[#000000] py-16">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center text-[#FFFFFF] mb-12">
+          <h2
+            className="text-5xl font-bold text-center text-[#FFFFFF] mb-12"
+            style={{ fontFamily: "Geogrotesque, sans-serif" }}
+          >
             Our Products
           </h2>
           <SkeletonGrid />
@@ -70,7 +73,10 @@ const ProductsSection = () => {
   return (
     <section className="bg-[#000000] py-16">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-[#FFFFFF] mb-12">
+        <h2
+          className="text-5xl font-bold text-center text-[#FFFFFF] mb-12"
+          style={{ fontFamily: "Geogrotesque, sans-serif" }}
+        >
           Our Products
         </h2>
         <motion.div

@@ -9,17 +9,20 @@ import RRMascot from "../assets/RRMascot.png";
 const AboutRed = () => {
   return (
     // A section with a red background, padding, and relative positioning
-    <section className="relative bg-[#D3242A] py-20 px-10">
+    <section className="relative bg-[#D3242A] py-20 px-6 sm:px-10">
       {/* 
-        Container to center our content and lay items out in a row on larger screens.
+        Container to center our content and lay items out in a row on medium+ screens.
         On smaller screens, items stack vertically.
       */}
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         {/* 
           LEFT SIDE: Image container. 
-          On md+ screens, place it on the left side (md:w-1/2).
+          
+          - On md (tablet) screens: it takes 2/3 width
+          - On lg (desktop) screens: it takes 1/2 width
+          - Adjusted the margin so it's smaller on tablets, bigger on desktop
         */}
-        <div className="md:w-1/2 relative mb-16 md:mb-0 md:mr-20">
+        <div className="w-full md:w-2/3 lg:w-1/2 relative mb-12 md:mb-0 md:mr-8 lg:mr-20">
           {/* 
             The mascot image is now animated to "slide in" from the left (x: -100).
           */}
@@ -45,14 +48,18 @@ const AboutRed = () => {
         </div>
 
         {/* 
-          RIGHT SIDE: Text container (md:w-1/2).
+          RIGHT SIDE: Text container 
+          
+          - On md (tablet) screens: it goes full width or whatever remains
+          - On lg (desktop) screens: half width
         */}
-        <div className="md:w-1/2">
+        <div className="w-full md:w-full lg:w-1/2">
           {/* 
-            Section Title (fade in from above).
+            Section Title (fade in from above) with Geogrotesque font applied.
           */}
           <motion.h2
-            className="text-white text-5xl font-extrabold mb-8"
+            className="text-white text-4xl sm:text-5xl font-extrabold mb-8"
+            style={{ fontFamily: "Geogrotesque, sans-serif" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -67,7 +74,7 @@ const AboutRed = () => {
             Paragraph 1 (fade in).
           */}
           <motion.p
-            className="text-white text-xl leading-relaxed mb-6"
+            className="text-white text-base sm:text-xl leading-relaxed mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -86,7 +93,7 @@ const AboutRed = () => {
             Paragraph 2 (fade in with slight delay).
           */}
           <motion.p
-            className="text-white text-xl leading-relaxed"
+            className="text-white text-base sm:text-xl leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -103,11 +110,12 @@ const AboutRed = () => {
 
           {/* 
             CTA Buttons: fade in from below, slightly staggered.
+            - Stacked on small devices, side-by-side on bigger screens 
           */}
           <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <motion.a
               href="#"
-              className="inline-block bg-white text-[#D3242A] font-bold py-2 px-6 rounded-lg hover:bg-gray-200 transition text-center"
+              className="inline-block bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -116,12 +124,12 @@ const AboutRed = () => {
                 ease: [0.6, 0.05, 0.2, 0.9],
               }}
             >
-              Learn More
+              Meet Red
             </motion.a>
 
             <motion.a
               href="#"
-              className="inline-block bg-white text-[#D3242A] font-bold py-2 px-6 rounded-lg hover:bg-gray-200 transition text-center"
+              className="inline-block bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -141,4 +149,3 @@ const AboutRed = () => {
 
 // Export the component so we can import it wherever we need it
 export default AboutRed;
-

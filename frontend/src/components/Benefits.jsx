@@ -5,7 +5,7 @@ const Benefits = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5; // half speed
+      videoRef.current.playbackRate = 0.5; // Slow down the video playback
     }
   }, []);
 
@@ -35,9 +35,9 @@ const Benefits = () => {
 
   return (
     <div className="w-full">
-      {/* Hero section that grows with content rather than a fixed height */}
+      {/* Hero section with a video background */}
       <section className="relative w-full overflow-hidden pt-12 pb-16 text-white">
-        {/* Video wrapper (absolutely fills the parent) */}
+        {/* Background video */}
         <div className="absolute inset-0">
           <video
             ref={videoRef}
@@ -51,17 +51,19 @@ const Benefits = () => {
               type="video/mp4"
             />
           </video>
-
-          {/* Optional overlay to improve text readability */}
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm pointer-events-none" />
+          {/* Overlay for text readability */}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-md pointer-events-none" />
         </div>
 
-        {/* Content, stacked above the video via z-index */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <h1 className="text-5xl font-extrabold text-center mb-8">
+        {/* Foreground content */}
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <h1
+            className="text-5xl font-extrabold text-center mb-8"
+            style={{ fontFamily: "Geogrotesque, sans-serif" }}
+          >
             Rugged Red in Action
           </h1>
-          <p className="text-center max-w-2xl mx-auto mb-12">
+          <p className="text-center max-w-2xl mx-auto mb-12 text-lg">
             Heavy-duty cleaning power for life’s messiest moments.
           </p>
 
@@ -70,17 +72,35 @@ const Benefits = () => {
             {scenarios.map((scenario, index) => (
               <div
                 key={index}
-                className="bg-white/90 text-gray-900 rounded-xl p-6 backdrop-blur-sm"
+                className="
+                  group
+                  bg-white
+                  text-gray-900
+                  rounded-3xl
+                  shadow-lg
+                  p-6
+                  transition
+                  transform
+                  duration-300
+                  hover:shadow-xl
+                  hover:scale-105
+                "
               >
+                {/* Image */}
                 <img
                   src={scenario.image}
                   alt={scenario.title}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
+                  className="w-full h-64 object-cover rounded-2xl mb-6"
                 />
-                <h3 className="text-xl font-semibold text-red-600 mb-4">
+                {/* Title */}
+                <h3
+                  className="text-2xl font-semibold text-red-600 mb-4 group-hover:underline"
+                  style={{ fontFamily: "Geogrotesque, sans-serif" }}
+                >
                   {scenario.title}
                 </h3>
-                <p className="text-gray-700">{scenario.description}</p>
+                {/* Description */}
+                <p className="text-gray-700 text-lg">{scenario.description}</p>
               </div>
             ))}
           </div>

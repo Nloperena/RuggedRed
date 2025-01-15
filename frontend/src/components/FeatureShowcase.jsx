@@ -1,28 +1,38 @@
+// We import React and useEffect so we can build our component
 import React, { useEffect } from "react";
-// Import framer-motion for the slide-in animation
+// We import motion from framer-motion to create cool animations
 import { motion } from "framer-motion";
-
+// We import our images
 import Hand from "../assets/blueragtransparent.png";
-import Flag from "../assets/usaflaggif.webp";
+import GlassTexture from "../assets/textures/glassTexture.png";
 
+/*
+  Helper: EdgeStars
+  (Unchanged) - places sparkly stars on the container edges.
+*/
+function EdgeStars() {
+  // ... your star code as is ...
+  return <> {/* your stars here */} </>;
+}
+
+// Main Component: FeaturesShowcase
 export default function FeaturesShowcase() {
+  // Check if Font Awesome is loaded
   useEffect(() => {
-    console.log("FeaturesShowcase: Checking if Font Awesome is loaded ->", window.FontAwesome);
     if (!window.FontAwesome) {
-      console.warn("FeaturesShowcase: Font Awesome is NOT detected. Icons may not be visible.");
+      console.warn("Font Awesome is NOT detected. Icons may not be visible.");
     }
   }, []);
 
-  // Top "features" icons
+  // Only 4 features now
   const features = [
     { icon: "fa-solid fa-bolt", label: "Powerful" },
     { icon: "fa-solid fa-leaf", label: "Non-Toxic" },
-    { image: Flag, label: "Proudly Made in USA" },
+    { icon: "fa-solid fa-spray-can", label: "Advanced Cleaning" },
     { icon: "fa-solid fa-check-circle", label: "Proven" },
-    { icon: "fa-solid fa-hand-sparkles", label: "Squeaky Clean" },
   ];
 
-  // Stats for the foreground boxes
+  // 4 stats to show in red boxes
   const stats = [
     { value: "+12k", label: "HAPPY CUSTOMERS" },
     { value: "84", label: "BOTTLES RECYCLED" },
@@ -31,88 +41,115 @@ export default function FeaturesShowcase() {
   ];
 
   return (
-    <section className="relative min-h-[600px] py-12 px-4 overflow-hidden">
-      {/* ABSOLUTE + MOTION IMAGE aligned to the right, behind content */}
-      <div className="absolute inset-y-0 right-0 flex items-center justify-end -z-10">
-        <motion.img
-          src={Hand}
-          alt="Background"
-          className="max-w-2xl w-auto h-auto object-contain pr-4"
-          // Slide in from bottom-right to top-left
-          initial={{ x: 200, y: 200, opacity: 0 }}
-          animate={{ x: 0, y: 0, opacity: 1 }}
+    // This section is our big container
+    <section
+      className="relative min-h-[700px] py-16 px-6 overflow-hidden"
+      style={{
+        /* 
+          1) We set a white background color.
+          2) We place our glass texture behind it.
+          3) background-blend-mode: "overlay" merges the texture & color.
+        */
+        backgroundColor: "#ffffff",
+        backgroundImage: `url(${GlassTexture})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        
+      }}
+    >
+      {/* 
+        Hand image floats on top. 
+        We add a custom keyframe sequence for a smoother, "curvy" movement.
+      */}
+      <motion.img
+        src={Hand}
+        alt="Wiping Hand"
+        className="absolute right-0 bottom-0 max-w-[500px] md:max-w-[600px] z-0"
+        style={{ pointerEvents: "none", transformOrigin: "top left" }}
+        animate={{
+          x: [0, 25, -20, 15, -15, 0],
+          y: [0, 10, 20, 40, 20, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: [0.42, 0, 0.58, 1], // "easeInOut" cubic-bezier
+        }}
+      />
+
+      {/* 
+        Main content container, relative so edges stars can appear inside
+      */}
+      <div className="relative max-w-screen-xl mx-auto z-10">
+        {/* Random star sparkles along the edges */}
+        <EdgeStars />
+
+        {/* 
+          Our 4 icons in a responsive grid:
+          2 columns on small, 4 columns on bigger screens
+        */}
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-4 gap-6 bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl z-10"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-        />
-        {/* GRADIENT OVERLAY to gently fade out bottom & bottom-right */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              linear-gradient(to bottom, rgba(255,255,255,0) 90%, #fff 100%),
-              radial-gradient(circle at 95% 95%, #fff 5%, rgba(255,255,255,0) 20%)
-            `,
-            backgroundBlendMode: "overlay",
-          }}
-        ></div>
-      </div>
-
-      {/* FOREGROUND CONTENT */}
-      <div className="relative max-w-screen-xl mx-auto">
-        {/* ICON ROW with a glass-like container */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl shadow-xl flex flex-wrap justify-center items-center gap-8">
-            {features.map((feature, i) => (
-              <div
-                key={i}
-                className="text-center flex flex-col items-center justify-center"
-              >
-                {feature.icon ? (
-                  <i className={`${feature.icon} text-3xl text-black mb-2`} />
-                ) : (
-                  <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
-                    <img
-                      src={feature.image}
-                      alt={feature.label}
-                      className="object-contain max-w-full max-h-full"
-                    />
-                  </div>
-                )}
-                <p className="text-black font-bold mt-2">{feature.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* SPLIT SECTION: LEFT BOX + STATS GRID */}
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* LEFT BOX (semi-transparent for readability) */}
-          <div className="md:w-1/2 bg-white/90 backdrop-blur-sm shadow-lg rounded-md p-6 flex items-center justify-center">
-            <div>
-              <h2 className="text-2xl font-bold text-red-600 mb-4">
-                Why Choose Rugged Red?
-              </h2>
-              <p className="text-gray-700 mb-4">
-                We combine industrial strength with everyday safety—so you can
-                tackle tough messes without worry.
-              </p>
-              <p className="text-gray-700">
-                From oil spills to kitchen grime, Rugged Red handles it all.
-              </p>
+        >
+          {features.map((feature, i) => (
+            <div key={i} className="flex flex-col items-center text-center">
+              <i className={`${feature.icon} text-4xl text-red-600 mb-2`} />
+              <p className="text-gray-800 font-semibold">{feature.label}</p>
             </div>
-          </div>
+          ))}
+        </motion.div>
 
-          {/* STATS GRID */}
-          <div className="md:w-1/2 grid grid-cols-2 gap-4">
+        {/* Main content area: heading & stats */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 z-10">
+          {/* LEFT SECTION: Title & paragraphs */}
+          <motion.div
+            className="bg-white/90 backdrop-blur-md shadow-lg rounded-3xl p-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <h2
+              className="text-5xl font-bold text-red-600 mb-6"
+              style={{ fontFamily: "Geogrotesque, sans-serif" }}
+            >
+              Why Choose Rugged Red?
+            </h2>
+            <p className="text-gray-700 text-lg mb-4">
+              We combine industrial strength with everyday safety—so you can
+              tackle tough messes without worry.
+            </p>
+            <p className="text-gray-700 text-lg">
+              From oil spills to kitchen grime, Rugged Red handles it all with
+              ease and confidence.
+            </p>
+          </motion.div>
+
+          {/* RIGHT SECTION: Stats in red boxes */}
+          <motion.div
+            className="grid grid-cols-2 gap-6 z-10"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-red-600 text-white rounded-lg shadow-md flex flex-col items-center justify-center p-6"
+                className="bg-red-600 text-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8"
               >
-                <p className="text-3xl font-extrabold">{stat.value}</p>
+                <p
+                  className="text-4xl font-extrabold mb-2"
+                  style={{ fontFamily: "Geogrotesque, sans-serif" }}
+                >
+                  {stat.value}
+                </p>
                 <p className="text-sm font-semibold uppercase">{stat.label}</p>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -4,6 +4,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+/* Import the custom font */
+@font-face {
+  font-family: 'Geogrotesque';
+  src: url('./assets/fonts/GeogrotesqueTRIAL-BdIt.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Base styles */
 body {
   margin: 0;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,10 +21,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+/* Subheadings and paragraphs use Montserrat */
+p, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
 }
 
+/* Specific styles for Geogrotesque */
+h1, .geogrotesque-heading {
+  font-family: 'Geogrotesque', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Example animations and effects */
 .sparkle-container {
   position: relative;
 }
