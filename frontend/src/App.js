@@ -9,6 +9,7 @@ import FeaturesShowcase from "./components/FeatureShowcase";
 import ProductCard from "./components/ProductCard";
 import AboutRed from "./components/AboutRed";
 import BenefitsSection from "./components/Benefits";
+import Testimonials from "./components/Testimonials";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Features />
       </div>
       <ProductsSection />
+      <Testimonials />
       <FeaturesShowcase />
       <Footer />
     </div>
