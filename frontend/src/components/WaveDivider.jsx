@@ -4,22 +4,18 @@ import PropTypes from "prop-types";
 const WaveDivider = ({ color, path, flip }) => {
   return (
     <div
-      className={`absolute w-full ${flip ? "rotate-180" : ""}`}
+      /* 
+        1) bottom-[-20px] on small screens
+        2) md:bottom-[-40px] on tablets
+        3) lg:bottom-[-60px] on large desktops
+        4) xl:bottom-[-80px] on extra-large displays
+      */
+      className={`absolute w-full bottom-[-20px] md:bottom-[-40px] lg:bottom-[-60px] xl:bottom-[-80px] ${
+        flip ? "rotate-180" : ""
+      }`}
       style={{
-        bottom: "-10px", // Moved down by 10px
         left: 0,
-        zIndex: 1000, // Debugging z-index
-      }}
-      ref={(el) => {
-        if (el) {
-          const styles = window.getComputedStyle(el);
-          const boundingBox = el.getBoundingClientRect();
-          console.log("WaveDivider Debugging Info:", {
-            position: styles.position,
-            zIndex: styles.zIndex,
-            boundingBox,
-          });
-        }
+        zIndex: 1000,
       }}
     >
       <svg
@@ -27,7 +23,7 @@ const WaveDivider = ({ color, path, flip }) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full"
       >
-        <path fill={color} d={path}></path>
+        <path fill={color} d={path} />
       </svg>
     </div>
   );
