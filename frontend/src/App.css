@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+/* Landscape adjustment */
+@media (min-width: 640px) { /* Adjust breakpoint if needed */
+  .MascotDivider img { /* Target the image within MascotDivider */
+    margin-top: -25rem !important; 
+  }
+}
+
+/* Extra-large screen adjustment */
+@media (min-width: 1280px) {
+  .xl\:w-\[307px\] {
+    width: 616px; 
+  }
+}

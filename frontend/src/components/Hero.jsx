@@ -1,20 +1,20 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Countertop from "../assets/countertop.webp";
 
 const Hero = () => {
-  // Same star generator as before
   const generateStars = (count, sizeRange, durationRange, opacityRange) => {
     return [...Array(count)].map((_, index) => {
       const size = Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0];
+      const rotationDirection = Math.random() < 0.5 ? 1 : -1; 
+      const scaleFactor = Math.random() * (1.5 - 10) + 1; 
       return (
         <motion.div
           key={index}
           initial={{ opacity: 0, rotate: 0 }}
           animate={{
             opacity: [opacityRange[0], opacityRange[1], opacityRange[0]],
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
+            rotate: [0, 360 * rotationDirection], // Apply random direction
+            scale: [1, scaleFactor, 1], // Apply random scale
           }}
           transition={{
             repeat: Infinity,
@@ -47,29 +47,19 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      /*
-        Increase min-height across breakpoints:
-        - 600px on mobile
-        - 700px on sm
-        - 800px on md
-        - 900px on lg
-        - 1000px on xl
-      */
       className="
-        relative z-10 bg-white
+        relative
+        z-10
         min-h-[600px]
         sm:min-h-[700px]
         md:min-h-[800px]
         lg:min-h-[900px]
         xl:min-h-[1000px]
         flex
-        items-end
+        items-center
       "
       style={{
-        backgroundImage: `url(${Countertop})`,
-        backgroundSize: "cover",
-        // Move the background image higher
-        backgroundPosition: "top",
+        background: "linear-gradient(to bottom, #ffffff, #d3d3d3)", // Pastel greyish gradient
       }}
     >
       {/* Sparkly Stars in the background */}
@@ -77,75 +67,83 @@ const Hero = () => {
         {generateStars(30, [5, 15], [3, 6], [0.4, 0.9])}
       </div>
 
-      {/* 
-        We add top margin (mt-16) so on mobile 
-        there's enough space under the navbar.
-      */}
-      <div className="container max-w-screen-2xl mx-auto px-4 pb-10 relative mt-16">
-        <div className="flex flex-col md:flex-row items-center">
-          {/* LEFT SIDE: The text box */}
-          <div
+      {/* Main container */}
+      <div className="container mx-auto px-4 py-10 relative"> 
+        {/* Hero content */}
+        <div
+          className="
+            text-center 
+            max-w-4xl 
+            mx-auto 
+            p-6 
+            sm:p-8 
+            md:p-12 
+            rounded-3xl 
+            shadow-lg
+          "
+          style={{
+            backdropFilter: "blur(10px)",
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            marginBottom: "15rem", // Added marginTop
+            paddingTop: "2.5rem", // Added paddingTop
+            paddingBottom: "2.5rem", // Added paddingBottom
+          }}
+        >
+          {/* Headline */}
+          <h1
             className="
-              w-full md:w-1/2
-              text-center md:text-left
-              mb-8 md:mb-0
-              relative z-20
+              text-4xl 
+              sm:text-5xl 
+              md:text-6xl 
+              lg:text-7xl 
+              font-black 
+              leading-tight 
+              text-[#D3242A]
+              mb-6
             "
+            style={{
+              marginLeft: "1rem",
+              marginRight: "1rem",
+            }}
           >
-            <div
-              className="p-6 sm:p-8 md:p-12 rounded-3xl shadow-lg"
-              style={{
-                backdropFilter: "blur(10px)",
-                backgroundColor: "rgba(255, 255, 255, 0.6)",
-              }}
-            >
-              {/* Bigger heading sizes */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-4 text-[#D3242A]">
-                A Proven Powerful Clean
-              </h1>
-              {/* Bigger paragraph text */}
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700 mb-8 leading-relaxed">
-                Rugged Red is a powerful, non-toxic cleaning solution
-                that works hard, so you don’t have to.
-              </p>
-              <a
-                href="#products"
-                className="px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg md:text-xl font-bold text-white bg-black"
-              >
-                Start Cleaning
-              </a>
-            </div>
-          </div>
+            A PROVEN POWERFUL CLEAN
+          </h1>
 
-          {/* RIGHT SIDE: The hero image */}
-          <div
+          {/* Updated paragraph */}
+          <p
             className="
-              w-full md:w-1/2
-              flex justify-center
-              mt-6 md:mt-12
-              relative z-10
+              text-lg 
+              sm:text-xl 
+              md:text-2xl 
+              lg:text-3xl 
+              text-gray-700 
+              mb-8
+              leading-relaxed
             "
           >
-            <img
-              src="https://images.ctfassets.net/hdznx4p7ef81/6wqdD2LcrXiHoKHFzExEtz/abcb41e3f9d66cbe030c4810e68f480a/RRBottleHeroAnimation_1.gif"
-              alt="Hero Bottle"
-              /*
-                Increase image size further:
-                - max-w-md on mobile
-                - max-w-lg on sm
-                - max-w-2xl on md
-                - max-w-3xl on lg
-                - max-w-4xl on xl
-              */
-              className="
-                max-w-md
-                sm:max-w-lg
-                md:max-w-2xl
-                lg:max-w-3xl
-                xl:max-w-4xl
-              "
-            />
-          </div>
+            New Rugged Red Product Line. Rugged Red is a powerful, non-toxic
+            cleaning solution that works hard, so you don’t have to.
+          </p>
+
+          {/* Button */}
+          <a
+            href="#products"
+            className="
+              px-6 
+              py-3 
+              sm:px-8 
+              sm:py-4 
+              rounded-full 
+              text-base 
+              sm:text-lg 
+              md:text-xl 
+              font-bold 
+              text-white 
+              bg-black
+            "
+          >
+            Start Cleaning
+          </a>
         </div>
       </div>
     </section>
