@@ -23,7 +23,7 @@ const ProductLine = () => {
                 ease: [0.6, 0.05, 0.2, 0.9],
               }}
             />
-            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#D3242A] to-transparent"></div>
+            <div className="absolute bottom-0 left-0 w-full h-40 "></div>
           </div>
         </div>
 

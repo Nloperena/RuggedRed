@@ -37,22 +37,19 @@ const ProductDivider = ({ flip }) => {
             sm:w-[240px] 
             md:w-[385px] 
             lg:w-[400px] 
-            xl:w-[615px]
+            xl:w-[700px]
             // Adjust margin-top for breakpoints
             mt-[rem]     // Default margin-top
             sm:mt-[-10rem]  // For min-width: 640px
             md:mt-[-10rem]  // For min-width: 768px
             lg:mt-[-10rem]
-            xl:mt-[-25rem]  // For min-width: 1280px
+            xl:mt-[-13rem]  // For min-width: 1280px
+            xl:mb-[10em]  // For min-width: 1280px
             // Add margin-right conditionally for larger screens
             lg:mr-8         // Add margin-right for min-width: 1024px
             xl:mr-12        // Add larger margin-right for min-width: 1280px
           `}
-          style={{
-            marginBottom: "-15rem", // Bottom margin consistent across sizes
-            maskImage: "linear-gradient(to bottom, black 70%, transparent)", 
-            WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent)", 
-          }}
+      
         />
       </div>
     </div>

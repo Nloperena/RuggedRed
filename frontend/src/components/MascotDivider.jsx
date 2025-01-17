@@ -43,15 +43,16 @@ const MascotDivider = ({ flip }) => {
             sm:mt-[-10rem]  // For min-width: 640px
             md:mt-[-10rem]  // For min-width: 768px
             lg:mt-[-15rem]
-            xl:mt-[-25rem]  // For min-width: 1280px
+            xl:mt-[-15rem]  // For min-width: 1280px
+          
             // Add margin-left conditionally for larger screens
             lg:ml-8         // Add margin-left for min-width: 1024px
             xl:ml-12        // Add larger margin-left for min-width: 1280px
           `}
           style={{
             marginBottom: "-15rem", // Bottom margin consistent across sizes
-            maskImage: "linear-gradient(to bottom, black 70%, transparent)", 
-            WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent)", 
+            maskImage: "linear-gradient(to bottom, black 95%, transparent)", 
+            WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)", 
           }}
         />
       </div>

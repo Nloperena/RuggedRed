@@ -1,20 +1,32 @@
+// src/components/Hero.jsx
+
 import React from "react";
 import { motion } from "framer-motion";
+import heroBackground from "../assets/LysolRedHero-noproduct.png"; // Adjust the path as needed
 
 const Hero = () => {
+  /**
+   * Generates sparkly star animations in the background.
+   * @param {number} count - Number of stars to generate.
+   * @param {Array} sizeRange - Min and max size for the stars.
+   * @param {Array} durationRange - Min and max duration for the animation cycles.
+   * @param {Array} opacityRange - Min and max opacity for the stars.
+   * @returns {Array} - Array of motion.div elements representing stars.
+   */
   const generateStars = (count, sizeRange, durationRange, opacityRange) => {
     return [...Array(count)].map((_, index) => {
-      const size = Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0];
-      const rotationDirection = Math.random() < 0.5 ? 1 : -1; 
-      const scaleFactor = Math.random() * (1.5 - 10) + 1; 
+      const size =
+        Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0];
+      const rotationDirection = Math.random() < 0.5 ? 1 : -1;
+      const scaleFactor = Math.random() * (1.5 - 10) + 1;
       return (
         <motion.div
           key={index}
           initial={{ opacity: 0, rotate: 0 }}
           animate={{
             opacity: [opacityRange[0], opacityRange[1], opacityRange[0]],
-            rotate: [0, 360 * rotationDirection], // Apply random direction
-            scale: [1, scaleFactor, 1], // Apply random scale
+            rotate: [0, 360 * rotationDirection],
+            scale: [1, scaleFactor, 1],
           }}
           transition={{
             repeat: Infinity,
@@ -57,9 +69,14 @@ const Hero = () => {
         xl:min-h-[1000px]
         flex
         items-center
+        bg-cover
+        bg-center
       "
       style={{
-        background: "linear-gradient(to bottom, #ffffff, #d3d3d3)", // Pastel greyish gradient
+        backgroundImage: `url(${heroBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       {/* Sparkly Stars in the background */}
@@ -67,28 +84,10 @@ const Hero = () => {
         {generateStars(30, [5, 15], [3, 6], [0.4, 0.9])}
       </div>
 
-      {/* Main container */}
-      <div className="container mx-auto px-4 py-10 relative"> 
+      {/* Main content */}
+      <div className="container mx-auto px-4 py-10 relative z-10">
         {/* Hero content */}
-        <div
-          className="
-            text-center 
-            max-w-4xl 
-            mx-auto 
-            p-6 
-            sm:p-8 
-            md:p-12 
-            rounded-3xl 
-            shadow-lg
-          "
-          style={{
-            backdropFilter: "blur(10px)",
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
-            marginBottom: "15rem", // Added marginTop
-            paddingTop: "2.5rem", // Added paddingTop
-            paddingBottom: "2.5rem", // Added paddingBottom
-          }}
-        >
+        <div className="text-center max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-transparent">
           {/* Headline */}
           <h1
             className="
@@ -100,6 +99,7 @@ const Hero = () => {
               leading-tight 
               text-[#D3242A]
               mb-6
+              drop-shadow-2xl
             "
             style={{
               marginLeft: "1rem",
@@ -109,26 +109,44 @@ const Hero = () => {
             A PROVEN POWERFUL CLEAN
           </h1>
 
-          {/* Updated paragraph */}
-          <p
+          {/* Paragraph Container */}
+          <div
             className="
-              text-lg 
-              sm:text-xl 
-              md:text-2xl 
-              lg:text-3xl 
-              text-gray-700 
+              inline-block
+              p-4
+              sm:p-6
+              md:p-8
+              bg-white
+              bg-opacity-60
+              backdrop-filter
+              backdrop-blur-lg
+              rounded-md
               mb-8
-              leading-relaxed
+              drop-shadow-lg
             "
           >
-            New Rugged Red Product Line. Rugged Red is a powerful, non-toxic
-            cleaning solution that works hard, so you don’t have to.
-          </p>
+            <p
+              className="
+                text-lg 
+                sm:text-xl 
+                md:text-2xl 
+                lg:text-3xl 
+                text-[#333333] 
+                leading-relaxed
+                font-semibold
+                drop-shadow-lg
+              "
+            >
+              New Rugged Red Product Line. Rugged Red is a powerful, non-toxic
+              cleaning solution that works hard, so you don’t have to.
+            </p>
+          </div>
 
           {/* Button */}
           <a
             href="#products"
             className="
+              inline-block
               px-6 
               py-3 
               sm:px-8 
@@ -140,7 +158,13 @@ const Hero = () => {
               font-bold 
               text-white 
               bg-black
+              hover:bg-gray-800
+              transition duration-300
+              focus:outline-none
+              focus:ring-2
+              focus:ring-blue-500
             "
+            aria-label="Start Cleaning Products"
           >
             Start Cleaning
           </a>
