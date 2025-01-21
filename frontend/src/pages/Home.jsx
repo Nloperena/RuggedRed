@@ -10,6 +10,7 @@ import Testimonials from "../components/Testimonials";
 import ImageCarousel from "../components/ImageCarousel";
 import AboutRed from "../components/AboutRed";
 import BlogSection from "../components/BlogSection";
+import ComparisonTable from "../components/ComparisonTable";
 
 const Home = () => {
   return (
@@ -25,7 +26,9 @@ const Home = () => {
       <ProductLine />
       <StickyImage />
       <RichTextProductsSection />
+      <ComparisonTable />
       <Testimonials />
+
       <ImageCarousel />
       <AboutRed />
       <BlogSection />
