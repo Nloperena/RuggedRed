@@ -1,4 +1,6 @@
+// Import React so we can build a component
 import React from "react";
+// Import the motion object from framer-motion for animations
 import { motion } from "framer-motion";
 import heroBackground from "../assets/kitchen1.png"; // Adjust the path as needed
 
@@ -57,19 +59,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="
-        relative
-        z-10
-        min-h-[600px]
-        sm:min-h-[700px]
-        md:min-h-[800px]
-        lg:min-h-[900px]
-        xl:min-h-[1000px]
-        flex
-        items-center
-        bg-cover
-        bg-center
-      "
+      className="relative z-10 min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:min-h-[900px] xl:min-h-[1000px] flex items-center bg-cover bg-center"
       style={{
         backgroundImage: `url(${heroBackground})`,
         backgroundSize: "cover",
@@ -82,40 +72,61 @@ const Hero = () => {
         {generateStars(30, [5, 15], [3, 6], [0.4, 0.9])}
       </div>
 
-      {/* Headline */}
-      <div className="absolute top-16 left-0 w-full z-20 px-4">
-        <h1
-          className="
-            text-4xl 
-            sm:text-5xl 
-            md:text-6xl 
-            lg:text-7xl 
-            font-black 
-            uppercase
-            text-center
-            text-[#D3242A]
-            tracking-wide
-            drop-shadow-2xl
-            mt-32 sm:mt-0  /* Adds margin-top only for mobile */
-          "
-          style={{
-            whiteSpace: "normal",
-            wordWrap: "break-word",
-          }}
-        >
-          A PROVEN POWERFUL CLEAN
-        </h1>
-      </div>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-10 relative z-10 mt-20">
+      {/* Main content */}
+      <div className="container mx-auto px-4 py-10 relative z-10">
+        {/* Hero content */}
         <div className="text-center max-w-4xl mx-auto p-6 sm:p-8 md:p-12 bg-transparent">
-          {/* Subtitle */}
+          {/* Headline */}
+          <h1
+            className="
+              text-4xl 
+              sm:text-5xl 
+              md:text-6xl 
+              lg:text-7xl 
+              font-black 
+              leading-tight 
+              text-[#D3242A]
+              mb-6
+              drop-shadow-2xl
+              mt-32
+              whitespace-nowrap 
+              sm:whitespace-normal
+            "
+            style={{
+              marginLeft: "1rem",
+              marginRight: "1rem",
+            }}
+          >
+            A PROVEN POWERFUL CLEAN
+          </h1>
+
+          {/* Paragraph Container */}
           <div
-            className="inline-block p-4 sm:p-6 md:p-8 bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-md mb-8 drop-shadow-lg"
+            className="
+              inline-block
+              p-4
+              sm:p-6
+              md:p-8
+              bg-white
+              bg-opacity-60
+              backdrop-filter
+              backdrop-blur-lg
+              rounded-md
+              mb-8
+              drop-shadow-lg
+            "
           >
             <p
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#333333] leading-relaxed font-semibold drop-shadow-lg"
+              className="
+                text-lg 
+                sm:text-xl 
+                md:text-2xl 
+                lg:text-3xl 
+                text-[#333333] 
+                leading-relaxed
+                font-semibold
+                drop-shadow-lg
+              "
             >
               Tough enough for industrial messes, safe enough for your home. Get the clean you can trust.
             </p>
@@ -124,7 +135,25 @@ const Hero = () => {
           {/* Button */}
           <a
             href="#products"
-            className="inline-block px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg md:text-xl font-bold text-white bg-black hover:bg-gray-800 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="
+              inline-block
+              px-6 
+              py-3 
+              sm:px-8 
+              sm:py-4 
+              rounded-full 
+              text-base 
+              sm:text-lg 
+              md:text-xl 
+              font-bold 
+              text-white 
+              bg-black
+              hover:bg-gray-800
+              transition duration-300
+              focus:outline-none
+              focus:ring-2
+              focus:ring-blue-500
+            "
             aria-label="Start Cleaning Products"
           >
             Start Cleaning Today

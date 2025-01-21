@@ -40,19 +40,14 @@ const RichTextProductsSection = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("[RichTextProductsSection] Fetching cleaningProduct entries...");
     client
       .getEntries({ content_type: "cleaningProduct" })
       .then((response) => {
-        console.log("[RichTextProductsSection] Received:", response.items);
         setProducts(response.items);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error(
-          "[RichTextProductsSection] Error fetching products:",
-          error
-        );
+        console.error("[RichTextProductsSection] Error fetching products:", error);
         setIsLoading(false);
       });
   }, []);
@@ -63,7 +58,7 @@ const RichTextProductsSection = () => {
       <section className="bg-white py-16">
         <div className="container mx-auto px-6">
           <h2
-            className="text-5xl font-bold text-center text-black mb-12"
+            className="text-5xl font-bold text-center text-black mb-12 uppercase"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
             Our Products
@@ -87,26 +82,29 @@ const RichTextProductsSection = () => {
 
   return (
     <section className="bg-white py-16">
-      <div className="container mx-auto px-6">
-        <h2
-          className="text-5xl font-bold text-center text-[#D3242A] mb-12"
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Title */}
+        <motion.h2
+          className="text-center text-[#D3242A] uppercase text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-12"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           Our Products
-        </h2>
+        </motion.h2>
 
-        {/* We stack them vertically, but flip layout every other product */}
+        {/* Products List */}
         <motion.div
-          className="flex flex-col gap-12"
+          className="flex flex-col gap-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
           {products.map((product, index) => (
             <RichTextProductCard
               key={product.sys.id || index}
               product={product}
-              // Flip if index is odd => image right, text left
               flip={index % 2 === 1}
             />
           ))}

@@ -82,7 +82,7 @@ const Testimonials = () => {
           className="text-4xl font-bold text-[#D3242A] mb-8"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
         >
-          See Why They Love Rugged Red
+          SEE WHY THEY LOVE RUGGED RED
         </h2>
         <div className="relative">
           {/* Arrows */}

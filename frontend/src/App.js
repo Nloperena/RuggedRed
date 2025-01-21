@@ -7,7 +7,7 @@ import MascotDivider from "./components/MascotDivider"; // New MascotDivider
 import Footer from "./components/Footer";
 import Features from "./components/Features";
 import ProductsSection from "./components/ProductsSection";
-import FeaturesShowcase from "./components/FeatureShowcase";
+import FeaturesShowcase from "./components/BlogSection";
 import ProductCard from "./components/ProductCard";
 import AboutRed from "./components/AboutRed";
 import BenefitsSection from "./components/Benefits";
@@ -17,6 +17,8 @@ import ProductLine from "./components/ProductLine";
 import RichTextProductsSection from "./components/RichTextProductsSection";
 import ImageCarousel from "./components/ImageCarousel";
 import MaddeInAmerica from "./components/MadeInAmerica";
+import StickyImage from "./components/StickyImage";
+import BlogSection from "./components/BlogSection";
 
 const App = () => {
   return (
@@ -34,8 +36,8 @@ const App = () => {
         {/* 
           WaveDivider placed below Hero
         */}
-       
-       <WaveDivider
+
+        <WaveDivider
           color="white"
           path="M0,256L60,224C120,192,240,128,360,112C480,96,600,128,720,144C840,160,960,160,1080,144C1200,128,1320,96,1380,80L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
         />
@@ -44,32 +46,31 @@ const App = () => {
           - flip={false}: Mascot appears normally
           - flip={true}: Mascot is flipped (useful for alternating dividers)
         */}
-        
-      </div>
-      
 
-      {/* The rest of your site */}
+      </div>
+
+
       <div className="relative z-0">
-          
+
 
         <ProductLine />
-        <ImageCarousel />
+        <StickyImage />
+
         <RichTextProductsSection />
-        
-         {/* Testimonials section with optional WaveDivider */}
-         <ImageCarousel />
-      <Testimonials />
-      <ImageCarousel />
+
+        {/* Testimonials section with optional WaveDivider */}
+        <Testimonials />
+        <ImageCarousel />
         <AboutRed />
-        
-        
+
+
       </div>
 
-     
+
 
       {/* Features Showcase */}
-      <FeaturesShowcase />
-          <MaddeInAmerica /> 
+      <BlogSection />
+
       {/* Footer */}
       <Footer />
     </div>

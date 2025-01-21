@@ -38,7 +38,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
       : null;
 
   return (
-    <div className="relative w-full bg-gradient-to-r from-[#fefefe] to-[#f7f7f7] rounded-lg p-8 shadow-lg hover:shadow-xl transition duration-300">
+    <div className="relative w-full bg-white p-8">
       <AnimatePresence>
         {(!isImageLoaded || !isTextLoaded) && (
           <motion.div
@@ -65,7 +65,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
       </AnimatePresence>
 
       <motion.div
-        className={`flex flex-col md:flex-row items-center md:items-start gap-8 ${
+        className={`flex flex-col md:flex-row items-center md:items-start gap-6 ${
           flip ? "md:flex-row-reverse" : ""
         }`}
         initial={{ opacity: 0, x: flip ? 50 : -50 }}
@@ -78,7 +78,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
             <img
               src={imageUrl}
               alt={name || "Product Image"}
-              className="w-full max-w-lg h-[500px] object-cover rounded-lg shadow-md"
+              className="w-full max-w-lg h-[500px] object-cover rounded-lg drop-shadow-2xl" // Darker shadow applied
               onLoad={() => setIsImageLoaded(true)}
             />
           )}
@@ -88,7 +88,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
         <div className="md:w-1/2 text-left">
           {isTextLoaded && name && (
             <h3
-              className="text-3xl font-bold text-[#D3242A] mb-4"
+              className="text-4xl font-bold text-[#D3242A] mb-3 uppercase" // Larger title with reduced margin
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
             >
               {name}
@@ -96,17 +96,17 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
           )}
 
           {isTextLoaded && slogan && (
-            <p className="text-lg italic text-gray-600 mb-3">{slogan}</p>
+            <p className="text-lg italic text-gray-600 mb-2">{slogan}</p>
           )}
 
           {isTextLoaded && typeof price === "number" && (
-            <p className="text-2xl font-semibold text-gray-900 mb-5">
+            <p className="text-2xl font-semibold text-gray-900 mb-4">
               ${price.toFixed(2)}
             </p>
           )}
 
           {isTextLoaded && description && (
-            <div className="text-gray-700 mb-6 leading-relaxed">
+            <div className="text-gray-700 mb-5 leading-relaxed">
               {typeof description === "object"
                 ? documentToReactComponents(description)
                 : description}

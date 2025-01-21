@@ -1,52 +1,55 @@
-// src/components/FeaturesShowcase.jsx
-
+// We import React so we can build our component
 import React, { useEffect, useState } from "react";
+// We import motion from Framer Motion to animate things
 import { motion } from "framer-motion";
+// We import our hand image for decoration
 import Hand from "../assets/blueragtransparent.png";
-// Removed GlassTexture import as per previous instructions
 
-/*
-  Helper: EdgeStars
-  (Unchanged) - places sparkly stars on the container edges.
-*/
+// This function creates little "stars" that appear around the edges
 function EdgeStars() {
-  // Example implementation; replace with your actual star generation logic
+  // We choose how many stars we want
   const starCount = 30;
+
+  // We build an array of starCount size and create a little motion div for each star
   const stars = Array.from({ length: starCount }, (_, index) => (
     <motion.div
       key={index}
+      // Each star starts invisible and small, then appears and disappears
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
       transition={{
         repeat: Infinity,
-        duration: Math.random() * 2 + 1,
-        delay: Math.random() * 2,
+        duration: Math.random() * 2 + 1, // Random durations
+        delay: Math.random() * 2,        // Random delays
       }}
       className="absolute bg-yellow-300 rounded-full"
       style={{
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        width: `${Math.random() * 4 + 1}px`,
-        height: `${Math.random() * 4 + 1}px`,
+        top: `${Math.random() * 100}%`,   // Random top position
+        left: `${Math.random() * 100}%`,  // Random left position
+        width: `${Math.random() * 4 + 1}px`,  // Random width
+        height: `${Math.random() * 4 + 1}px`, // Random height
       }}
     />
   ));
+
+  // Return all the stars
   return <>{stars}</>;
 }
 
-/*
-  BlogCard Component
-  Handles individual blog card with expandable content.
-*/
+// This component shows a single blog card with an image, title, excerpt, and link
 function BlogCard({ post }) {
+  // isExpanded controls if we show the full text or just a snippet
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // This toggles between full excerpt and short snippet
   const toggleExcerpt = () => {
     setIsExpanded(!isExpanded);
   };
 
   return (
+    // A white card with round corners, shadow, and a column layout
     <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+      {/* Blog image with slight zoom on hover */}
       <motion.img
         src={post.image}
         alt={`Image for ${post.title}`}
@@ -56,10 +59,9 @@ function BlogCard({ post }) {
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
       />
+      {/* Card text content */}
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-[#D3242A] text-xl font-bold mb-2">
-          {post.title}
-        </h3>
+        <h3 className="text-black text-xl font-bold mb-2">{post.title}</h3>
         <p className="text-gray-700 text-sm mb-4 flex-grow">
           {isExpanded ? post.excerpt : `${post.excerpt.substring(0, 100)}...`}
         </p>
@@ -68,6 +70,7 @@ function BlogCard({ post }) {
             href={post.link}
             className="text-[#D3242A] font-semibold hover:underline"
             aria-label={`Read more about ${post.title}`}
+            onClick={toggleExcerpt}
           >
             Read More &rarr;
           </a>
@@ -77,26 +80,25 @@ function BlogCard({ post }) {
   );
 }
 
-// Main Component: FeaturesShowcase (Now BlogSection)
+// This is our main component for the blog section
 export default function FeaturesShowcase() {
-  // Check if Font Awesome is loaded (optional)
+  // Check if Font Awesome is loaded
   useEffect(() => {
     if (!window.FontAwesome) {
       console.warn("Font Awesome is NOT detected. Icons may not be visible.");
     }
   }, []);
 
-  // Sample blog posts data with placeholder carousel links
+  // We set up our example blog posts
   const blogPosts = [
     {
       id: 1,
-      // Use external URL directly as a string
       image:
         "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
       title: "5 Essential Cleaning Tips",
       excerpt:
         "Discover the top five cleaning tips that will transform your home into a spotless sanctuary. From tackling stubborn stains to maintaining a clutter-free environment, these strategies are designed to make your cleaning routine efficient and effective.",
-      link: "#carousel1", // Placeholder link from carousel section
+      link: "#carousel1",
     },
     {
       id: 2,
@@ -105,7 +107,7 @@ export default function FeaturesShowcase() {
       title: "Benefits of Non-Toxic Cleaners",
       excerpt:
         "Learn why non-toxic cleaners are better for your health and the environment. Explore the advantages of using eco-friendly products that effectively clean your space without harmful chemicals.",
-      link: "#carousel2", // Placeholder link from carousel section
+      link: "#carousel2",
     },
     {
       id: 3,
@@ -114,7 +116,7 @@ export default function FeaturesShowcase() {
       title: "Tackling Tough Stains",
       excerpt:
         "Struggling with stubborn stains? Here’s how to remove them effortlessly. From coffee spills to ink marks, these tips will help you maintain pristine surfaces with ease.",
-      link: "#carousel3", // Placeholder link from carousel section
+      link: "#carousel3",
     },
     {
       id: 4,
@@ -123,23 +125,14 @@ export default function FeaturesShowcase() {
       title: "Eco-Friendly Cleaning Practices",
       excerpt:
         "Embrace eco-friendly cleaning practices with these simple and effective strategies. Reduce your carbon footprint while keeping your home spotless and safe for your family.",
-      link: "#carousel4", // Placeholder link from carousel section
+      link: "#carousel4",
     },
   ];
 
   return (
-    // This section is our big container with white background
-    <section
-      className="relative py-16 px-6 overflow-hidden bg-white"
-      style={{
-        /* 
-          1) Set background to white.
-          2) Removed glass texture background.
-          3) Removed gradient overlays.
-        */
-      }}
-    >
-      {/* Decorative Hand Animation */}
+    // A red background for the entire blog section
+    <section className="relative py-16 px-6 overflow-hidden bg-red-600">
+      {/* We have an animated hand in the bottom-right corner */}
       <motion.img
         src={Hand}
         alt="Decorative Hand"
@@ -152,42 +145,40 @@ export default function FeaturesShowcase() {
         transition={{
           duration: 6,
           repeat: Infinity,
-          ease: [0.42, 0, 0.58, 1], // "easeInOut" cubic-bezier
+          ease: [0.42, 0, 0.58, 1],
         }}
       />
 
-      {/* Main content container, relative so edges stars can appear inside */}
+      {/* Main content is above the hand (z-10) */}
       <div className="relative max-w-screen-xl mx-auto z-10">
-        {/* Random star sparkles along the edges */}
+        {/* Sparkly stars along the edges */}
         <EdgeStars />
 
-        {/* 
-          Header: Headline, Subheading, and CTA
-        */}
+        {/* Header / title for the blog section (centered, in all caps, in white) */}
         <div className="text-center mb-12 z-10">
           <h2
-            className="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-4"
+            // Make heading uppercase and white
+            className="text-4xl sm:text-5xl font-extrabold text-white uppercase mb-4"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
             Welcome to Our Blog
           </h2>
-          <p className="text-gray-600 text-lg mb-6">
-            Stay updated with the latest tips and insights to keep your home clean and
-            eco-friendly.
+          {/* Paragraph text also in white */}
+          <p className="text-white text-lg mb-6">
+            Stay updated with the latest tips and insights to keep your home
+            clean and eco-friendly.
           </p>
+          {/* "Visit our Tips and Blogs" button in black now */}
           <a
             href="#tips-and-blogs"
-            className="inline-block bg-[#D3242A] text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition-colors duration-300"
+            className="inline-block bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300"
             aria-label="Visit our Tips and Blogs"
           >
             Visit our Tips and Blogs
           </a>
         </div>
 
-        {/* 
-          Blog Posts Grid:
-          Responsive grid with 1 column on small screens and up to 4 on larger screens
-        */}
+        {/* Display our blog posts in a grid (1 column on small, up to 4 columns on large) */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 z-10"
           initial={{ opacity: 0, y: 50 }}
