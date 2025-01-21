@@ -43,7 +43,7 @@ const AboutRed = () => {
             className="text-4xl font-extrabold text-[#D3242A] flex items-center justify-center md:justify-start gap-2 mb-6"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
-            About Rugged Red
+            ABOUT RUGGED RED
             {/* Badge made bigger than before (80px). */}
             <img
               src={FlagIcon}

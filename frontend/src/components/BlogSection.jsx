@@ -161,7 +161,7 @@ export default function FeaturesShowcase() {
             className="text-4xl sm:text-5xl font-extrabold text-white uppercase mb-4"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
-            Welcome to Our Blog
+            LEARN SOMETHING NEW!
           </h2>
           {/* Paragraph text also in white */}
           <p className="text-white text-lg mb-6">

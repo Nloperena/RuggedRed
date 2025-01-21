@@ -6,9 +6,9 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative z-10 min-h-[550px] sm:min-h-[650px] md:min-h-[750px] lg:min-h-[850px] xl:min-h-[950px] flex items-center bg-cover bg-center"
+      className="relative z-10 min-h-[500px] sm:min-h-[600px] md:min-h-[700px] lg:min-h-[800px] xl:min-h-[900px] flex items-center bg-cover bg-center"
       style={{
-        backgroundImage: `url(${heroBackground})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 95%, rgba(255, 255, 255, 1)), url(${heroBackground})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -20,9 +20,9 @@ const Hero = () => {
       </div>
 
       {/* Main content */}
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
         {/* Hero content */}
-        <div className="text-center max-w-4xl mx-auto p-4 sm:p-6 md:p-8 bg-transparent">
+        <div className="text-center max-w-4xl mx-auto p-6 sm:p-8 md:p-10 bg-transparent">
           {/* Headline */}
           <h1
             className="
@@ -33,7 +33,7 @@ const Hero = () => {
               font-black 
               leading-snug 
               text-[#D3242A]
-              mb-4
+              mb-5
               drop-shadow-md
               whitespace-nowrap 
               sm:whitespace-normal
@@ -46,21 +46,21 @@ const Hero = () => {
           <div
             className="
               inline-block
-              p-4
-              sm:p-5
-              md:p-6
+              p-6
+              sm:p-8
+              md:p-10
               bg-white
               bg-opacity-70
               backdrop-filter
               backdrop-blur-md
               rounded-md
-              mb-6
+              mb-12
               drop-shadow-md
             "
           >
             <p
               className="
-                text-base 
+                text-sm 
                 sm:text-lg 
                 md:text-xl 
                 lg:text-2xl 
@@ -78,10 +78,10 @@ const Hero = () => {
             href="#products"
             className="
               inline-block
-              px-5 
-              py-2 
-              sm:px-6 
-              sm:py-3 
+              px-6 
+              py-3 
+              sm:px-8 
+              sm:py-4 
               rounded-full 
               text-sm 
               sm:text-base 
