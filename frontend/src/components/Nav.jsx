@@ -38,7 +38,7 @@ const Nav = () => {
             fontFamily: "Geogrotesque, sans-serif",
            
             color: "red", // Red text
-             WebkitTextStroke: "9px black", // Black stroke
+            
           }}
         >
           {links.map((link, index) => (
