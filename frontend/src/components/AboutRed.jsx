@@ -8,57 +8,56 @@ import RRMascot from "../assets/RRMascot.png";
 // Create and export a functional component called "AboutRed"
 const AboutRed = () => {
   return (
-    // A section with a red background, padding, and relative positioning
-    <section className="relative bg-[#D3242A] py-20 px-6 sm:px-10">
-      {/* 
+    // A section with a white background, padding, and relative positioning
+    <section className="relative bg-white py-20 px-6 sm:px-10">
+      {/*
         Container to center our content and lay items out in a row on medium+ screens.
         On smaller screens, items stack vertically.
       */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        {/* 
-          LEFT SIDE: Image container. 
-          
+      <div className="container mx-auto flex flex-col md:flex-row-reverse items-center justify-between">
+        {/*
+          RIGHT SIDE (FLIPPED): Image container.
+
           - On md (tablet) screens: it takes 2/3 width
           - On lg (desktop) screens: it takes 1/2 width
-          - Adjusted the margin so it's smaller on tablets, bigger on desktop
         */}
-        <div className="w-full md:w-2/3 lg:w-1/2 relative mb-12 md:mb-0 md:mr-8 lg:mr-20">
-          {/* 
-            The mascot image is now animated to "slide in" from the left (x: -100).
+        <div className="w-full md:w-2/3 lg:w-1/2 relative mb-12 md:mb-0 md:ml-8 lg:ml-20">
+          {/*
+            The mascot image is now animated to "slide in" from the right (x: 100).
           */}
           <div className="relative overflow-hidden">
             <motion.img
               src={RRMascot}
               alt="Rugged Red Mascot"
-              className="w-full h-auto transform scale-x-[-1]" // Flips horizontally
-              // Slide in from left + fade in
-              initial={{ x: -100, opacity: 0 }}
+              className="w-full h-auto transform scale-x-[1]" // Mirrored horizontally
+              // Slide in from right + fade in
+              initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{
                 duration: 0.8,
                 ease: [0.6, 0.05, 0.2, 0.9],
               }}
             />
-            {/* 
-              A red-to-transparent gradient overlay at the bottom 
-              to help blend into background.
+            {/*
+              A white-to-transparent gradient overlay at the bottom
+              to help blend into the background.
             */}
-            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#D3242A] to-transparent"></div>
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white to-transparent"></div>
           </div>
         </div>
 
-        {/* 
-          RIGHT SIDE: Text container 
-          
+        {/*
+          LEFT SIDE (FLIPPED): Text container
+
           - On md (tablet) screens: it goes full width or whatever remains
           - On lg (desktop) screens: half width
         */}
         <div className="w-full md:w-full lg:w-1/2">
-          {/* 
+          {/*
             Section Title (fade in from above) with Geogrotesque font applied.
           */}
           <motion.h2
-            className="text-white text-4xl sm:text-5xl font-extrabold mb-8"
+            className="text-[#D3242A] text-4xl sm:text-5xl font-extrabold mb-8"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -70,11 +69,11 @@ const AboutRed = () => {
             About Rugged Red
           </motion.h2>
 
-          {/* 
+          {/*
             Paragraph 1 (fade in).
           */}
           <motion.p
-            className="text-white text-base sm:text-xl leading-relaxed mb-6"
+            className="text-black text-base sm:text-xl leading-relaxed mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -89,11 +88,11 @@ const AboutRed = () => {
             confront the toughest messes with unwavering strength.
           </motion.p>
 
-          {/* 
+          {/*
             Paragraph 2 (fade in with slight delay).
           */}
           <motion.p
-            className="text-white text-base sm:text-xl leading-relaxed"
+            className="text-black text-base sm:text-xl leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -108,14 +107,14 @@ const AboutRed = () => {
             meets purpose.
           </motion.p>
 
-          {/* 
+          {/*
             CTA Buttons: fade in from below, slightly staggered.
-            - Stacked on small devices, side-by-side on bigger screens 
+            - Stacked on small devices, side-by-side on bigger screens
           */}
           <div className="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <motion.a
               href="#"
-              className="inline-block bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition text-center"
+              className="inline-block bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full hover:bg-[#B91D23] transition text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{

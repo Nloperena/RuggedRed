@@ -7,7 +7,7 @@ import ProvenIcon from "../assets/icons/Proven Icon.png";
 
 const ProductLine = () => {
   return (
-    <section className="relative bg-[#D3242A] py-20 px-6 sm:px-10">
+    <section className="relative bg-white py-20 px-6 sm:px-10">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         {/* LEFT SIDE: Image Container */}
         <div className="w-full md:w-2/3 lg:w-1/2 relative mb-12 md:mb-0 md:mr-8 lg:mr-20">
@@ -23,14 +23,14 @@ const ProductLine = () => {
                 ease: [0.6, 0.05, 0.2, 0.9],
               }}
             />
-            <div className="absolute bottom-0 left-0 w-full h-40 "></div>
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white to-transparent"></div>
           </div>
         </div>
 
         {/* RIGHT SIDE: Text Container */}
         <div className="w-full md:w-full lg:w-1/2">
           <motion.h2
-            className="text-white text-4xl sm:text-5xl font-extrabold mb-8"
+            className="text-[#D3242A] text-4xl sm:text-5xl font-extrabold mb-8"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ const ProductLine = () => {
           </motion.h2>
 
           <motion.p
-            className="text-white text-base sm:text-xl leading-relaxed mb-6"
+            className="text-black text-base sm:text-xl leading-relaxed mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -58,7 +58,7 @@ const ProductLine = () => {
           </motion.p>
 
           <motion.p
-            className="text-white text-base sm:text-xl leading-relaxed mb-8"
+            className="text-black text-base sm:text-xl leading-relaxed mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
@@ -77,9 +77,9 @@ const ProductLine = () => {
               <img
                 src={PowerfulIcon}
                 alt="Powerful"
-                className="h-16 w-16 mb-4 filter invert"
+                className="h-16 w-16 mb-4"
               />
-              <p className="text-white font-bold text-lg">Powerful</p>
+              <p className="text-black font-bold text-lg">Powerful</p>
             </div>
 
             {/* Icon 2: Biodegradable */}
@@ -87,9 +87,9 @@ const ProductLine = () => {
               <img
                 src={BiodegradableIcon}
                 alt="Biodegradable"
-                className="h-16 w-16 mb-4 filter invert"
+                className="h-16 w-16 mb-4"
               />
-              <p className="text-white font-bold text-lg">Biodegradable</p>
+              <p className="text-black font-bold text-lg">Biodegradable</p>
             </div>
 
             {/* Icon 3: Proven */}
@@ -97,9 +97,9 @@ const ProductLine = () => {
               <img
                 src={ProvenIcon}
                 alt="Proven"
-                className="h-16 w-16 mb-4 filter invert"
+                className="h-16 w-16 mb-4"
               />
-              <p className="text-white font-bold text-lg">Proven</p>
+              <p className="text-black font-bold text-lg">Proven</p>
             </div>
           </div>
         </div>
