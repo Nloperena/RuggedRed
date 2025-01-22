@@ -1,23 +1,47 @@
-import React, { useState, useEffect } from "react";
+// LoadingScreen.jsx
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import usaflaggif from "../assets/usaflaggif.webp"; // WebP image
+import usaflaggifFallback from "../assets/icons/Flag Icon.png"; // PNG fallback
 
-const LoadingScreen = () => {
-  const [isFading, setIsFading] = useState(false);
+const LoadingScreen = ({ isFading }) => {
+  const loadingVariants = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0, transition: { duration: 0.5 } }, // Fade out over 0.5 seconds
+  };
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsFading(true), 2000); // Delay before fade-out
-    return () => clearTimeout(timer);
+    // Disable scrolling when loading
+    document.body.style.overflow = "hidden";
+    return () => {
+      // Re-enable scrolling when loading screen is removed
+      document.body.style.overflow = "auto";
+    };
   }, []);
 
   return (
-    <div
-      className={`fixed inset-0 bg-[#D3242A] flex items-center justify-center z-50 transition-opacity duration-500 ${
+    <motion.div
+      className={`fixed inset-0 bg-[#D3242A] flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${
         isFading ? "opacity-0" : "opacity-100"
       }`}
+      initial="visible"
+      animate={isFading ? "hidden" : "visible"}
+      variants={loadingVariants}
     >
-      <div className="text-white text-2xl font-bold animate-pulse">
-        Loading...
-      </div>
-    </div>
+      {/* Logo with Fallback */}
+      <picture className="mb-4">
+        <source srcSet={usaflaggif} type="image/webp" />
+        <img
+          src={usaflaggifFallback}
+          alt="USA Flag"
+          className="w-32 h-auto object-contain" // Adjusted classes to prevent squishing
+        />
+      </picture>
+      {/* FontAwesome Spinner Icon */}
+      <i className="fas fa-spinner fa-spin text-white text-4xl"></i>
+      {/* Optional Text */}
+      <p className="text-white mt-4 text-lg">Welcome to Rugged Red!</p>
+    </motion.div>
   );
 };
 
