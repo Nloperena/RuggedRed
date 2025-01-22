@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// useInView lets us monitor if elements are visible in the viewport
 import { useInView } from "react-intersection-observer";
+
+// Importing all necessary components
 import Hero from "../components/Hero";
 import MascotDivider from "../components/MascotDivider";
 import ProductDivider from "../components/ProductDivider";
@@ -14,82 +17,113 @@ import ComparisonTable from "../components/ComparisonTable";
 import AutoScrollingImages from "../components/AutoScrollingImages";
 
 const Home = () => {
-  const [stickyVisible, setStickyVisible] = useState(false); // Control StickyImage visibility
+  // 1) State to control the visibility of StickyImage
+  const [stickyVisible, setStickyVisible] = useState(false);
 
-  // Observe Hero section
-  const { ref: heroRef, inView: heroInView } = useInView({
-    threshold: 0.5, // Trigger when 50% of Hero is visible
-    onChange: (inView) => {
-      if (inView) setStickyVisible(true); // Show StickyImage
-    },
+  // 2) Watch the ProductLine section
+  const { ref: productLineRef, inView: productLineInView } = useInView({
+    threshold: 0.1, // Trigger if 10% or more of ProductLine is visible
   });
 
-  // Observe ComparisonTable
+  // 3) Watch the RichTextProductsSection ("Our Products") with multiple thresholds
+  const {
+    ref: richTextRef,
+    inView: richTextInView,
+    entry: richTextEntry,
+  } = useInView({
+    threshold: [0.1, 0.5], // Trigger at 10% and 50% visibility
+  });
+
+  // 4) Watch the ComparisonTable section
   const { ref: comparisonTableRef, inView: comparisonInView } = useInView({
-    threshold: 0.5, // Trigger when 50% of ComparisonTable is visible
-    onChange: (inView) => {
-      if (inView) setStickyVisible(false); // Hide StickyImage
-    },
+    threshold: 0.01, // Trigger as soon as 1% of ComparisonTable is visible
   });
+
+  // 5) State to store how much of RichText is visible (0 to 1)
+  const [richTextRatio, setRichTextRatio] = useState(0);
+
+  // 6) Update richTextRatio whenever RichText's visibility changes
+  useEffect(() => {
+    if (richTextEntry) {
+      setRichTextRatio(richTextEntry.intersectionRatio);
+    }
+  }, [richTextEntry]);
+
+  // 7) Effect to determine when to show or hide StickyImage
+  useEffect(() => {
+    if (comparisonInView) {
+      // If ComparisonTable is at least 1% visible, hide StickyImage
+      setStickyVisible(false);
+    } else if (productLineInView) {
+      // If ProductLine is at least 10% visible, show StickyImage
+      setStickyVisible(true);
+    } else if (richTextInView && richTextRatio < 0.5) {
+      // If RichText is at least 10% visible but less than 50%, show StickyImage
+      setStickyVisible(true);
+    } else {
+      // Otherwise, hide StickyImage
+      setStickyVisible(false);
+    }
+  }, [comparisonInView, productLineInView, richTextInView, richTextRatio]);
 
   return (
     <>
-      {/* Sticky Image Section */}
+      {/* 8) Conditionally render StickyImage if stickyVisible is true */}
       {stickyVisible && (
         <section className="relative">
           <StickyImage />
         </section>
       )}
 
-      {/* Main Content */}
+      {/* 9) Main Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <div ref={heroRef}> {/* Observe Hero section */}
-          <Hero />
-        </div>
-
+        <Hero />
         <MascotDivider />
         <ProductDivider />
 
-        {/* Product Line Section */}
-        <ProductLine />
+        {/* Product Line Section observed by productLineRef */}
+        <div ref={productLineRef}>
+          <ProductLine />
+        </div>
 
-        {/* Products Section */}
+        {/* Products Section ("Our Products") with 45rem top margin */}
         <section
+          ref={richTextRef} // Observing RichText section
           className="relative bg-white py-20 px-6 sm:px-10"
-          style={{ marginTop: "45rem" }} // Add 45rem top margin
+          style={{ marginTop: "40rem" }} // Maintaining the large top margin
         >
           <RichTextProductsSection />
         </section>
 
-        {/* Comparison Table Section */}
-        <div ref={comparisonTableRef}> {/* Observe ComparisonTable */}
+        {/* Comparison Table Section observed by comparisonTableRef */}
+        <div ref={comparisonTableRef}>
           <ComparisonTable />
         </div>
 
-        {/* Testimonials Section with Cropped Background */}
+        {/* Testimonials Section with Blurred Background and White Overlay */}
         <section className="relative z-30 text-white py-20 px-6 overflow-hidden">
-          {/* Background Container */}
+          {/* Blurred Background Image */}
           <div
             className="absolute inset-0 -z-10 bg-cover bg-center filter blur-sm"
             style={{
               backgroundImage: `url('https://images.ctfassets.net/hdznx4p7ef81/4bmH8LUErm4lVMKisci0EQ/afe5be750a53f06d5c46903aafd010e5/CD_Cleaning_Grease_on_Table.jpg')`,
-              backgroundPosition: "center top", // Move the image to the top
-              transform: "translateY(-2rem)", // Crop the top by 2rem
+              backgroundPosition: "center top", // Positioning the image
+              transform: "translateY(-2rem)", // Slightly shifting the image for cropping effect
               backgroundSize: "cover",
-              opacity: 0.7, // Adjust opacity for washed-out effect
+              opacity: 0.7, // Adjusting opacity for a washed-out look
             }}
           ></div>
 
-          {/* White Overlay */}
+          {/* White Overlay for Enhanced Readability */}
           <div className="absolute inset-0 -z-10 bg-white opacity-40"></div>
 
+          {/* Testimonials Content */}
           <Testimonials />
         </section>
 
-        {/* Carousel and Other Sections */}
+        {/* Additional Content Sections */}
         <AutoScrollingImages />
-
         <AboutRed />
         <BlogSection />
       </div>
