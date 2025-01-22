@@ -1,6 +1,6 @@
 import React from "react";
 import Stars from "./Stars"; // Import the Stars component
-import heroBackground from "../assets/kitchen1.png";
+import heroBackground from "../assets/kitchen2.jpg";
 
 const Hero = () => {
   return (

@@ -18,14 +18,14 @@ const App = () => {
     <>
  
       <div className={`${isLoading ? "hidden" : "block"}`}>
-        <Nav />
+        <Nav className = 'z-40'/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
         </Routes>
-        <Footer />
+        <Footer className = 'z-39'/>
       </div>
     </>
   );
