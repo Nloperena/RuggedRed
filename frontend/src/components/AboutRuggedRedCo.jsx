@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 // Import images
 import TeamworkImage from "../assets/HeroBottle1.png";
-import FactoryImage from "../assets/icons/Flag Icon.png";
+import FactoryImage from "../assets/American Flag.png";
 
 const AboutRedCo = () => {
   const [teamworkImageLoaded, setTeamworkImageLoaded] = useState(false);
@@ -168,7 +168,7 @@ const AboutRedCo = () => {
               <img
                 src={FactoryImage}
                 alt="RedCo Factory"
-                className="w-[400px] h-auto rounded-lg object-cover"
+                className="w-[1000px] h-auto rounded-lg object-cover"
                 style={{ display: factoryImageLoaded ? "block" : "none" }}
                 onLoad={() => setFactoryImageLoaded(true)}
               />
