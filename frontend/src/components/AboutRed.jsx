@@ -22,11 +22,7 @@ const AboutRed = () => {
             }}
           >
             WHO IS RED?
-            <img
-              src={FlagIcon}
-              alt="Made in America"
-              className="w-[100px] h-[100px]"
-            />
+            
           </motion.h2>
 
           {/* Paragraph 1 */}

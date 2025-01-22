@@ -2,32 +2,43 @@ import React from "react";
 import Hero from "../components/Hero";
 import MascotDivider from "../components/MascotDivider";
 import ProductDivider from "../components/ProductDivider";
-import WaveDivider from "../components/WaveDivider";
 import ProductLine from "../components/ProductLine";
 import StickyImage from "../components/StickyImage";
 import RichTextProductsSection from "../components/RichTextProductsSection";
+import ComparisonTable from "../components/ComparisonTable";
 import Testimonials from "../components/Testimonials";
 import ImageCarousel from "../components/ImageCarousel";
 import AboutRed from "../components/AboutRed";
 import BlogSection from "../components/BlogSection";
-import ComparisonTable from "../components/ComparisonTable";
 
 const Home = () => {
   return (
     <>
-      {/* Hero, Dividers, etc. */}
       <Hero />
       <MascotDivider />
       <ProductDivider />
-      {/* <WaveDivider
-        color="white"
-        path="M0,256L60,224C120,192,240,128,360,112C480,96,600,128,720,144C840,160,960,160,1080,144C1200,128,1320,96,1380,80L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-      /> */}
       <ProductLine />
-      <StickyImage />
-      <RichTextProductsSection />
-      <ComparisonTable />
-      <Testimonials />
+
+      {/*
+        BIG WRAPPER: We give it a very tall height (600vh), 
+        so there's plenty of scrolling room for the parallax to happen.
+        We removed overflow-hidden so the page can actually scroll.
+      */}
+      <div className="relative" style={{ height: "350vh" }}>
+        {/*
+          1) StickyImage is in normal flow here.
+             Inside StickyImage, you likely have your own 300vh
+             or 600vh area plus the "sticky" logic.
+        */}
+        <StickyImage />
+
+     
+        <div className="relative z-10" style={{ marginTop: "50vh" }}>
+          <RichTextProductsSection />
+          <ComparisonTable />
+          <Testimonials />
+        </div>
+      </div>
 
       <ImageCarousel />
       <AboutRed />
