@@ -1,124 +1,257 @@
 import React, { useState, useEffect } from "react";
-// useInView lets us monitor if elements are visible in the viewport
 import { useInView } from "react-intersection-observer";
-
-// Importing all necessary components
+import { motion } from "framer-motion"; // Import framer-motion
 import Hero from "../components/Hero";
-import MascotDivider from "../components/MascotDivider";
-import ProductDivider from "../components/ProductDivider";
+import Divider from "../components/Divider";
 import ProductLine from "../components/ProductLine";
-import StickyImage from "../components/StickyImage"; // The pinned background
+import StickyImage from "../components/StickyImage";
 import RichTextProductsSection from "../components/RichTextProductsSection";
 import Testimonials from "../components/Testimonials";
-import ImageCarousel from "../components/ImageCarousel";
+import AutoScrollingImages from "../components/AutoScrollingImages";
 import AboutRed from "../components/AboutRed";
 import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
-import AutoScrollingImages from "../components/AutoScrollingImages";
 
 const Home = () => {
-  // 1) State to control the visibility of StickyImage
-  const [stickyVisible, setStickyVisible] = useState(false);
+    const [stickyVisible, setStickyVisible] = useState(false);
+  
+    // Observe ProductLine, RichTextProductsSection, and ComparisonTable
+    const { ref: productLineRef, inView: productLineInView } = useInView({
+      threshold: 0.1, // Trigger when 10% of ProductLine is visible
+    });
+    const { ref: richTextRef, inView: richTextInView } = useInView({
+      threshold: 0, // Trigger when the very top of RichTextProductsSection enters the viewport
+      triggerOnce: true, // Animate only once when in view
+    });
+    const { ref: comparisonTableRef, inView: comparisonInView } = useInView({
+      threshold: 0.1, // Trigger when 10% of ComparisonTable is visible
+    });
+  
+    // Visibility Logic for StickyImage
+    useEffect(() => {
+      // StickyImage is visible:
+      // - While ProductLine is in view
+      // - Or until ComparisonTable becomes visible
+      if (!comparisonInView) {
+        setStickyVisible(true);
+      } else {
+        setStickyVisible(false);
+      }
+    }, [comparisonInView]);
+  
+    return (
+      <>
+        {/* Sticky Image Section */}
+        {stickyVisible && (
+          <section className="relative">
+            <StickyImage />
+          </section>
+        )}
+  
+        <div className="relative z-10">
+          {/* Hero Section */}
+          <Hero />
+  
+      {/* --------------------------------
+           (Optional) Mascot Divider - COMMENTED OUT
+           Uncomment if you want to display the Mascot Divider.
+      --------------------------------
+      <div
+        className="relative w-full"
+        style={{
+          zIndex: 1001,
+          position: "relative",
+          marginTop: "-8rem", // Default margin-top
+        }}
+      >
+        <div
+          className={\`
+            block transform mx-auto float-left w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]
+          \`}
+          style={{
+            marginBottom: "5rem", // Add extra space below the divider
+          }}
+        >
+          <img
+            src={require("../assets/RRMascot.png")}
+            alt="Mascot Divider"
+            className="block object-contain mascot-divider"
+            style={{
+              maskImage: "linear-gradient(to bottom, black 95%, transparent)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
+            }}
+          />
+        </div>
+      </div>
+      */}
 
-  // 2) Watch the ProductLine section
-  const { ref: productLineRef, inView: productLineInView } = useInView({
-    threshold: 0.1, // Trigger if 10% or more of ProductLine is visible
-  });
+      {/* --------------------------------
+           Product Divider
+      -------------------------------- */}
+      <div
+        className="relative w-full"
+        style={{
+          zIndex: 1001,
+          position: "relative",
+          marginTop: "-8rem", // Default margin-top
+        }}
+      >
+        <div
+          className={`
+            block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]
+          `}
+          style={{
+            marginBottom: "0rem",  // Extra space below the divider
+            marginRight: "0rem",   // Adjust spacing to the right
+            marginTop: "-7rem",    // Adjust top margin for smaller screens
+            maxWidth: "",          // Shrink the width for smaller screens
+          }}
+        >
+          {/* All media queries for the .product-divider */}
+          <style>
+            {`
+              /* Catch-All Styles for Product Divider */
+              .product-divider {
+                margin-top: -7rem;
+                margin-right: 1rem;
+                margin-bottom: 9rem;
+                margin-left: 0rem;
+                padding-top: 0rem;
+                padding-right: 0rem;
+                padding-bottom: 0rem;
+                padding-left: 0rem;
+                max-width: 100%;
+              }
 
-  // 3) Watch the RichTextProductsSection ("Our Products") with multiple thresholds
-  const {
-    ref: richTextRef,
-    inView: richTextInView,
-    entry: richTextEntry,
-  } = useInView({
-    threshold: [0.1, 0.5], // Trigger at 10% and 50% visibility
-  });
+              /* Below Small Screens */
+              @media (max-width: 639px) {
+                .product-divider {
+                  margin-top: 3rem;
+                  margin-right: 0.5rem;
+                  margin-bottom: 5rem;
+                  margin-left: 4rem;
+                  padding-top: 0.5rem;
+                  padding-right: 0.5rem;
+                  padding-bottom: 0.5rem;
+                  padding-left: 0.5rem;
+                  max-width: 65%;
+                }
+              }
 
-  // 4) Watch the ComparisonTable section
-  const { ref: comparisonTableRef, inView: comparisonInView } = useInView({
-    threshold: 0.01, // Trigger as soon as 1% of ComparisonTable is visible
-  });
+              /* Small Screens */
+              @media (min-width: 640px) and (max-width: 767px) {
+                .product-divider {
+                  margin-top: -1rem;
+                  margin-right: 0rem;
+                  margin-bottom: 6rem;
+                  margin-left: 6rem;
+                  padding-top: 1rem;
+                  padding-right: 1rem;
+                  padding-bottom: 0.5rem;
+                  padding-left: 0.5rem;
+                  max-width: 60%;
+                }
+              }
 
-  // 5) State to store how much of RichText is visible (0 to 1)
-  const [richTextRatio, setRichTextRatio] = useState(0);
+              /* Medium Screens */
+              @media (min-width: 768px) and (max-width: 1023px) {
+                .product-divider {
+                  margin-top: -10rem;
+                  margin-right: 5rem;
+                  margin-bottom: 7rem;
+                  margin-left: 7.5rem;
+                  padding-top: 1.5rem;
+                  padding-right: 1.5rem;
+                  padding-bottom: 1rem;
+                  padding-left: 1rem;
+                  max-width: 70%;
+                }
+              }
 
-  // 6) Update richTextRatio whenever RichText's visibility changes
-  useEffect(() => {
-    if (richTextEntry) {
-      setRichTextRatio(richTextEntry.intersectionRatio);
-    }
-  }, [richTextEntry]);
+              /* Large Screens */
+              @media (min-width: 1024px) and (max-width: 1279px) {
+                .product-divider {
+                  margin-top: -11rem;
+                  margin-right: 5rem;
+                  margin-bottom: 10rem;
+                  margin-left: 10rem;
+                  padding-top: 2rem;
+                  padding-right: 2rem;
+                  padding-bottom: 1.5rem;
+                  padding-left: 1.5rem;
+                  max-width: 60%;
+                }
+              }
 
-  // 7) Effect to determine when to show or hide StickyImage
-  useEffect(() => {
-    if (comparisonInView) {
-      // If ComparisonTable is at least 1% visible, hide StickyImage
-      setStickyVisible(false);
-    } else if (productLineInView) {
-      // If ProductLine is at least 10% visible, show StickyImage
-      setStickyVisible(true);
-    } else if (richTextInView && richTextRatio < 0.5) {
-      // If RichText is at least 10% visible but less than 50%, show StickyImage
-      setStickyVisible(true);
-    } else {
-      // Otherwise, hide StickyImage
-      setStickyVisible(false);
-    }
-  }, [comparisonInView, productLineInView, richTextInView, richTextRatio]);
+              /* Extra Large Screens */
+              @media (min-width: 1280px) {
+                .product-divider {
+                  margin-top: -18rem;
+                  margin-right: 5rem;
+                  margin-bottom: 12rem;
+                  margin-left: 3rem;
+                  padding-top: 2.5rem;
+                  padding-right: 2.5rem;
+                  padding-bottom: 2rem;
+                  padding-left: 2rem;
+                  max-width: 80%;
+                }
+              }
+            `}
+          </style>
 
-  return (
-    <>
-      {/* 8) Conditionally render StickyImage if stickyVisible is true */}
-      {stickyVisible && (
-        <section className="relative">
-          <StickyImage />
-        </section>
-      )}
+          <img
+            src={require("../assets/RR-ProductHeroImg.png")}
+            alt="Product Divider"
+            className="block object-contain product-divider"
+            style={{
+              maskImage: "linear-gradient(to bottom, black 95%, transparent)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
+            }}
+          />
+        </div>
+      </div>
 
-      {/* 9) Main Content */}
-      <div className="relative z-10">
-        {/* Hero Section */}
-        <Hero />
-        <MascotDivider />
-        <ProductDivider />
-
-        {/* Product Line Section observed by productLineRef */}
-        <div ref={productLineRef}>
+      {/* --------------------------------
+           Product Line Section
+      -------------------------------- */}
+      <div ref={productLineRef}>
           <ProductLine />
         </div>
 
-        {/* Products Section ("Our Products") with 45rem top margin */}
-        <section
-          ref={richTextRef} // Observing RichText section
-          className="relative bg-white py-20 px-6 sm:px-10"
-          style={{ marginTop: "40rem" }} // Maintaining the large top margin
+        {/* Animated Rich Text Products Section */}
+        <motion.section
+          ref={richTextRef}
+          className="relative bg-white pt-20 pb-12 px-6 sm:px-10"
+          style={{ marginTop: "40rem" }}
+          initial={{ opacity: 0, y: 20 }} // Start faded out and shifted down
+          animate={richTextInView ? { opacity: 1, y: 0 } : {}} // Animate into view
+          transition={{
+            duration: 0.8,
+            ease: [0.6, 0.05, 0.2, 0.9], // Smooth easing
+          }}
         >
           <RichTextProductsSection />
-        </section>
+        </motion.section>
 
-        {/* Comparison Table Section observed by comparisonTableRef */}
+        {/* Comparison Table Section */}
         <div ref={comparisonTableRef}>
           <ComparisonTable />
         </div>
 
-        {/* Testimonials Section with Blurred Background and White Overlay */}
+        {/* Testimonials Section */}
         <section className="relative z-30 text-white py-20 px-6 overflow-hidden">
-          {/* Blurred Background Image */}
           <div
             className="absolute inset-0 -z-10 bg-cover bg-center filter blur-sm"
             style={{
               backgroundImage: `url('https://images.ctfassets.net/hdznx4p7ef81/4bmH8LUErm4lVMKisci0EQ/afe5be750a53f06d5c46903aafd010e5/CD_Cleaning_Grease_on_Table.jpg')`,
-              backgroundPosition: "center top", // Positioning the image
-              transform: "translateY(-2rem)", // Slightly shifting the image for cropping effect
+              backgroundPosition: "center top",
+              transform: "translateY(-2rem)",
               backgroundSize: "cover",
-              opacity: 0.7, // Adjusting opacity for a washed-out look
+              opacity: 0.7,
             }}
           ></div>
-
-          {/* White Overlay for Enhanced Readability */}
           <div className="absolute inset-0 -z-10 bg-white opacity-40"></div>
-
-          {/* Testimonials Content */}
           <Testimonials />
         </section>
 

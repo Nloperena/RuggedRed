@@ -17,12 +17,10 @@ const ProductDivider = ({ flip }) => {
           block 
           transform 
           mx-auto
-          // Position product image differently for mobile vs. larger screens
-          sm:float-right   // Float right for larger screens (square/landscape)
-          float-left       // Float left for mobile
+          sm:float-right   // Float right for larger screens
         `}
         style={{
-          marginTop: "-10rem",    // Default for smaller screens
+          marginTop: "6rem", // Ensure consistent margin-top
           marginBottom: "-5rem", // Consistent bottom margin
         }}
       >
@@ -31,25 +29,25 @@ const ProductDivider = ({ flip }) => {
           src={ProductHeroImg}
           alt="Rugged Red Product Hero"
           className={`
-            w-full
             block
+            w-full
             // Responsive sizes
+            w-[180px]        // Smaller size for mobile
             sm:w-[240px] 
             md:w-[385px] 
             lg:w-[400px] 
             xl:w-[700px]
-            // Adjust margin-top for breakpoints
-            mt-[rem]     // Default margin-top
-            sm:mt-[-10rem]  // For min-width: 640px
-            md:mt-[-10rem]  // For min-width: 768px
-            lg:mt-[-10rem]
-            xl:mt-[-13rem]  // For min-width: 1280px
-            xl:mb-[10em]  // For min-width: 1280px
-            // Add margin-right conditionally for larger screens
-            lg:mr-8         // Add margin-right for min-width: 1024px
-            xl:mr-12        // Add larger margin-right for min-width: 1280px
+            float-right      // Align to the right for mobile and above
+            mr-[1rem]        // Add margin-right for spacing on smaller screens
+            sm:mr-[2rem]     // Increase margin-right for sm breakpoint
+            lg:mr-8          // Consistent margin for large screens
+            xl:mr-12         // Larger margin for extra-large screens
           `}
-      
+          style={{
+            position: "relative",
+            maxWidth: "30%", // Keep the image width to 30%
+            transform: "translateX(15px)", // Move slightly to the right for smaller displays
+          }}
         />
       </div>
     </div>

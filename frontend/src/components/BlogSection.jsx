@@ -133,21 +133,7 @@ export default function FeaturesShowcase() {
     // A red background for the entire blog section
     <section className="relative py-16 px-6 overflow-hidden bg-red-600">
       {/* We have an animated hand in the bottom-right corner */}
-      <motion.img
-        src={Hand}
-        alt="Decorative Hand"
-        className="absolute right-0 bottom-0 max-w-[500px] md:max-w-[600px] z-0"
-        style={{ pointerEvents: "none", transformOrigin: "top left" }}
-        animate={{
-          x: [0, 25, -20, 15, -15, 0],
-          y: [0, 10, 20, 40, 20, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: [0.42, 0, 0.58, 1],
-        }}
-      />
+      
 
       {/* Main content is above the hand (z-10) */}
       <div className="relative max-w-screen-xl mx-auto z-10">

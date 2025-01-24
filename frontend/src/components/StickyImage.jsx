@@ -7,24 +7,22 @@ const StickyImage = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-0"> {/* z-0 instead of -z-10 */}
-      <div className="flex w-full h-full">
-        {/* Left Half */}
-        <div className="w-1/2 relative h-full">
-          <img
-            src={images[0]}
-            alt="Left"
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          />
-        </div>
-        {/* Right Half */}
-        <div className="w-1/2 relative h-full">
-          <img
-            src={images[1]}
-            alt="Right"
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          />
-        </div>
+    <div className="fixed inset-0 z-0 flex flex-col h-full">
+      {/* Top Image */}
+      <div className="flex-1 relative">
+        <img
+          src={images[0]}
+          alt="Top Image"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+      {/* Bottom Image */}
+      <div className="flex-1 relative">
+        <img
+          src={images[1]}
+          alt="Bottom Image"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
     </div>
   );
