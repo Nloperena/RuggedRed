@@ -76,9 +76,14 @@ const Hero = () => {
             }
           }
 
+          /* 
+            On the largest displays,
+            center the container horizontally,
+            and remove the strong negative top margin
+          */
           @media (min-width: 1280px) {
             #hero .hero-content {
-              margin: -15rem 6rem 2rem;
+              margin: -20rem auto 2rem;
               max-width: 1600px;
               padding: 5rem 0;
             }
@@ -88,7 +93,7 @@ const Hero = () => {
              FONT-SIZE FOR HEADLINE AND PARAGRAPH
           ---------------------------------- */
           #hero h1 {
-            font-size: 2rem; /* Mobile default */
+            font-size: 2.8rem; /* Mobile default */
           }
 
           #hero p {
@@ -99,7 +104,6 @@ const Hero = () => {
             #hero h1 {
               font-size: 3rem; /* Small screens */
             }
-
             #hero p {
               font-size: 1.25rem; /* Small screens */
             }
@@ -109,7 +113,6 @@ const Hero = () => {
             #hero h1 {
               font-size: 4rem; /* Medium screens */
             }
-
             #hero p {
               font-size: 1.5rem; /* Medium screens */
             }
@@ -119,7 +122,6 @@ const Hero = () => {
             #hero h1 {
               font-size: 3.4rem; /* Large screens */
             }
-
             #hero p {
               font-size: 1.2rem; /* Large screens */
             }
@@ -129,7 +131,6 @@ const Hero = () => {
             #hero h1 {
               font-size: 5.4rem; /* Extra-large screens */
             }
-
             #hero p {
               font-size: 1.5rem; /* Extra-large screens */
             }
@@ -147,7 +148,7 @@ const Hero = () => {
         />
       </div>
 
-      {/* Main wrapper: replaced container classes with .hero-content */}
+      {/* Main wrapper: .hero-content with negative top margin for effect */}
       <div className="hero-content relative z-10 w-full">
         {/* Grid with left & right columns */}
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 h-full">
@@ -158,30 +159,20 @@ const Hero = () => {
 
           {/* Right column: Content wrapper */}
           <div className="flex flex-col justify-center items-start text-left space-y-6">
-            {/* Headline */}
+            {/* Headline (removed white stroke, kept glow) */}
             <h1
               className="font-extrabold leading-snug text-[#D3242A] mb-2"
               style={{
+                // Removed WebkitTextStroke to remove the white outline
                 textShadow: `0 0 6px rgba(255, 255, 255, 0.5),
                              0 0 12px rgba(255, 255, 255, 0.4)`,
               }}
             >
-              <span
-                className="inline-block"
-                style={{
-                  WebkitTextStroke: "2px white",
-                  textShadow: `0 0 6px rgba(255, 255, 255, 0.5),
-                               0 0 12px rgba(255, 255, 255, 0.4)`,
-                }}
-              >
-                A PROVEN POWERFUL CLEAN
-              </span>
+              <span className="inline-block">A PROVEN POWERFUL CLEAN</span>
             </h1>
 
             {/* Subheading with glass container */}
-            <div
-              className="inline-block bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg drop-shadow-md p-4 sm:p-6 md:p-8"
-            >
+            <div className="inline-block bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg drop-shadow-md p-4 sm:p-6 md:p-8">
               <p className="text-[#222222] leading-relaxed font-medium mb-1">
                 Tough enough for industrial messes, safe enough for your home.
                 Get the clean you can trust.

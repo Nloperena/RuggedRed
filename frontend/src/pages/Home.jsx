@@ -52,39 +52,8 @@ const Home = () => {
           {/* Hero Section */}
           <Hero />
   
-      {/* --------------------------------
-           (Optional) Mascot Divider - COMMENTED OUT
-           Uncomment if you want to display the Mascot Divider.
-      --------------------------------
-      <div
-        className="relative w-full"
-        style={{
-          zIndex: 1001,
-          position: "relative",
-          marginTop: "-8rem", // Default margin-top
-        }}
-      >
-        <div
-          className={\`
-            block transform mx-auto float-left w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]
-          \`}
-          style={{
-            marginBottom: "5rem", // Add extra space below the divider
-          }}
-        >
-          <img
-            src={require("../assets/RRMascot.png")}
-            alt="Mascot Divider"
-            className="block object-contain mascot-divider"
-            style={{
-              maskImage: "linear-gradient(to bottom, black 95%, transparent)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
-            }}
-          />
-        </div>
-      </div>
-      */}
-
+         
+     
       {/* --------------------------------
            Product Divider
       -------------------------------- */}
@@ -211,6 +180,136 @@ const Home = () => {
           />
         </div>
       </div>
+
+
+        {/* --------------------------------
+           MascotDivider
+      -------------------------------- */}
+      {true && ( // <-- set this to `true` or remove the `{false &&` to show it
+        <div
+          className="relative w-full"
+          style={{
+            zIndex: 1001,
+            position: "relative",
+            marginTop: "-8rem", // Default margin-top
+          }}
+        >
+          <div
+            className={`
+              block transform mx-auto float-left 
+              w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]
+            `}
+            style={{
+              marginBottom: "5rem", // Extra space below the divider
+            }}
+          >
+            {/*
+              Same approach as .product-divider, 
+              but this time for .mascot-divider
+            */}
+            <style>{`
+              /* Catch-All Styles for Mascot Divider */
+              .mascot-divider {
+                margin-top: -7rem;
+                margin-left: 1rem;
+                margin-bottom: 9rem;
+                margin-right: 0rem;
+                padding-top: 0rem;
+                padding-right: 0rem;
+                padding-bottom: 0rem;
+                padding-left: 0rem;
+                max-width: 100%;
+              }
+
+              /* Below Small Screens: max-width: 639px */
+              @media (max-width: 639px) {
+                .mascot-divider {
+                  margin-top: -10rem;
+                  margin-left: 0.5rem;
+                  margin-bottom: 0rem;
+                  margin-right: 4rem;
+                  padding-top: 0.5rem;
+                  padding-right: 0.5rem;
+                  padding-bottom: 0.5rem;
+                  padding-left: 0.5rem;
+                  max-width: 100%;
+                }
+              }
+
+              /* Small Screens: 640px to 767px */
+              @media (min-width: 640px) and (max-width: 767px) {
+                .mascot-divider {
+                  margin-top: -13rem;
+        margin-left: 1rem;
+        margin-bottom: 0rem;
+        margin-right: 0rem;
+        padding-top: 1rem;
+        padding-left: 1rem;
+        padding-bottom: 0.5rem;
+        padding-right: 0.5rem;
+        max-width: 83%;
+                }
+              }
+
+              /* Medium Screens: 768px to 1023px */
+              @media (min-width: 768px) and (max-width: 1023px) {
+                .mascot-divider {
+                  margin-top: -10rem;
+                  margin-left: 7.5rem;
+                  margin-bottom: 7rem;
+                  margin-right: 5rem;
+                  padding-top: 1.5rem;
+                  padding-right: 1.5rem;
+                  padding-bottom: 1rem;
+                  padding-left: 1rem;
+                  max-width: 70%;
+                }
+              }
+
+              /* Large Screens: 1024px to 1279px */
+              @media (min-width: 1024px) and (max-width: 1279px) {
+                .mascot-divider {
+                  margin-top: -62rem;
+        margin-left: -14rem;
+        margin-bottom: 10rem;
+        margin-right: 5rem;
+        padding-top: 2rem;
+        padding-right: 2rem;
+        padding-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        max-width: 160%;
+                }
+              }
+
+              /* Extra Large Screens: 1280px+ */
+              @media (min-width: 1280px) {
+                .mascot-divider {
+                  margin-top: -53rem;
+        margin-left: -5rem;
+        margin-bottom: 0rem;
+        margin-right: 5rem;
+        padding-top: 2.5rem;
+        padding-right: 2.5rem;
+        padding-bottom: 2rem;
+        padding-left: 10rem;
+        max-width: 200%;
+                }
+              }
+            `}</style>
+
+            <img
+              src={require("../assets/RRMascot.png")}
+              alt="Mascot Divider"
+              className="block object-contain mascot-divider"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 95%, transparent)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 95%, transparent)",
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* --------------------------------
            Product Line Section
