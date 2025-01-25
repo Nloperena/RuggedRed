@@ -187,7 +187,7 @@ const Home = () => {
       -------------------------------- */}
       {true && ( // <-- set this to `true` or remove the `{false &&` to show it
         <div
-          className="relative w-full"
+          className="relative w-full "
           style={{
             zIndex: 1001,
             position: "relative",
@@ -198,7 +198,7 @@ const Home = () => {
             className={`
               block transform mx-auto float-left 
               w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]
-            `}
+             `}
             style={{
               marginBottom: "5rem", // Extra space below the divider
             }}
@@ -219,20 +219,21 @@ const Home = () => {
                 padding-bottom: 0rem;
                 padding-left: 0rem;
                 max-width: 100%;
+                drop-shadow: (0 1px 1px rgba(0, 0, 0, 0.05))
               }
 
               /* Below Small Screens: max-width: 639px */
               @media (max-width: 639px) {
                 .mascot-divider {
                   margin-top: -10rem;
-                  margin-left: 0.5rem;
-                  margin-bottom: 0rem;
-                  margin-right: 4rem;
-                  padding-top: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-bottom: 0.5rem;
-                  padding-left: 0.5rem;
-                  max-width: 100%;
+        margin-left: 0.5rem;
+        margin-bottom: 0rem;
+        margin-right: 4rem;
+        padding-top: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.5rem;
+        max-width: 135%;
                 }
               }
 
