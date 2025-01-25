@@ -154,7 +154,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 h-full">
           {/* Left column: Empty box for aesthetics */}
           <div className="hidden lg:block h-full">
-            <div className="w-full h-full bg-gray-100 opacity-30 rounded-lg"></div>
+            <div className="w-full h-full bg-gray-100 opacity-0 rounded-lg"></div>
           </div>
 
           {/* Right column: Content wrapper */}

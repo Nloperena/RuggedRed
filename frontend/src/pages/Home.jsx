@@ -14,7 +14,7 @@ import ComparisonTable from "../components/ComparisonTable";
 
 const Home = () => {
     const [stickyVisible, setStickyVisible] = useState(false);
-  
+    
     // Observe ProductLine, RichTextProductsSection, and ComparisonTable
     const { ref: productLineRef, inView: productLineInView } = useInView({
       threshold: 0.1, // Trigger when 10% of ProductLine is visible

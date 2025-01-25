@@ -7,6 +7,38 @@
   pointer-events: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.bg-[#D3242A] {
+  background-color: #D3242A;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
