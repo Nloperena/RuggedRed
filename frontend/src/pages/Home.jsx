@@ -155,15 +155,15 @@ const Home = () => {
               /* Extra Large Screens */
               @media (min-width: 1280px) {
                 .product-divider {
-                  margin-top: -18rem;
-                  margin-right: 5rem;
-                  margin-bottom: 12rem;
-                  margin-left: 3rem;
-                  padding-top: 2.5rem;
-                  padding-right: 2.5rem;
-                  padding-bottom: 2rem;
-                  padding-left: 2rem;
-                  max-width: 80%;
+                  margin-top: -13rem;
+        margin-right: 5rem;
+        margin-bottom: 12rem;
+        margin-left: 13rem;
+        padding-top: 2.5rem;
+        padding-right: 2.5rem;
+        padding-bottom: 2rem;
+        padding-left: 2rem;
+        max-width: 86%;
                 }
               }
             `}
@@ -284,7 +284,7 @@ const Home = () => {
               /* Extra Large Screens: 1280px+ */
               @media (min-width: 1280px) {
                 .mascot-divider {
-                  margin-top: -53rem;
+        margin-top: -45rem;
         margin-left: -5rem;
         margin-bottom: 0rem;
         margin-right: 5rem;
@@ -292,7 +292,7 @@ const Home = () => {
         padding-right: 2.5rem;
         padding-bottom: 2rem;
         padding-left: 10rem;
-        max-width: 200%;
+        max-width: 180%;
                 }
               }
             `}</style>
