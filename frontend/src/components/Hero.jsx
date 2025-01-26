@@ -42,7 +42,7 @@ const Hero = () => {
 
           @media (min-width: 1280px) {
             #hero {
-              min-height: 865px;
+              min-height: 1230px;
             }
           }
 
@@ -71,7 +71,7 @@ const Hero = () => {
 
           @media (min-width: 1024px) {
             #hero .hero-content {
-              margin: -5rem 6rem 2rem;
+              margin: -13rem 6rem 2rem;
               padding: 4rem 0;
             }
           }

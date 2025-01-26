@@ -158,7 +158,7 @@ const Home = () => {
                   margin-top: -13rem;
         margin-right: 5rem;
         margin-bottom: 12rem;
-        margin-left: 13rem;
+        margin-left: 0rem;
         padding-top: 2.5rem;
         padding-right: 2.5rem;
         padding-bottom: 2rem;
@@ -219,7 +219,6 @@ const Home = () => {
                 padding-bottom: 0rem;
                 padding-left: 0rem;
                 max-width: 100%;
-                drop-shadow: (0 1px 1px rgba(0, 0, 0, 0.05))
               }
 
               /* Below Small Screens: max-width: 639px */
@@ -285,15 +284,16 @@ const Home = () => {
               /* Extra Large Screens: 1280px+ */
               @media (min-width: 1280px) {
                 .mascot-divider {
-        margin-top: -45rem;
-        margin-left: -5rem;
-        margin-bottom: 0rem;
-        margin-right: 5rem;
-        padding-top: 2.5rem;
-        padding-right: 2.5rem;
-        padding-bottom: 2rem;
-        padding-left: 10rem;
-        max-width: 180%;
+                margin-top: -60rem;
+                margin-left: -20rem;
+                margin-bottom: 0rem;
+                margin-right: 5rem;
+                padding-top: 2.5rem;
+                padding-right: 2.5rem;
+                padding-bottom: 2rem;
+                padding-left: 10rem;
+                max-width: 215%;
+    }
                 }
               }
             `}</style>
@@ -305,7 +305,7 @@ const Home = () => {
               style={{
                 maskImage: "linear-gradient(to bottom, black 95%, transparent)",
                 WebkitMaskImage:
-                  "linear-gradient(to bottom, black 95%, transparent)",
+                  "linear-(to bottom, black 95%, transparent)",
               }}
             />
           </div>
