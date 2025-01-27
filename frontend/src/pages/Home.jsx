@@ -13,6 +13,7 @@ import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
 
 const Home = () => {
+  
     const [stickyVisible, setStickyVisible] = useState(false);
     
     // Observe ProductLine, RichTextProductsSection, and ComparisonTable
@@ -41,11 +42,11 @@ const Home = () => {
   
     return (
       <>
-        {/* Sticky Image Section */}
-        {stickyVisible && (
-          <section className="relative">
-            <StickyImage />
-          </section>
+         {/* Sticky Image Section */}
+      {stickyVisible && (
+        <section className="relative">
+          <StickyImage richTextRef={richTextRef} />
+        </section>
         )}
   
         <div className="relative z-10">
@@ -311,6 +312,7 @@ const Home = () => {
           </div>
         </div>
       )}
+      <StickyImage />
 
       {/* --------------------------------
            Product Line Section
@@ -331,7 +333,7 @@ const Home = () => {
             ease: [0.6, 0.05, 0.2, 0.9], // Smooth easing
           }}
         >
-          <RichTextProductsSection />
+        <RichTextProductsSection />
         </motion.section>
 
         {/* Comparison Table Section */}
