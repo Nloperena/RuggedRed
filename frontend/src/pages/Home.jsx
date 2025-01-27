@@ -224,15 +224,15 @@ const Home = () => {
               /* Below Small Screens: max-width: 639px */
               @media (max-width: 639px) {
                 .mascot-divider {
-                  margin-top: -10rem;
-        margin-left: 0.5rem;
-        margin-bottom: 0rem;
-        margin-right: 4rem;
-        padding-top: 0.5rem;
-        padding-right: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0.5rem;
-        max-width: 135%;
+                  margin-top: -4rem;
+                  margin-left: 0.5rem;
+                  margin-bottom: 0rem;
+                  margin-right: 4rem;
+                  padding-top: 0.5rem;
+                  padding-right: 0.5rem;
+                  padding-bottom: 0.5rem;
+                  padding-left: 0.5rem;
+                  max-width: 135%;
                 }
               }
 
@@ -240,29 +240,29 @@ const Home = () => {
               @media (min-width: 640px) and (max-width: 767px) {
                 .mascot-divider {
                   margin-top: -13rem;
-        margin-left: 1rem;
-        margin-bottom: 0rem;
-        margin-right: 0rem;
-        padding-top: 1rem;
-        padding-left: 1rem;
-        padding-bottom: 0.5rem;
-        padding-right: 0.5rem;
-        max-width: 83%;
+                  margin-left: 1rem;
+                  margin-bottom: 0rem;
+                  margin-right: 0rem;
+                  padding-top: 1rem;
+                  padding-left: 1rem;
+                  padding-bottom: 0.5rem;
+                  padding-right: 0.5rem;
+                  max-width: 83%;
                 }
               }
 
               /* Medium Screens: 768px to 1023px */
               @media (min-width: 768px) and (max-width: 1023px) {
                 .mascot-divider {
-                  margin-top: -10rem;
-                  margin-left: 7.5rem;
-                  margin-bottom: 7rem;
+                  margin-top: -24rem;
+                  margin-left: -1.5rem;
+                  margin-bottom: -2rem;
                   margin-right: 5rem;
                   padding-top: 1.5rem;
                   padding-right: 1.5rem;
                   padding-bottom: 1rem;
                   padding-left: 1rem;
-                  max-width: 70%;
+                  max-width: 115%;
                 }
               }
 
@@ -270,14 +270,14 @@ const Home = () => {
               @media (min-width: 1024px) and (max-width: 1279px) {
                 .mascot-divider {
                   margin-top: -62rem;
-        margin-left: -14rem;
-        margin-bottom: 10rem;
-        margin-right: 5rem;
-        padding-top: 2rem;
-        padding-right: 2rem;
-        padding-bottom: 1.5rem;
-        padding-left: 1.5rem;
-        max-width: 160%;
+                  margin-left: -14rem;
+                  margin-bottom: 10rem;
+                  margin-right: 5rem;
+                  padding-top: 2rem;
+                  padding-right: 2rem;
+                  padding-bottom: 1.5rem;
+                  padding-left: 1.5rem;
+                  max-width: 160%;
                 }
               }
 
