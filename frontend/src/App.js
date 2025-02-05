@@ -1,5 +1,6 @@
 // App.jsx
-import React, { useState, useEffect } from "react";
+import React, { useRef } from "react"
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -19,26 +20,26 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
+   // Create a ref for the footer
+   const footerRef = useRef(null);
+
   return (
     <>
-      {/* 
-         Only render <LoadingScreen /> while isLoading is true.
-         Once isLoading is set to false, LoadingScreen will fade out 
-         and unmount cleanly.
-      */}
-      <LoadingScreen className='z-1000000'isLoading={isLoading} />
+      <LoadingScreen isLoading={isLoading} />
 
-      {/* Main Content */}
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home footerRef={footerRef} />} />
         <Route path="/products" element={<Products />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/about" element={<About />} />
       </Routes>
-      <Footer />
+      {/* Pass the ref to the Footer */}
+      <div ref={footerRef}>
+        <Footer />
+      </div>
     </>
   );
 };
-
-export default App;
+ 
+ export default App;
