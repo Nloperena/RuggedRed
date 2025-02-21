@@ -1,22 +1,26 @@
 import React from "react";
 import ProductsSection from "../components/ProductsSection";
 import ProductCard from "../components/ProductCard";
+import PagePrelude from "../components/PagePrelude";
 
 const Products = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold text-center my-10">Our Products</h1>
+      <PagePrelude
+        heading="Our Product Line"
+        subheading="Rugged, Reliable, and Ready to Clean"
+        description="Explore a variety of professional-grade cleaning products designed with sustainability and safety in mind. Perfect for any tough job you throw at it."
+        imageSrc="/path/to/your/image.jpg"
+        imageAlt="Preview of product"
+        buttonLabel="Shop Now"
+        // onButtonClick={handleButtonClick}
+        reverse={false}
+      />
 
-      {/* Show a main products section */}
+      {/* Main products section (e.g. a hero or top-level content) */}
       <ProductsSection />
 
-      {/* Example: four product cards in a grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
+      
     </>
   );
 };

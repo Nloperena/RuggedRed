@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useInView } from "react-intersection-observer";
-import BackgroundImage from "../assets/CD Cleaning Grease on Table.jpg"; // Replace with your image file name
+import BackgroundImage from "../assets/CD Cleaning Grease on Table.jpg"; // or remove if no background
 
 const testimonials = [
   {
@@ -16,7 +16,8 @@ const testimonials = [
     name: "Alicia Rivera",
     role: "Auto Mechanic",
     text: "Oil stains, grease, you name it. Rugged Red wipes it all away, saving me so much time in the shop. It's my go-to every day!",
-    photo: "https://www.sheboygan.k12.wi.us/perch/resources/abigail-tagel-red-raider-manufacturing-1-600x400.jpg",
+    photo:
+      "https://www.sheboygan.k12.wi.us/perch/resources/abigail-tagel-red-raider-manufacturing-1-600x400.jpg",
   },
   {
     name: "Marcus Klein",
@@ -26,28 +27,29 @@ const testimonials = [
   },
 ];
 
-const Testimonials = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+// Section fade-in
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
+// Card staggered appearance
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
+};
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-    }),
-  };
-
-  const FiveStars = () => (
+// Five-star helper
+function FiveStars() {
+  return (
     <div className="flex justify-center mb-3">
       {[...Array(5)].map((_, i) => (
         <FontAwesomeIcon
@@ -58,27 +60,33 @@ const Testimonials = () => {
       ))}
     </div>
   );
+}
+
+export default function Testimonials() {
+  // Intersection observer to trigger animation once in view
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
     <section
       ref={ref}
       className="relative py-16 px-6 bg-cover bg-center"
-      style={{ backgroundImage: `url(${BackgroundImage})` }}
+      style={{ backgroundImage: `url(${BackgroundImage})` }} // Remove if no background desired
     >
       <motion.div
-        className="container mx-auto text-center"
+        className="relative container mx-auto text-center"
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         variants={sectionVariants}
       >
         <h2
-          className="text-4xl sm:text-5xl font-extrabold text-[#D3242A] mb-12"
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#D3242A] mb-8 uppercase"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
         >
           SEE WHY THEY LOVE RUGGED RED
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* 3 → 2 → 1 layout, bigger gap (gap-8) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
           {testimonials.map((item, index) => (
             <motion.div
               key={index}
@@ -86,19 +94,31 @@ const Testimonials = () => {
               animate={inView ? "visible" : "hidden"}
               custom={index}
               variants={cardVariants}
-              className="bg-white rounded-[2rem] p-8 flex flex-col items-center text-center"
+              // White card, mild shadow, no extra white container behind
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 max-w-xs text-center flex flex-col items-center"
             >
-              <div className="w-28 h-28 mb-4">
+              {/* Photo */}
+              <div className="w-20 h-20 sm:w-24 sm:h-24 mb-3">
                 <img
                   src={item.photo}
                   alt={item.name}
-                  className="w-full h-full object-cover rounded-full border-4 border-white shadow-md"
+                  className="w-full h-full object-cover rounded-full border-2 border-white shadow"
                 />
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-1">{item.name}</h3>
-              <p className="text-sm text-gray-500 mb-3">{item.role}</p>
+
+              {/* Name & role */}
+              <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-800 uppercase mb-1">
+                {item.name}
+              </h3>
+              <p className="text-xs sm:text-sm md:text-base text-gray-500 mb-2">
+                {item.role}
+              </p>
+
+              {/* 5 stars */}
               <FiveStars />
-              <p className="text-gray-700 text-sm leading-relaxed px-3">
+
+              {/* Testimonial text */}
+              <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                 {item.text}
               </p>
             </motion.div>
@@ -107,6 +127,4 @@ const Testimonials = () => {
       </motion.div>
     </section>
   );
-};
-
-export default Testimonials;
+}

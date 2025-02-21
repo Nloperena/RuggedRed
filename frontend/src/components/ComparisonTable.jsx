@@ -1,4 +1,3 @@
-// ComparisonTable.jsx
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -6,33 +5,33 @@ const ComparisonTable = () => {
   const comparisonData = [
     {
       title: "Multi-Surface Cleaner",
-      color: "bg-[#009E00]", // Updated Green
+      color: "bg-[#009E00]", // Green
       rows: [
         ["Safe on Surfaces", "✔", "✔"],
-        ["Cleans Away More Dirt & Germs*", "✔", "✘"],
+        ["Cleans More Dirt & Germs*", "✔", "✘"],
         ["Destroys Odor at Source", "✔", "✘"],
         ["100% Derived from Nature", "✔", "✘"],
       ],
     },
     {
-      title: "Glass Cleaner",
-      color: "bg-[#22A7AD]", // Updated Blue
+      title: "Heavy Duty Degreaser",
+      color: "bg-[#D3242A]", // Red
       rows: [
-        ["Streak Free", "✔", "✔"],
-        ["Ammonia Free", "✔", "✘"],
-        ["Zero Toxicity", "✔", "✘"],
-        ["100% Derived from Nature", "✔", "✘"],
-        ["100% Biodegradable", "✔", "✘"],
+        ["Safe on Industrial Surfaces", "✔", "✔"],
+        ["100% Biodegradable", "✔", "✔"],
+        ["More Grease Fighting Power", "✔", "✘"],
+        ["Cuts Grease Faster", "✔", "✘"],
       ],
     },
     {
-      title: "Heavy Duty Degreaser",
-      color: "bg-[#D3242A]", // Updated Red
+      title: "Glass Cleaner",
+      color: "bg-[#22A7AD]", // Blue
       rows: [
-        ["Safe on all Industrial Surfaces", "✔", "✔"],
-        ["100% Biodegradable", "✔", "✔"],
-        ["More Grease Fighting Power", "✔", "✘"],
-        ["Cuts Grease Faster from Surfaces", "✔", "✘"],
+        ["Streak-Free Shine", "✔", "✔"],
+        ["Ammonia-Free Formula", "✔", "✘"],
+        ["Zero Toxicity", "✔", "✘"],
+        ["100% Derived from Nature", "✔", "✘"],
+        ["100% Biodegradable", "✔", "✘"],
       ],
     },
   ];
@@ -42,10 +41,7 @@ const ComparisonTable = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        staggerChildren: 0.2,
-        duration: 0.8,
-      },
+      transition: { staggerChildren: 0.2, duration: 0.8 },
     },
   };
 
@@ -54,18 +50,14 @@ const ComparisonTable = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Function to render checkmarks and crosses
-  const renderSymbol = (symbol, color) => {
-    return (
-      <span className={`font-bold text-center ${color}`}>
-        {symbol}
-      </span>
-    );
-  };
+  // Render checkmarks & crosses
+  const renderSymbol = (symbol, color) => (
+    <span className={`font-extrabold text-base sm:text-lg ${color}`}>{symbol}</span>
+  );
 
   return (
-    <section className="py-12 bg-gray-100 relative z-0">
-      {/* Headline and Subheading */}
+    <section className="py-14 bg-gray-100 relative z-0">
+      {/* Header Section */}
       <motion.div
         className="text-center mb-12 px-4"
         initial="hidden"
@@ -74,28 +66,24 @@ const ComparisonTable = () => {
         variants={containerVariants}
       >
         <motion.h2
-          className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#D3242A] uppercase"
-          style={{
-            fontFamily: "Geogrotesque, sans-serif",
-            letterSpacing: "1px",
-          }}
+          className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#D3242A] uppercase leading-tight"
+          style={{ fontFamily: "Geogrotesque, sans-serif", letterSpacing: "1px" }}
           variants={childVariants}
         >
-          COMPARE OUR CLEANERS
+          Compare Our Cleaners
         </motion.h2>
         <motion.p
-          className="text-gray-600 text-base sm:text-lg mt-2 max-w-2xl mx-auto"
+          className="text-gray-700 text-sm sm:text-base mt-3 max-w-2xl mx-auto"
           variants={childVariants}
         >
-          See how our products outperform national brands with natural and
-          powerful cleaning solutions.
+          See how our products outperform national brands with natural and powerful cleaning solutions.
         </motion.p>
       </motion.div>
 
-      {/* Comparison Tables */}
+      {/* Single Grid: 1 col on mobile, 2 cols at sm, 3 cols at xl */}
       <div className="container mx-auto px-4">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -104,35 +92,30 @@ const ComparisonTable = () => {
           {comparisonData.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden transition-transform hover:scale-105"
+              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform hover:scale-[1.02] w-full"
               variants={childVariants}
             >
               {/* Header */}
               <motion.div
-                className={`${item.color} text-white text-lg font-bold p-4 text-center uppercase`}
-                style={{
-                  fontFamily: "Geogrotesque, sans-serif",
-                  letterSpacing: "1px",
-                }}
+                className={`${item.color} text-white text-lg sm:text-xl font-bold py-4 text-center uppercase`}
+                style={{ fontFamily: "Geogrotesque, sans-serif", letterSpacing: "1px" }}
                 variants={childVariants}
               >
                 {item.title}
               </motion.div>
+
               {/* Table Container */}
-              <motion.div
-                className="p-4 overflow-x-auto"
-                variants={childVariants}
-              >
-                <table className="w-full min-w-full table-auto">
+              <motion.div className="p-5" variants={childVariants}>
+                <table className="w-full border-collapse">
                   <thead>
                     <tr>
-                      <th className="px-4 py-2 text-gray-700 text-left text-sm uppercase tracking-wider">
+                      <th className="px-4 py-2 text-gray-800 text-left text-xs sm:text-sm uppercase tracking-wide">
                         Feature
                       </th>
-                      <th className="px-4 py-2 text-gray-700 text-center text-sm uppercase tracking-wider">
+                      <th className="px-4 py-2 text-gray-800 text-center text-xs sm:text-sm uppercase tracking-wide">
                         Rugged Red
                       </th>
-                      <th className="px-4 py-2 text-gray-700 text-center text-sm uppercase tracking-wider">
+                      <th className="px-4 py-2 text-gray-800 text-center text-xs sm:text-sm uppercase tracking-wide">
                         National Brand
                       </th>
                     </tr>
@@ -141,17 +124,13 @@ const ComparisonTable = () => {
                     {item.rows.map((row, rowIndex) => (
                       <tr
                         key={rowIndex}
-                        className={`${
-                          rowIndex % 2 === 0 ? "bg-gray-50" : "bg-white"
-                        }`}
+                        className={rowIndex % 2 === 0 ? "bg-gray-50" : "bg-white"}
                       >
-                        <td className="px-4 py-2 text-gray-800 text-left text-sm">
-                          {row[0]}
-                        </td>
-                        <td className="px-4 py-2 text-[#009E00] font-bold text-center text-sm">
+                        <td className="px-4 py-3 text-gray-900 text-xs sm:text-sm">{row[0]}</td>
+                        <td className="px-4 py-3 text-center">
                           {renderSymbol(row[1], "text-[#009E00]")}
                         </td>
-                        <td className="px-4 py-2 text-[#D3242A] font-bold text-center text-sm">
+                        <td className="px-4 py-3 text-center">
                           {renderSymbol(row[2], "text-[#D3242A]")}
                         </td>
                       </tr>

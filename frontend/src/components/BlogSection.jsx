@@ -1,180 +1,219 @@
-// We import React so we can build our component
-import React, { useEffect, useState } from "react";
-// We import motion from Framer Motion to animate things
-import { motion } from "framer-motion";
-// We import our hand image for decoration
-import Hand from "../assets/blueragtransparent.png";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import BlogCard from "./BlogCard";
 
-// This function creates little "stars" that appear around the edges
-function EdgeStars() {
-  // We choose how many stars we want
-  const starCount = 30;
+// Sample data
+const blogPostsData = [
+  {
+    id: 1,
+    image:
+      "https://contentgrid.homedepot-static.com/hdus/en_US/DTCCOMNEW/Articles/how-to-clean-kitchen-appliances-2022-step-3.jpg",
+    title: "5 Essential Cleaning Tips",
+    excerpt:
+      "Discover the top five cleaning tips that will transform your home into a spotless sanctuary. These strategies make your cleaning routine efficient and effective.",
+    link: "#carousel1",
+  },
+  {
+    id: 2,
+    image:
+      "https://www.sustainablejungle.com/wp-content/uploads/2022/09/Image-by-ozgurkeser-Getty-Images-Canva-Pro.jpg",
+    title: "Benefits of Non-Toxic Cleaners",
+    excerpt:
+      "Learn why non-toxic cleaners are better for your health and the environment. Explore advantages of using eco-friendly products without harmful chemicals.",
+    link: "#carousel2",
+  },
+  {
+    id: 3,
+    image:
+      "https://www.mcsclean.co.uk/wp-content/uploads/2021/05/shutterstock_738900295-425x319.jpg",
+    title: "Tackling Tough Stains",
+    excerpt:
+      "Struggling with stubborn stains? Here’s how to remove them effortlessly. From coffee spills to ink marks, maintain pristine surfaces with ease.",
+    link: "#carousel3",
+  },
+  {
+    id: 4,
+    image:
+      "https://images.squarespace-cdn.com/content/v1/5f60cebfa8258e3d29185127/1628286912273-FBGPWA1REO6C27A0EW6O/AdobeStock_417842646.jpeg",
+    title: "Eco-Friendly Cleaning Practices",
+    excerpt:
+      "Embrace eco-friendly cleaning practices with these simple strategies. Reduce your carbon footprint while keeping your home spotless and safe.",
+    link: "#carousel4",
+  },
+  {
+    id: 5,
+    image:
+      "https://www.myzen.tv/wp-content/uploads/2024/03/handcraft-handmade-diy-skills-drawing-3-scaled.jpg",
+    title: "DIY Cleaning Solutions",
+    excerpt:
+      "Make your own cleaning solutions with common household items. Cut costs and go green with these quick recipes and tips.",
+    link: "#carousel5",
+  },
+  {
+    id: 6,
+    image: "https://placeimg.com/640/480/nature",
+    title: "Upcycling Cleaning Tools",
+    excerpt:
+      "Repurpose household items for more sustainable cleaning. Embrace upcycling as part of your eco-friendly routine!",
+    link: "#carousel6",
+  },
+];
 
-  // We build an array of starCount size and create a little motion div for each star
-  const stars = Array.from({ length: starCount }, (_, index) => (
-    <motion.div
-      key={index}
-      // Each star starts invisible and small, then appears and disappears
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-      transition={{
-        repeat: Infinity,
-        duration: Math.random() * 2 + 1, // Random durations
-        delay: Math.random() * 2,        // Random delays
-      }}
-      className="absolute bg-yellow-300 rounded-full"
-      style={{
-        top: `${Math.random() * 100}%`,   // Random top position
-        left: `${Math.random() * 100}%`,  // Random left position
-        width: `${Math.random() * 4 + 1}px`,  // Random width
-        height: `${Math.random() * 4 + 1}px`, // Random height
-      }}
-    />
-  ));
+// Slide animation variants
+const variants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 200 : -200,
+    opacity: 0,
+    position: "absolute",
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    position: "relative",
+  },
+  exit: (direction) => ({
+    x: direction > 0 ? -200 : 200,
+    opacity: 0,
+    position: "absolute",
+  }),
+};
 
-  // Return all the stars
-  return <>{stars}</>;
-}
+export default function FeaturesShowcase() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [direction, setDirection] = useState(0); // +1 = next, -1 = prev
+  const [itemsPerPage, setItemsPerPage] = useState(1); // default
 
-// This component shows a single blog card with an image, title, excerpt, and link
-function BlogCard({ post }) {
-  // isExpanded controls if we show the full text or just a snippet
-  const [isExpanded, setIsExpanded] = useState(false);
+  // Dynamically compute items per page
+  const updateItemsPerPage = () => {
+    const width = window.innerWidth;
+    if (width >= 1024) {
+      setItemsPerPage(4);
+    } else if (width >= 768) {
+      setItemsPerPage(3);
+    } else if (width >= 640) {
+      setItemsPerPage(2);
+    } else {
+      setItemsPerPage(1);
+    }
+  };
 
-  // This toggles between full excerpt and short snippet
-  const toggleExcerpt = () => {
-    setIsExpanded(!isExpanded);
+  // On mount + resize
+  useEffect(() => {
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  const totalPages = Math.ceil(blogPostsData.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const visiblePosts = blogPostsData.slice(startIndex, startIndex + itemsPerPage);
+
+  // Next / Prev
+  const goToNextPage = () => {
+    setDirection(1);
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const goToPrevPage = () => {
+    setDirection(-1);
+    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  };
+
+  // Jump to specific page
+  const jumpToPage = (pageIndex) => {
+    setDirection(pageIndex > currentPage ? 1 : -1);
+    setCurrentPage(pageIndex);
   };
 
   return (
-    // A white card with round corners, shadow, and a column layout
-    <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
-      {/* Blog image with slight zoom on hover */}
-      <motion.img
-        src={post.image}
-        alt={`Image for ${post.title}`}
-        className="w-full h-48 object-cover"
-        loading="lazy"
-        initial={{ scale: 1 }}
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.3 }}
-      />
-      {/* Card text content */}
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-black text-xl font-bold mb-2">{post.title}</h3>
-        <p className="text-gray-700 text-sm mb-4 flex-grow">
-          {isExpanded ? post.excerpt : `${post.excerpt.substring(0, 100)}...`}
-        </p>
-        <div>
-          <a
-            href={post.link}
-            className="text-[#D3242A] font-semibold hover:underline"
-            aria-label={`Read more about ${post.title}`}
-            onClick={toggleExcerpt}
-          >
-            Read More &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// This is our main component for the blog section
-export default function FeaturesShowcase() {
-  // Check if Font Awesome is loaded
-  useEffect(() => {
-    if (!window.FontAwesome) {
-      console.warn("Font Awesome is NOT detected. Icons may not be visible.");
-    }
-  }, []);
-
-  // We set up our example blog posts
-  const blogPosts = [
-    {
-      id: 1,
-      image:
-        "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-      title: "5 Essential Cleaning Tips",
-      excerpt:
-        "Discover the top five cleaning tips that will transform your home into a spotless sanctuary. From tackling stubborn stains to maintaining a clutter-free environment, these strategies are designed to make your cleaning routine efficient and effective.",
-      link: "#carousel1",
-    },
-    {
-      id: 2,
-      image:
-        "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-      title: "Benefits of Non-Toxic Cleaners",
-      excerpt:
-        "Learn why non-toxic cleaners are better for your health and the environment. Explore the advantages of using eco-friendly products that effectively clean your space without harmful chemicals.",
-      link: "#carousel2",
-    },
-    {
-      id: 3,
-      image:
-        "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-      title: "Tackling Tough Stains",
-      excerpt:
-        "Struggling with stubborn stains? Here’s how to remove them effortlessly. From coffee spills to ink marks, these tips will help you maintain pristine surfaces with ease.",
-      link: "#carousel3",
-    },
-    {
-      id: 4,
-      image:
-        "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-      title: "Eco-Friendly Cleaning Practices",
-      excerpt:
-        "Embrace eco-friendly cleaning practices with these simple and effective strategies. Reduce your carbon footprint while keeping your home spotless and safe for your family.",
-      link: "#carousel4",
-    },
-  ];
-
-  return (
-    // A red background for the entire blog section
-    <section className="relative py-16 px-6 overflow-hidden bg-red-600">
-      {/* We have an animated hand in the bottom-right corner */}
-      
-
-      {/* Main content is above the hand (z-10) */}
+    <section className="relative py-16 px-6 bg-red-600">
       <div className="relative max-w-screen-xl mx-auto z-10">
-        {/* Sparkly stars along the edges */}
-        <EdgeStars />
-
-        {/* Header / title for the blog section (centered, in all caps, in white) */}
-        <div className="text-center mb-12 z-10">
+        {/* Section Heading */}
+        <div className="text-center mb-12">
           <h2
-            // Make heading uppercase and white
             className="text-4xl sm:text-5xl font-extrabold text-white uppercase mb-4"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
             LEARN SOMETHING NEW!
           </h2>
-          {/* Paragraph text also in white */}
           <p className="text-white text-lg mb-6">
             Stay updated with the latest tips and insights to keep your home
             clean and eco-friendly.
           </p>
-          {/* "Visit our Tips and Blogs" button in black now */}
           <a
             href="#tips-and-blogs"
             className="inline-block bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300"
-            aria-label="Visit our Tips and Blogs"
           >
             Visit our Tips and Blogs
           </a>
         </div>
 
-        {/* Display our blog posts in a grid (1 column on small, up to 4 columns on large) */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 z-10"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          {blogPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </motion.div>
+        {/* Slider container */}
+        <div className="relative w-full min-h-[400px] overflow-visible">
+          <AnimatePresence mode="popLayout" custom={direction}>
+            <motion.div
+              key={currentPage}
+              variants={variants}
+              custom={direction}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.5 }}
+              className="grid gap-8 justify-items-center"
+              style={{
+                gridTemplateColumns: `repeat(${itemsPerPage}, minmax(0, 1fr))`,
+                minHeight: "300px",
+              }}
+            >
+              {visiblePosts.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Left Arrow */}
+          <button
+            onClick={goToPrevPage}
+            style={{
+              left: "-2rem",
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+            className="absolute bg-white text-[#D3242A] border-2 border-[#D3242A] w-12 h-12 rounded-full z-20 shadow-sm hover:shadow-md hover:bg-gray-200 transition-transform duration-300"
+          >
+            &#10094;
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={goToNextPage}
+            style={{
+              right: "-2rem",
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+            className="absolute bg-white text-[#D3242A] border-2 border-[#D3242A] w-12 h-12 rounded-full z-20 shadow-sm hover:shadow-md hover:bg-gray-200 transition-transform duration-300"
+          >
+            &#10095;
+          </button>
+        </div>
+
+        {/* Circle pagination, with smaller margin on mobile, bigger on desktop */}
+        <div className="mt-3 sm:mt-6 flex items-center justify-center space-x-2">
+          {Array.from({ length: totalPages }).map((_, i) => {
+            const isActive = i === currentPage;
+            return (
+              <button
+                key={i}
+                onClick={() => jumpToPage(i)}
+                className={`w-4 h-4 rounded-full border-2 border-[#D3242A] shadow-sm transition-colors duration-300 ${
+                  isActive ? "bg-white" : "bg-gray-300"
+                }`}
+                aria-label={`Go to page ${i + 1}`}
+              />
+            );
+          })}
+        </div>
       </div>
     </section>
   );

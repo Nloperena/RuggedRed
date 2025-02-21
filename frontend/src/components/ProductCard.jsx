@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
- * Shimmer style for the skeleton loader.
+ * Shimmer style for the skeleton loader
  */
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
@@ -11,94 +11,137 @@ const shimmerStyle = {
 };
 
 /**
- * Skeleton loader block for loading states.
+ * Skeleton loader block for loading states
+ * The sizing here should match the final elements
  */
 function SkeletonBlock({ className, style }) {
   return (
     <div
-      className={`${className} relative overflow-hidden bg-[#A9AAAC]`}
+      className={`${className} relative overflow-hidden bg-[#A9AAAC] rounded-md`}
       style={{ ...shimmerStyle, ...style }}
     />
   );
 }
 
+/**
+ * Mock product data to simulate loaded content
+ * In real usage, you'd fetch from your API / CMS
+ */
+const mockProductData = {
+  fields: {
+    name: "Mock Product",
+    slogan: "Your #1 cleaning solution",
+    price: 12.99,
+    images: [
+      {
+        fields: {
+          file: {
+            url: "https://via.placeholder.com/400",
+          },
+        },
+      },
+    ],
+    amazonUrl: "https://www.amazon.com/example",
+    productPageUrl: "https://example.com/product-page",
+  },
+};
+
 const ProductCard = ({ product, delay = 0 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isTextLoaded, setIsTextLoaded] = useState(false);
 
-  const hasProduct = !!product?.fields;
+  // Simulate fetching product data if none is passed in
+  // If you already pass real product data, remove this and rely on the real prop
+  const hasProduct = product?.fields;
+  const [localProduct, setLocalProduct] = useState(null);
 
   useEffect(() => {
-    if (hasProduct) {
+    let timer;
+    if (!hasProduct) {
+      // Simulate an async fetch
+      timer = setTimeout(() => {
+        setLocalProduct(mockProductData);
+      }, 1200); // e.g. 1.2s fetch time
+    } else {
+      setLocalProduct(product);
+    }
+    return () => clearTimeout(timer);
+  }, [hasProduct, product]);
+
+  useEffect(() => {
+    if (localProduct?.fields) {
       setIsTextLoaded(true);
     }
-  }, [hasProduct]);
+  }, [localProduct]);
 
+  // Extract data from local or real product
   const { name, slogan, price, amazonUrl, productPageUrl, images } =
-    product?.fields || {};
+    localProduct?.fields || {};
 
+  // First image URL
   const imageUrl =
-    Array.isArray(images) && images.length > 0
-      ? images[0].fields.file.url
-      : null;
+    Array.isArray(images) && images.length > 0 ? images[0].fields.file.url : null;
 
   return (
     <div
       className="
         relative
-        bg-[#D3242A]
-        rounded-3xl /* More rounded corners */
+        bg-white
+        rounded-3xl
         p-6
         text-center
-        overflow-hidden
         transition
         duration-300
         hover:-translate-y-1
-        shadow-lg
-        hover:shadow-xl
+        shadow-sm
+        hover:shadow-md
+        overflow-hidden
       "
-      style={{
-        minHeight: "700px", // Increased height for balance
-        boxShadow: "inset 0 6px 12px rgba(0, 0, 0, 0.6)", // Harsher inlet shadow
-      }}
+      style={{ minHeight: "550px" }} // Slightly shorter than 600-700
     >
-      {/* Loading skeleton */}
+      {/* SKELETON LOADER */}
       <AnimatePresence>
         {(!isImageLoaded || !isTextLoaded) && (
           <motion.div
             key="skeleton"
-            className="absolute inset-0 flex flex-col items-center justify-center p-6"
+            className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-white"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
+            {/* Image skeleton matches final w-64 h-64 shape */}
             {!isImageLoaded && (
-              <SkeletonBlock className="w-96 h-96 rounded-lg mb-4" />
+              <SkeletonBlock className="w-64 h-64 mb-4" />
             )}
+
+            {/* Text skeletons match the final text arrangement */}
             {!isTextLoaded && (
               <>
-                <SkeletonBlock className="w-48 h-5 rounded-md mb-2" />
-                <SkeletonBlock className="w-64 h-4 rounded-md mb-2" />
-                <SkeletonBlock className="w-24 h-4 rounded-md mb-4" />
-                <SkeletonBlock className="w-40 h-8 rounded-full" />
+                <SkeletonBlock className="w-48 h-6 mb-3" /> {/* Name skeleton */}
+                <SkeletonBlock className="w-56 h-4 mb-3" /> {/* Slogan skeleton */}
+                <SkeletonBlock className="w-20 h-5 mb-4" /> {/* Price skeleton */}
+
+                {/* Button skeleton(s) */}
+                <SkeletonBlock className="w-32 h-8 mb-2" />
+                <SkeletonBlock className="w-32 h-8" />
               </>
             )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Main content */}
+      {/* MAIN CONTENT (fades in once loaded) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isImageLoaded && isTextLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Product image */}
+        {/* Product image with mild drop shadow */}
         {imageUrl && (
           <img
             src={imageUrl}
             alt={name || "Product Image"}
-            className="mx-auto mb-6 w-96 h-96 object-cover rounded-lg" // Increased size
+            className="mx-auto mb-4 w-64 h-64 object-cover rounded-lg shadow-sm"
             onLoad={() => setIsImageLoaded(true)}
           />
         )}
@@ -106,7 +149,7 @@ const ProductCard = ({ product, delay = 0 }) => {
         {/* Product name */}
         {isTextLoaded && name && (
           <h3
-            className="text-3xl font-semibold text-white mb-4"
+            className="text-2xl font-semibold text-gray-900 mb-2"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
             {name}
@@ -115,13 +158,13 @@ const ProductCard = ({ product, delay = 0 }) => {
 
         {/* Product slogan */}
         {isTextLoaded && slogan && (
-          <p className="text-white italic mb-4">{slogan}</p>
+          <p className="text-gray-700 italic mb-4">{slogan}</p>
         )}
 
         {/* Product price */}
-        {isTextLoaded && price && (
+        {isTextLoaded && price != null && (
           <p
-            className="text-2xl font-bold text-white mb-6"
+            className="text-xl font-bold text-gray-900 mb-6"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
             ${price}
@@ -137,15 +180,15 @@ const ProductCard = ({ product, delay = 0 }) => {
             className="
               inline-block
               mt-2
-              bg-black
+              bg-[#D3242A]
               text-white
-              py-3
-              px-8
+              py-2
+              px-6
               rounded-full
-              hover:bg-[#000000e6]
+              hover:bg-[#B91D23]
               transition
               duration-200
-              mr-4 /* Add spacing between buttons */
+              mr-4
             "
           >
             Buy on Amazon
@@ -161,12 +204,12 @@ const ProductCard = ({ product, delay = 0 }) => {
             className="
               inline-block
               mt-2
-              bg-white
-              text-black
-              py-3
-              px-8
+              bg-black
+              text-white
+              py-2
+              px-6
               rounded-full
-              hover:bg-[#A9AAAC]
+              hover:bg-gray-800
               transition
               duration-200
             "

@@ -1,7 +1,7 @@
 // Home.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 import Hero from "../components/Hero";
 import Divider from "../components/Divider";
 import ProductLine from "../components/ProductLine";
@@ -13,45 +13,83 @@ import AboutRed from "../components/AboutRed";
 import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
 
+import ParallaxSection from "../components/ParallaxSection";
+
 const Home = () => {
-  // State to control the visibility of the sticky decorative image
-  const [stickyVisible, setStickyVisible] = useState(false);
-
-  // Observe ProductLine, RichTextProductsSection, and ComparisonTable
-  const { ref: productLineRef, inView: productLineInView } = useInView({
-    threshold: 0.1, // Trigger when 10% of ProductLine is visible
+  // Set up InView hooks for our two key markers:
+  // • The end of the ProductLine section
+  // • The top of the RichTextProductsSection
+  const { ref: productLineEndInViewRef, inView: productLineEndInView } = useInView({
+    threshold: 0,
   });
-  const { ref: richTextRef, inView: richTextInView } = useInView({
-    threshold: 0, // Trigger as soon as the top enters the viewport
-    triggerOnce: true, // Animate only once
+  const { ref: richTextInViewRef, inView: richTextInView } = useInView({
+    threshold: 0,
   });
-  const { ref: comparisonTableRef, inView: comparisonInView } = useInView({
-    threshold: 0.1, // Trigger when 10% of ComparisonTable is visible
-  });
-
-  // Add an extra observer near the bottom of the page (a “footer sentinel”)
-  // so the decorative element is hidden when scrolling near your footer.
+  // Observer for a footer sentinel so the sticky image is hidden when near the footer.
   const { ref: footerSentinelRef, inView: footerSentinelInView } = useInView({
     threshold: 0.1,
   });
 
-  // Show StickyImage when neither the ComparisonTable nor the footer sentinel is in view.
+  // Create refs to hold DOM nodes so we can measure their positions.
+  const productLineEndElement = useRef(null);
+  const richTextElement = useRef(null);
+
+  // Combine the InView ref with our own ref so we can both observe and measure.
+  const setProductLineEndRef = (node) => {
+    productLineEndInViewRef(node);
+    productLineEndElement.current = node;
+  };
+  const setRichTextRef = (node) => {
+    richTextInViewRef(node);
+    richTextElement.current = node;
+  };
+
+  // Get the scrollY value from Framer Motion.
+  const { scrollY } = useViewportScroll();
+
+  // Compute a fade zone.
+  // Previously, fadeStart was at the end of the ProductLine.
+  // Now, we delay the fade so that it starts only after 25% of the distance between
+  // the ProductLine end and the top of the RichText section, and ends at 75% of that distance.
+  const [fadeBounds, setFadeBounds] = useState({ fadeStart: 0, fadeEnd: 1 });
   useEffect(() => {
-    if (!comparisonInView && !footerSentinelInView) {
-      setStickyVisible(true);
-    } else {
-      setStickyVisible(false);
-    }
-  }, [comparisonInView, footerSentinelInView]);
+    const updateFadeBounds = () => {
+      if (productLineEndElement.current && richTextElement.current) {
+        const productLineEndY =
+          productLineEndElement.current.getBoundingClientRect().top + window.scrollY;
+        const richTextTopY =
+          richTextElement.current.getBoundingClientRect().top + window.scrollY;
+        // New fade boundaries:
+        const fadeStart = productLineEndY + (richTextTopY - productLineEndY) * 0.95;
+        const fadeEnd = productLineEndY + (richTextTopY - productLineEndY) * 0.95;
+        setFadeBounds({ fadeStart, fadeEnd });
+      }
+    };
+    updateFadeBounds();
+    window.addEventListener("resize", updateFadeBounds);
+    return () => window.removeEventListener("resize", updateFadeBounds);
+  }, []);
+
+  // Map the scrollY value over our fade zone into an opacity value (1 → 0).
+  const fadeOpacity = useTransform(
+    scrollY,
+    [fadeBounds.fadeStart, fadeBounds.fadeEnd],
+    [1, 0]
+  );
+
+  // We want the sticky image active only after the ProductLine has ended and before the footer comes into view.
+  const stickyActive = productLineEndInView && !footerSentinelInView;
 
   return (
     <>
-      {/* Sticky Image Section (only renders when stickyVisible is true) */}
-      {stickyVisible && (
-        <section className="relative">
-          <StickyImage richTextRef={richTextRef} />
-        </section>
-      )}
+      {/* Sticky Image Section: Its opacity is controlled by fadeOpacity.
+          When stickyActive is false (e.g. near the footer), opacity is forced to 0. */}
+      <motion.section
+        className="relative"
+        style={{ opacity: stickyActive ? fadeOpacity : 0 }}
+      >
+        <StickyImage />
+      </motion.section>
 
       <div className="relative z-10">
         {/* Hero Section */}
@@ -62,24 +100,18 @@ const Home = () => {
         -------------------------------- */}
         <div
           className="relative w-full"
-          style={{
-            zIndex: 1001,
-            position: "relative",
-            marginTop: "-8rem", // Default margin-top
-          }}
+          style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
         >
           <div
-            className={`block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]`}
+            className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
             style={{
               marginBottom: "0rem",
               marginRight: "0rem",
               marginTop: "-7rem",
             }}
           >
-            {/* All media queries for the .product-divider */}
             <style>
               {`
-                /* Catch-All Styles for Product Divider */
                 .product-divider {
                   margin-top: -7rem;
                   margin-right: 1rem;
@@ -156,119 +188,109 @@ const Home = () => {
         {/* --------------------------------
              Mascot Divider Section
         -------------------------------- */}
-        {true && (
+        <div
+          className="relative w-full"
+          style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
+        >
           <div
-            className="relative w-full"
-            style={{
-              zIndex: 1001,
-              position: "relative",
-              marginTop: "-8rem",
-            }}
+            className="block transform mx-auto float-left w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]"
+            style={{ marginBottom: "5rem" }}
           >
-            <div
-              className={`block transform mx-auto float-left w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]`}
-              style={{
-                marginBottom: "5rem",
-              }}
-            >
-              <style>
-                {`
-                  /* Catch-All Styles for Mascot Divider */
+            <style>
+              {`
+                .mascot-divider {
+                  margin-top: -7rem;
+                  margin-left: 1rem;
+                  margin-bottom: 9rem;
+                  margin-right: 0;
+                  padding: 0;
+                  max-width: 100%;
+                }
+                @media (max-width: 639px) {
                   .mascot-divider {
-                    margin-top: -7rem;
+                    margin-top: -4rem;
+                    margin-left: 0.5rem;
+                    margin-bottom: 0;
+                    margin-right: 4rem;
+                    padding: 0.5rem;
+                    max-width: 135%;
+                  }
+                }
+                @media (min-width: 640px) and (max-width: 767px) {
+                  .mascot-divider {
+                    margin-top: -13rem;
                     margin-left: 1rem;
-                    margin-bottom: 9rem;
+                    margin-bottom: 0;
                     margin-right: 0;
-                    padding: 0;
-                    max-width: 100%;
+                    padding: 1rem;
+                    max-width: 83%;
                   }
-                  @media (max-width: 639px) {
-                    .mascot-divider {
-                      margin-top: -4rem;
-                      margin-left: 0.5rem;
-                      margin-bottom: 0;
-                      margin-right: 4rem;
-                      padding: 0.5rem;
-                      max-width: 135%;
-                    }
+                }
+                @media (min-width: 768px) and (max-width: 1023px) {
+                  .mascot-divider {
+                    margin-top: -24rem;
+                    margin-left: -1.5rem;
+                    margin-bottom: -2rem;
+                    margin-right: 5rem;
+                    padding: 1.5rem;
+                    max-width: 115%;
                   }
-                  @media (min-width: 640px) and (max-width: 767px) {
-                    .mascot-divider {
-                      margin-top: -13rem;
-                      margin-left: 1rem;
-                      margin-bottom: 0;
-                      margin-right: 0;
-                      padding: 1rem;
-                      max-width: 83%;
-                    }
+                }
+                @media (min-width: 1024px) and (max-width: 1279px) {
+                  .mascot-divider {
+                    margin-top: -62rem;
+                    margin-left: -14rem;
+                    margin-bottom: 10rem;
+                    margin-right: 5rem;
+                    padding: 2rem;
+                    max-width: 160%;
                   }
-                  @media (min-width: 768px) and (max-width: 1023px) {
-                    .mascot-divider {
-                      margin-top: -24rem;
-                      margin-left: -1.5rem;
-                      margin-bottom: -2rem;
-                      margin-right: 5rem;
-                      padding: 1.5rem;
-                      max-width: 115%;
-                    }
+                }
+                @media (min-width: 1280px) {
+                  .mascot-divider {
+                    margin-top: -60rem;
+                    margin-left: -20rem;
+                    margin-bottom: 0;
+                    margin-right: 5rem;
+                    padding: 2.5rem 2.5rem 2rem 10rem;
+                    max-width: 215%;
                   }
-                  @media (min-width: 1024px) and (max-width: 1279px) {
-                    .mascot-divider {
-                      margin-top: -62rem;
-                      margin-left: -14rem;
-                      margin-bottom: 10rem;
-                      margin-right: 5rem;
-                      padding: 2rem;
-                      max-width: 160%;
-                    }
-                  }
-                  @media (min-width: 1280px) {
-                    .mascot-divider {
-                      margin-top: -60rem;
-                      margin-left: -20rem;
-                      margin-bottom: 0;
-                      margin-right: 5rem;
-                      padding: 2.5rem 2.5rem 2rem 10rem;
-                      max-width: 215%;
-                    }
-                  }
-                `}
-              </style>
-              <img
-                src={require("../assets/RRMascot.png")}
-                alt="Mascot Divider"
-                className="block object-contain mascot-divider"
-                style={{
-                  maskImage:
-                    "linear-gradient(to bottom, black 95%, transparent)",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, black 95%, transparent)",
-                }}
-              />
-            </div>
+                }
+              `}
+            </style>
+            <img
+              src={require("../assets/RRMascot.png")}
+              alt="Mascot Divider"
+              className="block object-contain mascot-divider"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 95%, transparent)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 95%, transparent)",
+              }}
+            />
           </div>
-        )}
+        </div>
 
         {/* --------------------------------
              Product Line Section
         -------------------------------- */}
-        <div ref={productLineRef}>
+        <div>
           <ProductLine />
         </div>
+        {/* Sentinel immediately after ProductLine for fade measurement */}
+        <div ref={setProductLineEndRef} />
 
         {/* --------------------------------
              Animated Rich Text Products Section
         -------------------------------- */}
+        <ParallaxSection />
         <motion.section
-          ref={richTextRef}
+          ref={setRichTextRef}
           className="relative bg-white pt-20 pb-12 px-6 sm:px-10"
-          style={{ marginTop: "40rem" }}
+          style={{ marginTop: "" }}
           initial={{ opacity: 0, y: 20 }}
           animate={richTextInView ? { opacity: 1, y: 0 } : {}}
-          transition={{
-            duration: 0.8,
-            ease: [0.6, 0.05, 0.2, 0.9],
-          }}
+          transition={{ duration: 0.8, ease: [0.6, 0.05, 0.2, 0.9] }}
         >
           <RichTextProductsSection />
         </motion.section>
@@ -276,7 +298,7 @@ const Home = () => {
         {/* --------------------------------
              Comparison Table Section
         -------------------------------- */}
-        <div ref={comparisonTableRef}>
+        <div>
           <ComparisonTable />
         </div>
 
@@ -306,7 +328,7 @@ const Home = () => {
         <BlogSection />
       </div>
 
-      {/* Invisible Footer Sentinel Element */}
+      {/* Footer Sentinel: an invisible marker so the sticky image hides near the footer */}
       <div ref={footerSentinelRef} style={{ height: "1px" }}></div>
     </>
   );

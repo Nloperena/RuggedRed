@@ -1,7 +1,7 @@
 // Hand.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import HandImage from "../assets/blueragtransparent.png"; // Update with the correct path
+import HandImage from "../assets/blueragtransparent.png"; // Update path if needed
 
 const Hand = () => {
   return (
@@ -11,13 +11,16 @@ const Hand = () => {
       className="absolute right-0 bottom-0 max-w-[300px] md:max-w-[400px] z-0 pointer-events-none"
       style={{ transformOrigin: "top left" }}
       animate={{
-        x: [0, 25, -20, 15, -15, 0],
-        y: [0, 10, 20, 40, 20, 0],
+        // Fewer keyframes, repeated back-and-forth
+        x: [-30, 30],    // side-to-side elliptical
+        y: [10, -20],    // up-down elliptical
+        rotate: [-10, 10], // gentle rotation
       }}
       transition={{
-        duration: 6,
-        repeat: Infinity,
-        ease: [0.42, 0, 0.58, 1], // Eases in and out
+        duration: 3,           // Time to go from start to end
+        repeat: Infinity,      // Loop forever
+        repeatType: "reverse", // Go forward, then back
+        ease: "easeInOut",     // Smooth acceleration
       }}
     />
   );

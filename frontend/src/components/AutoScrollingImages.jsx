@@ -18,77 +18,94 @@ export default function AutoScrollingImages() {
     { src: Glass, label: "Glass" },
   ];
 
-  const [isHovered, setIsHovered] = useState(false);
-  const [scrollIndex, setScrollIndex] = useState(0);
-  const scrollContainerRef = useRef(null);
-  const [imagesPerView, setImagesPerView] = useState(3);
+  const [imagesPerView, setImagesPerView] = useState(() => {
+    if (window.innerWidth >= 1024) return 3;
+    else if (window.innerWidth >= 640) return 2;
+    else return 1;
+  });
 
-  // Auto-scroll logic
-  useEffect(() => {
-    if (isHovered) return;
-    const interval = setInterval(() => {
-      setScrollIndex((prev) => (prev + 1) % (images.length - imagesPerView + 1));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [isHovered, images.length, imagesPerView]);
-
-  // Adjust images per view based on screen size
   useEffect(() => {
     const updateImagesPerView = () => {
-      if (window.innerWidth >= 1024) {
+      const width = window.innerWidth;
+      if (width >= 1024) {
         setImagesPerView(3);
-      } else if (window.innerWidth >= 640) {
+      } else if (width >= 640) {
         setImagesPerView(2);
       } else {
         setImagesPerView(1);
       }
     };
-
     updateImagesPerView();
     window.addEventListener("resize", updateImagesPerView);
     return () => window.removeEventListener("resize", updateImagesPerView);
   }, []);
 
-  // Scroll container to the active image
+  const [scrollIndex, setScrollIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setScrollIndex((prev) => {
+        const maxIndex = images.length - imagesPerView;
+        return prev >= maxIndex ? 0 : prev + 1;
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [isHovered, images.length, imagesPerView]);
+
   useEffect(() => {
     if (scrollContainerRef.current) {
-      const scrollAmount = scrollIndex * (scrollContainerRef.current.offsetWidth / imagesPerView);
+      const slideWidth = scrollContainerRef.current.offsetWidth / imagesPerView;
       scrollContainerRef.current.scrollTo({
-        left: scrollAmount,
+        left: scrollIndex * slideWidth,
         behavior: "smooth",
       });
     }
   }, [scrollIndex, imagesPerView]);
 
   const goToPrevious = () => {
-    setScrollIndex((prev) =>
-      prev === 0 ? images.length - imagesPerView : prev - 1
-    );
+    setScrollIndex((prev) => {
+      const maxIndex = images.length - imagesPerView;
+      return prev === 0 ? maxIndex : prev - 1;
+    });
   };
 
   const goToNext = () => {
-    setScrollIndex((prev) =>
-      prev === images.length - imagesPerView ? 0 : prev + 1
-    );
+    setScrollIndex((prev) => {
+      const maxIndex = images.length - imagesPerView;
+      return prev === maxIndex ? 0 : prev + 1;
+    });
   };
 
+  const showPagination = window.innerWidth >= 640;
   const visibleDots = images.length - imagesPerView + 1;
 
   return (
-    <div className="relative w-full bg-white py-16" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
+    <div
+      className="relative w-full bg-white py-16"
+      style={{ fontFamily: "Geogrotesque, sans-serif" }}
+    >
       {/* Headline */}
-      <div className="text-center mb-8">
-        <h2 className="text-4xl font-extrabold text-[#D3242A] uppercase mb-4">
+      <div className="text-center mb-8 px-4">
+        <h2
+          className="text-4xl font-extrabold text-[#D3242A] uppercase mb-4"
+          style={{ fontFamily: "Geogrotesque, sans-serif" }}
+        >
           Everyday Solutions
         </h2>
-        <p className="text-lg text-gray-600">
+        <p
+          className="text-lg text-gray-600"
+          style={{ fontFamily: "Geogrotesque, sans-serif" }}
+        >
           From Heavy-Duty to Everyday – Built for All Your Needs.
         </p>
       </div>
 
-      {/* Scrolling Images */}
+      {/* Slider View */}
       <div
-        className="relative overflow-hidden w-full max-w-[90rem] mx-auto flex items-center"
+        className="relative overflow-hidden w-full max-w-6xl mx-auto flex items-center"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -101,24 +118,37 @@ export default function AutoScrollingImages() {
         </button>
 
         {/* Scroll Container */}
-        <div
-          className="flex overflow-x-hidden w-full"
-          ref={scrollContainerRef}
-        >
+        <div className="flex overflow-x-hidden w-full" ref={scrollContainerRef}>
           {images.map((item, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-1/3 px-4 text-center"
+              className={`relative flex-shrink-0 px-4 text-center ${
+                imagesPerView === 1
+                  ? "w-full"
+                  : imagesPerView === 2
+                  ? "w-1/2"
+                  : "w-1/3"
+              }`}
               style={{ flex: "0 0 auto" }}
             >
-              <img
-                src={item.src}
-                alt={item.label}
-                className="w-full h-auto object-cover rounded-lg"
-              />
-              <p className="mt-2 text-base font-medium text-gray-700">
-                {item.label}
-              </p>
+              <div className="relative">
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="w-full h-auto object-cover rounded-lg shadow-md"
+                  style={{ boxShadow: "0 8px 12px rgba(0, 0, 0, 0.1)" }} // Subtle drop shadow
+                />
+
+                {/* Text Overlay */}
+                <div className="absolute bottom-0 left-0 w-full bg-white bg-opacity-80 py-4">
+                  <p
+                    className="text-xl font-bold text-gray-900"
+                    style={{ fontFamily: "Geogrotesque, sans-serif" }}
+                  >
+                    {item.label}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -133,18 +163,20 @@ export default function AutoScrollingImages() {
       </div>
 
       {/* Pagination Dots */}
-      <div className="mt-6 flex items-center justify-center space-x-4">
-        {Array.from({ length: visibleDots }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setScrollIndex(index)}
-            className={`w-4 h-4 rounded-full ${
-              scrollIndex === index ? "bg-[#D3242A]" : "bg-gray-300"
-            } focus:outline-none focus:ring-2 focus:ring-[#D3242A]`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      {showPagination && (
+        <div className="mt-6 flex items-center justify-center space-x-2">
+          {Array.from({ length: visibleDots }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setScrollIndex(index)}
+              className={`w-3 h-3 rounded-full ${
+                scrollIndex === index ? "bg-[#D3242A]" : "bg-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-[#D3242A]`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

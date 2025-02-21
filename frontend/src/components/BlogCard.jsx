@@ -1,72 +1,53 @@
-// BlogCard.jsx
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 
-const BlogCard = ({ id }) => {
-  const [post, setPost] = useState(null);
-
-  // Fetch the data for the blog post based on its ID
-  useEffect(() => {
-    const fetchPost = async () => {
-      // Mocked fetch request
-      const blogPosts = [
-        {
-          id: 1,
-          image: "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-          title: "5 Essential Cleaning Tips",
-          excerpt:
-            "Discover top cleaning tips to transform your space into a spotless sanctuary.",
-          link: "#",
-        },
-        {
-          id: 2,
-          image: "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-          title: "Non-Toxic Cleaners: Benefits",
-          excerpt:
-            "Learn why non-toxic cleaners are better for your health and the environment.",
-          link: "#",
-        },
-        {
-          id: 3,
-          image: "https://images.ctfassets.net/hdznx4p7ef81/6TYPOeZ6Jv4bw3aXrR6TVt/bf6db00620cc5dbb9f12adc4b20fe5c2/5._APC_Industrial_Strength_for_Tough_Jobs.png",
-          title: "Tackling Tough Stains",
-          excerpt:
-            "Struggling with stubborn stains? Here’s how to remove them effortlessly.",
-          link: "#",
-        },
-      ];
-
-      // Simulate fetching data
-      const post = blogPosts.find((p) => p.id === id);
-      setPost(post);
-    };
-
-    fetchPost();
-  }, [id]);
-
-  if (!post) return null; // Don't render until data is available
+export default function BlogCard({ post }) {
+  if (!post) return null;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-      {/* Blog Image */}
-      <img
+    <div className="relative group w-full aspect-square overflow-hidden rounded-lg shadow-lg">
+      {/* Background image with subtle scale on hover */}
+      <motion.img
         src={post.image}
         alt={post.title}
-        className="w-full h-48 object-cover"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
+        initial={{ scale: 1 }}
+        whileHover={{ scale: 1.02 }}
       />
-      {/* Blog Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-red-600 mb-2">{post.title}</h3>
-        <p className="text-gray-700 text-sm mb-4">{post.excerpt}</p>
+
+      {/* White wrapper slides up over the image on hover (90% opacity) */}
+      <div
+        className="absolute bottom-0 left-0 w-full bg-white/90 px-4 py-4 transform translate-y-[60%] group-hover:translate-y-0 transition-all duration-300 ease-in-out"
+        style={{ backdropFilter: "blur(2px)" }}
+      >
+        {/* Headline forced to Geogrotesque */}
+        <h3
+          className="text-xl font-extrabold uppercase mb-2"
+          style={{
+            fontFamily: "Geogrotesque, sans-serif",
+            color: "#D3242A",
+          }}
+        >
+          {post.title}
+        </h3>
+
+        {/* Snippet text: black */}
+        <p className="text-black text-sm mb-3">
+          {post.excerpt.substring(0, 100)}...
+        </p>
+
+        {/* READ MORE: uppercase, red */}
         <a
           href={post.link}
-          className="text-red-600 font-semibold hover:underline"
-          aria-label={`Read more about ${post.title}`}
+          className="inline-block font-semibold border-b border-[#D3242A] uppercase"
+          style={{
+            fontFamily: "Geogrotesque, sans-serif",
+            color: "#D3242A",
+          }}
         >
-          Read More →
+          READ MORE &rarr;
         </a>
       </div>
     </div>
   );
-};
-
-export default BlogCard;
+}
