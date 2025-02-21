@@ -18,10 +18,10 @@ const ProductLine = () => {
     <>
       {/* MOBILE VIEW */}
       <section className="block md:hidden bg-white pt-16 pb-8 px-6">
-        <div className="container mx-auto flex flex-col items-center">
-          {/* HEADLINE - center-aligned, slightly larger */}
+        <div className="container mx-auto flex flex-col items-start">
+          {/* HEADLINE */}
           <motion.h2
-            className="text-[#D3242A] text-4xl font-extrabold mb-4 text-center uppercase"
+            className="text-[#D3242A] text-3xl sm:text-4xl font-extrabold mb-4 text-left uppercase"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -30,9 +30,9 @@ const ProductLine = () => {
             OUR PRODUCT LINE
           </motion.h2>
 
-          {/* PARAGRAPH - center-aligned, a bit larger */}
+          {/* PARAGRAPH */}
           <motion.p
-            className="text-black text-base sm:text-lg leading-relaxed mb-5 text-center"
+            className="text-black text-sm sm:text-base leading-relaxed mb-5 text-left"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.6, 0.05, 0.2, 0.9] }}
@@ -42,8 +42,8 @@ const ProductLine = () => {
             mind, Rugged Red delivers the clean you can trust.
           </motion.p>
 
-          {/* ICONS row, center aligned */}
-          <div className="grid grid-cols-4 gap-3 w-full mb-6 justify-items-center">
+          {/* ICONS: 4 across in one row, placed BEFORE the image on mobile */}
+          <div className="grid grid-cols-4 gap-3 w-full mb-6">
             {iconData.map((icon, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">
                 <img src={icon.src} alt={icon.label} className="h-14 w-14 mb-2" />
@@ -54,7 +54,7 @@ const ProductLine = () => {
             ))}
           </div>
 
-          {/* IMAGE - below icons, center aligned */}
+          {/* IMAGE: now below the icons */}
           <div className="w-full flex justify-center">
             <motion.img
               src={ProductHeroImg}
@@ -106,7 +106,7 @@ const ProductLine = () => {
               mind, Rugged Red delivers the clean you can trust.
             </motion.p>
 
-            {/* ICONS - 4 columns in a single row, same as before */}
+            {/* ICONS - 4 across in one row on desktop */}
             <div className="grid grid-cols-4 gap-6 w-full">
               {iconData.map((icon, idx) => (
                 <div key={idx} className="flex flex-col items-center text-center">
