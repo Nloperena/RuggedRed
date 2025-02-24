@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import RRMascot from "../assets/RRMascot.png";
+import RRMascot from "../assets/RRMascot+Type.png";
 import FlagIcon from "../assets/icons/Flag Icon.png";
 
 const AboutRed = () => {
@@ -104,7 +104,7 @@ const AboutRed = () => {
           <img
             src={RRMascot}
             alt="Rugged Red Mascot"
-            className="w-[600px] h-auto transform scale-x-[-1] object-cover"
+            className="w-[600px] h-auto transform scale-x-[1] object-cover"
             style={{ objectPosition: "bottom" }}
           />
         </motion.div>
