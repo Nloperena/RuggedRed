@@ -4,69 +4,123 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const ParallaxSection = () => {
   const containerRef = useRef(null);
 
-  // Determine orientation: portrait (stacked vertically) vs. landscape (side by side)
-  const [isPortrait, setIsPortrait] = useState(true);
+  // Determine layout: vertical for screens <=768px, horizontal otherwise.
+  const [isVertical, setIsVertical] = useState(window.innerWidth <= 768);
   useEffect(() => {
-    const updateOrientation = () => {
-      setIsPortrait(window.matchMedia("(orientation: portrait)").matches);
+    const updateLayout = () => {
+      setIsVertical(window.innerWidth <= 768);
     };
-    updateOrientation();
-    window.addEventListener("resize", updateOrientation);
-    return () => window.removeEventListener("resize", updateOrientation);
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+    return () => window.removeEventListener("resize", updateLayout);
   }, []);
 
-  // Track the scroll progress for this section
+  // Compute image scale based on window width.
+  const getImageScale = (width) => {
+    if (width <= 768) return 1.8;      // Phones: scale up images more.
+    else if (width < 1024) return 1.5;  // Tablets / smaller laptops.
+    else return 1.15;                 // Larger desktops.
+  };
+  const [imageScale, setImageScale] = useState(getImageScale(window.innerWidth));
+  useEffect(() => {
+    const updateImageScale = () => {
+      setImageScale(getImageScale(window.innerWidth));
+    };
+    updateImageScale();
+    window.addEventListener("resize", updateImageScale);
+    return () => window.removeEventListener("resize", updateImageScale);
+  }, []);
+
+  // Compute dynamic container height based on window width.
+  const getContainerHeight = (width) => {
+    if (width >= 2560) return 1000;
+    else if (width >= 1536) return 950;
+    else if (width >= 1280) return 900;
+    else if (width >= 1024) return 800;
+    else if (width >= 768) return 700;
+    else return 600;
+  };
+  const [containerHeight, setContainerHeight] = useState(getContainerHeight(window.innerWidth));
+  useEffect(() => {
+    const updateHeight = () => {
+      setContainerHeight(getContainerHeight(window.innerWidth));
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  // Track scroll progress for this section.
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Increase the vertical translation range for a more pronounced effect.
-  // The container is moved upward from 0 to -400px as you scroll.
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  // Adjust parallax translations (increased for a more noticeable effect):
+  const parallaxYBackground = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const parallaxYForeground = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  // For horizontal layout, a slightly smaller translation for the right image.
+  const parallaxYRight = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const blurBackground = useTransform(scrollYProgress, [0, 1], ["0px", "16px"]);
 
   return (
-    <section ref={containerRef} className="relative h-[600px] overflow-hidden">
-      <motion.div style={{ y: parallaxY }}>
-        {isPortrait ? (
-          // Portrait: images stacked vertically.
+    <section
+      ref={containerRef}
+      className="relative overflow-hidden"
+      style={{ height: `${containerHeight}px`, perspective: "500px" }}
+    >
+      <motion.div>
+        {isVertical ? (
+          // Vertical layout: images stacked.
           <div className="flex flex-col h-full">
-            <div className="relative flex-1">
+            <motion.div
+              style={{ y: parallaxYBackground, filter: blurBackground }}
+              className="relative flex-1 overflow-hidden"
+            >
               <img
                 src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
                 alt="Top Image"
-                className="w-full object-cover object-bottom"
-                style={{ height: "800px" }}
+                className="w-full h-full object-cover object-center"
+                style={{ transform: `scale(${imageScale})` }}
               />
-            </div>
-            <div className="relative flex-1">
+            </motion.div>
+            <motion.div
+              style={{ y: parallaxYForeground }}
+              className="relative flex-1 overflow-hidden"
+            >
               <img
                 src="https://images.ctfassets.net/hdznx4p7ef81/6YIz7DoFu6vD2njwLTB6vs/1b74a042bf21b293fc6e467959a8bef6/Home_Cleaning_Tips_Blog-edit2.png"
                 alt="Bottom Image"
-                className="w-full object-cover object-bottom"
-                style={{ height: "800px" }}
+                className="w-full h-full object-cover object-center"
+                style={{ transform: `scale(${imageScale})` }}
               />
-            </div>
+            </motion.div>
           </div>
         ) : (
-          // Landscape: images arranged side by side.
+          // Horizontal layout: images side by side.
           <div className="flex h-full">
-            <div className="relative w-1/2 h-full">
+            <motion.div
+              style={{ y: parallaxYBackground, filter: blurBackground }}
+              className="relative w-1/2 h-full overflow-hidden"
+            >
               <img
                 src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
                 alt="Left Image"
-                className="w-full object-cover object-bottom"
-                style={{ height: "800px" }}
+                className="w-full h-full object-cover object-center"
+                style={{ transform: `scale(${imageScale})` }}
               />
-            </div>
-            <div className="relative w-1/2 h-full">
+            </motion.div>
+            <motion.div
+              style={{ y: parallaxYRight }}
+              className="relative w-1/2 h-full overflow-hidden"
+            >
               <img
                 src="https://images.ctfassets.net/hdznx4p7ef81/6YIz7DoFu6vD2njwLTB6vs/1b74a042bf21b293fc6e467959a8bef6/Home_Cleaning_Tips_Blog-edit2.png"
                 alt="Right Image"
-                className="w-full object-cover object-bottom"
-                style={{ height: "800px" }}
+                className="w-full h-full object-cover object-center"
+                style={{ transform: `scale(${imageScale})` }}
               />
-            </div>
+            </motion.div>
           </div>
         )}
       </motion.div>

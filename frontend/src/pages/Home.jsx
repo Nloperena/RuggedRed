@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
@@ -12,29 +11,26 @@ import AutoScrollingImages from "../components/AutoScrollingImages";
 import AboutRed from "../components/AboutRed";
 import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
-
 import ParallaxSection from "../components/ParallaxSection";
 
 const Home = () => {
-  // Set up InView hooks for our two key markers:
-  // • The end of the ProductLine section
-  // • The top of the RichTextProductsSection
+  // Set up InView hooks for key markers.
   const { ref: productLineEndInViewRef, inView: productLineEndInView } = useInView({
     threshold: 0,
   });
   const { ref: richTextInViewRef, inView: richTextInView } = useInView({
     threshold: 0,
   });
-  // Observer for a footer sentinel so the sticky image is hidden when near the footer.
+  // Footer sentinel to hide the sticky image near the footer.
   const { ref: footerSentinelRef, inView: footerSentinelInView } = useInView({
     threshold: 0.1,
   });
 
-  // Create refs to hold DOM nodes so we can measure their positions.
+  // Create refs to measure positions.
   const productLineEndElement = useRef(null);
   const richTextElement = useRef(null);
 
-  // Combine the InView ref with our own ref so we can both observe and measure.
+  // Combine InView refs with our own refs.
   const setProductLineEndRef = (node) => {
     productLineEndInViewRef(node);
     productLineEndElement.current = node;
@@ -44,13 +40,10 @@ const Home = () => {
     richTextElement.current = node;
   };
 
-  // Get the scrollY value from Framer Motion.
+  // Get the scrollY value.
   const { scrollY } = useViewportScroll();
 
-  // Compute a fade zone.
-  // Previously, fadeStart was at the end of the ProductLine.
-  // Now, we delay the fade so that it starts only after 25% of the distance between
-  // the ProductLine end and the top of the RichText section, and ends at 75% of that distance.
+  // Compute a fade zone for the sticky image.
   const [fadeBounds, setFadeBounds] = useState({ fadeStart: 0, fadeEnd: 1 });
   useEffect(() => {
     const updateFadeBounds = () => {
@@ -59,10 +52,8 @@ const Home = () => {
           productLineEndElement.current.getBoundingClientRect().top + window.scrollY;
         const richTextTopY =
           richTextElement.current.getBoundingClientRect().top + window.scrollY;
-        // New fade boundaries:
         const fadeStart = productLineEndY + (richTextTopY - productLineEndY) * 0.95;
-        const fadeEnd = productLineEndY + (richTextTopY - productLineEndY) * 0.95;
-        setFadeBounds({ fadeStart, fadeEnd });
+        setFadeBounds({ fadeStart, fadeEnd: fadeStart });
       }
     };
     updateFadeBounds();
@@ -70,20 +61,39 @@ const Home = () => {
     return () => window.removeEventListener("resize", updateFadeBounds);
   }, []);
 
-  // Map the scrollY value over our fade zone into an opacity value (1 → 0).
+  // Map scrollY over the fade zone.
   const fadeOpacity = useTransform(
     scrollY,
     [fadeBounds.fadeStart, fadeBounds.fadeEnd],
     [1, 0]
   );
 
-  // We want the sticky image active only after the ProductLine has ended and before the footer comes into view.
+  // Scroll-driven animation for the Our Products section.
+  const sectionOpacity = useTransform(scrollY, [200, 300], [0, 1]);
+  const sectionY = useTransform(scrollY, [200, 300], [20, 0]);
+
+  // Determine sticky image activation.
   const stickyActive = productLineEndInView && !footerSentinelInView;
+
+  // Conditionally set the margin-top for the Our Products section:
+  // If window.innerWidth is above 1693px, use -50px; otherwise, use -300px.
+  const [sectionMarginTop, setSectionMarginTop] = useState("-300px");
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1693) {
+        setSectionMarginTop("-50px");
+      } else {
+        setSectionMarginTop("-300px");
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
-      {/* Sticky Image Section: Its opacity is controlled by fadeOpacity.
-          When stickyActive is false (e.g. near the footer), opacity is forced to 0. */}
+      {/* Sticky Image Section */}
       <motion.section
         className="relative"
         style={{ opacity: stickyActive ? fadeOpacity : 0 }}
@@ -95,20 +105,14 @@ const Home = () => {
         {/* Hero Section */}
         <Hero />
 
-        {/* --------------------------------
-             Product Divider Section
-        -------------------------------- */}
+        {/* Product Divider Section */}
         <div
           className="relative w-full"
           style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
         >
           <div
             className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
-            style={{
-              marginBottom: "0rem",
-              marginRight: "0rem",
-              marginTop: "-7rem",
-            }}
+            style={{ marginBottom: "0rem", marginRight: "0rem", marginTop: "-7rem" }}
           >
             <style>
               {`
@@ -185,9 +189,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* --------------------------------
-             Mascot Divider Section
-        -------------------------------- */}
+        {/* Mascot Divider Section */}
         <div
           className="relative w-full"
           style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
@@ -271,40 +273,48 @@ const Home = () => {
           </div>
         </div>
 
-        {/* --------------------------------
-             Product Line Section
-        -------------------------------- */}
-        <div>
+        {/* Product Line Section (layered above ParallaxSection) */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            boxShadow: "0px 20px 30px rgba(0,0,0,0.3)",
+          }}
+        >
           <ProductLine />
         </div>
-        {/* Sentinel immediately after ProductLine for fade measurement */}
+        {/* Sentinel immediately after ProductLine */}
         <div ref={setProductLineEndRef} />
 
-        {/* --------------------------------
-             Animated Rich Text Products Section
-        -------------------------------- */}
-        <ParallaxSection />
+        {/* Parallax Section (background layer) */}
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <ParallaxSection />
+        </div>
+
+        {/* Animated Our Products Section */}
         <motion.section
           ref={setRichTextRef}
-          className="relative bg-white pt-20 pb-12 px-6 sm:px-10"
-          style={{ marginTop: "" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={richTextInView ? { opacity: 1, y: 0 } : {}}
+          className="relative bg-white pt-12 pb-12 px-6 sm:px-10"
+          style={{
+            marginTop: "-140px",
+            position: "relative",
+            zIndex: 2,
+            boxShadow: "0px -20px 30px rgba(0,0,0,0.3)",
+            opacity: sectionOpacity,
+            y: sectionY,
+          }}
           transition={{ duration: 0.8, ease: [0.6, 0.05, 0.2, 0.9] }}
         >
           <RichTextProductsSection />
         </motion.section>
 
-        {/* --------------------------------
-             Comparison Table Section
-        -------------------------------- */}
+
+        {/* Comparison Table Section */}
         <div>
           <ComparisonTable />
         </div>
 
-        {/* --------------------------------
-             Testimonials Section
-        -------------------------------- */}
+        {/* Testimonials Section */}
         <section className="relative z-30 text-white py-20 px-6 overflow-hidden">
           <div
             className="absolute inset-0 -z-10 bg-cover bg-center filter blur-sm"
@@ -320,15 +330,13 @@ const Home = () => {
           <Testimonials />
         </section>
 
-        {/* --------------------------------
-             Additional Content Sections
-        -------------------------------- */}
+        {/* Additional Content Sections */}
         <AutoScrollingImages />
         <AboutRed />
         <BlogSection />
       </div>
 
-      {/* Footer Sentinel: an invisible marker so the sticky image hides near the footer */}
+      {/* Footer Sentinel */}
       <div ref={footerSentinelRef} style={{ height: "1px" }}></div>
     </>
   );

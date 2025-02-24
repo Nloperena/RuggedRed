@@ -13,8 +13,9 @@ function SkeletonList() {
         <motion.div
           key={index}
           className="bg-[#F2F2F2] rounded-md p-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
           <div className="w-full h-64 bg-[#E5E5E5] rounded-md shimmer mb-4" />
@@ -34,6 +35,7 @@ function SkeletonList() {
  * - Fetches all "cleaningProduct" entries.
  * - Renders a vertical list of horizontal product cards.
  * - Alternates "flip" based on index (0 => no flip, 1 => flip, etc.).
+ * - Each element animates into view as you scroll.
  */
 const RichTextProductsSection = () => {
   const [products, setProducts] = useState([]);
@@ -52,43 +54,56 @@ const RichTextProductsSection = () => {
       });
   }, []);
 
-  // Show skeleton while loading
+  // While loading, show the skeleton list with animated header.
   if (isLoading) {
     return (
-      <section className="bg-white py-16">
+      <section className="bg-white pt-0 pb-16">
         <div className="container mx-auto px-6">
-          <h2
+          <motion.h2
             className="text-5xl font-bold text-center text-black mb-12 uppercase"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Our Products
-          </h2>
+          </motion.h2>
           <SkeletonList />
         </div>
       </section>
     );
   }
 
-  // If no products found, show a fallback message
+  // Fallback if no products found.
   if (!products.length) {
     return (
-      <section className="bg-white py-16">
+      <section className="bg-white pt-0 pb-16">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-black text-lg">No products found!</p>
+          <motion.p
+            className="text-black text-lg"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            No products found!
+          </motion.p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white pt-0 pb-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <motion.h2
           className="text-center text-[#D3242A] uppercase text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-12"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           Our Products
@@ -98,15 +113,20 @@ const RichTextProductsSection = () => {
         <motion.div
           className="flex flex-col gap-16"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
         >
           {products.map((product, index) => (
-            <RichTextProductCard
+            <motion.div
               key={product.sys.id || index}
-              product={product}
-              flip={index % 2 === 1}
-            />
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              <RichTextProductCard product={product} flip={index % 2 === 1} />
+            </motion.div>
           ))}
         </motion.div>
       </div>
