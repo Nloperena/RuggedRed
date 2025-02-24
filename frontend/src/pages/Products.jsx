@@ -1,26 +1,25 @@
 import React from "react";
 import ProductsSection from "../components/ProductsSection";
-import ProductCard from "../components/ProductCard";
-import PagePrelude from "../components/PagePrelude";
+import CustomHeader from "../components/CustomHeader";
+import kitchen1 from "../assets/kitchen1.png";
+import ComparisonTable from "../components/ComparisonTable";
+import Testimonials from "../components/Testimonials";
 
 const Products = () => {
   return (
     <>
-      <PagePrelude
+      <CustomHeader
+        backgroundImg={kitchen1}
+        layeredImage={kitchen1}
         heading="Our Product Line"
         subheading="Rugged, Reliable, and Ready to Clean"
         description="Explore a variety of professional-grade cleaning products designed with sustainability and safety in mind. Perfect for any tough job you throw at it."
-        imageSrc="/path/to/your/image.jpg"
-        imageAlt="Preview of product"
+        highlightLine="Discover innovative solutions for every cleaning challenge."
         buttonLabel="Shop Now"
-        // onButtonClick={handleButtonClick}
-        reverse={false}
       />
-
-      {/* Main products section (e.g. a hero or top-level content) */}
       <ProductsSection />
-
-      
+      <ComparisonTable />
+      <Testimonials />
     </>
   );
 };

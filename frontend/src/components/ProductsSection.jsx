@@ -57,7 +57,7 @@ const ProductsSection = () => {
           className="text-5xl font-bold text-center text-[#D3242A] mb-12"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
         >
-          Our Products
+          OUR PRODUCTS
         </h2>
 
         {/* If loading, show skeleton placeholders */}

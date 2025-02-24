@@ -12,25 +12,23 @@ import AboutRed from "../components/AboutRed";
 import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
 import ParallaxSection from "../components/ParallaxSection";
+import OurProductsSection from "../components/OurProductSection";
 
 const Home = () => {
-  // Set up InView hooks for key markers.
+  // InView hooks for key markers.
   const { ref: productLineEndInViewRef, inView: productLineEndInView } = useInView({
     threshold: 0,
   });
   const { ref: richTextInViewRef, inView: richTextInView } = useInView({
     threshold: 0,
   });
-  // Footer sentinel to hide the sticky image near the footer.
   const { ref: footerSentinelRef, inView: footerSentinelInView } = useInView({
     threshold: 0.1,
   });
 
-  // Create refs to measure positions.
+  // Create refs.
   const productLineEndElement = useRef(null);
   const richTextElement = useRef(null);
-
-  // Combine InView refs with our own refs.
   const setProductLineEndRef = (node) => {
     productLineEndInViewRef(node);
     productLineEndElement.current = node;
@@ -40,10 +38,9 @@ const Home = () => {
     richTextElement.current = node;
   };
 
-  // Get the scrollY value.
   const { scrollY } = useViewportScroll();
 
-  // Compute a fade zone for the sticky image.
+  // Compute fade zone for the sticky image.
   const [fadeBounds, setFadeBounds] = useState({ fadeStart: 0, fadeEnd: 1 });
   useEffect(() => {
     const updateFadeBounds = () => {
@@ -61,30 +58,34 @@ const Home = () => {
     return () => window.removeEventListener("resize", updateFadeBounds);
   }, []);
 
-  // Map scrollY over the fade zone.
   const fadeOpacity = useTransform(
     scrollY,
     [fadeBounds.fadeStart, fadeBounds.fadeEnd],
     [1, 0]
   );
 
-  // Scroll-driven animation for the Our Products section.
+  // Scroll-driven animation for the Rich Text section.
+  // Adjusted the range to be slightly more noticeable.
   const sectionOpacity = useTransform(scrollY, [200, 300], [0, 1]);
-  const sectionY = useTransform(scrollY, [200, 300], [20, 0]);
+  // For a more noticeable parallax effect, we map scrollY from 200px to 300px onto a translation of 40px downward to 0.
+  const sectionY = useTransform(scrollY, [200, 300], [40, 0]);
 
-  // Determine sticky image activation.
   const stickyActive = productLineEndInView && !footerSentinelInView;
 
-  // Conditionally set the margin-top for the Our Products section:
-  // If window.innerWidth is above 1693px, use -50px; otherwise, use -300px.
-  const [sectionMarginTop, setSectionMarginTop] = useState("-300px");
+  // Responsive margin-top for the overlay Our Products section.
+  const getMarginTop = (width) => {
+    if (width >= 2560) return "-100px";    // 4K displays
+    else if (width >= 1536) return "-150px"; // Large desktops
+    else if (width >= 1280) return "-190px"; // Standard desktops
+    else if (width >= 1024) return "-250px"; // Smaller desktops / large tablets
+    else if (width >= 768) return "-300px";   // Tablets
+    else return "-350px";                     // Mobile devices
+  };
+
+  const [sectionMarginTop, setSectionMarginTop] = useState(getMarginTop(window.innerWidth));
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1693) {
-        setSectionMarginTop("-50px");
-      } else {
-        setSectionMarginTop("-300px");
-      }
+      setSectionMarginTop(getMarginTop(window.innerWidth));
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -102,7 +103,6 @@ const Home = () => {
       </motion.section>
 
       <div className="relative z-10">
-        {/* Hero Section */}
         <Hero />
 
         {/* Product Divider Section */}
@@ -182,8 +182,7 @@ const Home = () => {
               className="block object-contain product-divider"
               style={{
                 maskImage: "linear-gradient(to bottom, black 95%, transparent)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, black 95%, transparent)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
               }}
             />
           </div>
@@ -266,8 +265,7 @@ const Home = () => {
               className="block object-contain mascot-divider"
               style={{
                 maskImage: "linear-gradient(to bottom, black 95%, transparent)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, black 95%, transparent)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
               }}
             />
           </div>
@@ -283,31 +281,31 @@ const Home = () => {
         >
           <ProductLine />
         </div>
-        {/* Sentinel immediately after ProductLine */}
         <div ref={setProductLineEndRef} />
 
-        {/* Parallax Section (background layer) */}
+        {/* Parallax Section (background layer) with OurProductsSection inside */}
         <div style={{ position: "relative", zIndex: 1 }}>
           <ParallaxSection />
+          <OurProductsSection />
         </div>
 
-        {/* Animated Our Products Section */}
-        <motion.section
+        {/* Animated Rich Text Production Section with its own parallax effect */}
+        {/* <motion.section
           ref={setRichTextRef}
           className="relative bg-white pt-12 pb-12 px-6 sm:px-10"
           style={{
-            marginTop: "-140px",
+            marginTop: sectionMarginTop,
             position: "relative",
             zIndex: 2,
             boxShadow: "0px -20px 30px rgba(0,0,0,0.3)",
             opacity: sectionOpacity,
+            // Increase the vertical translation range for a more pronounced parallax effect:
             y: sectionY,
           }}
           transition={{ duration: 0.8, ease: [0.6, 0.05, 0.2, 0.9] }}
         >
           <RichTextProductsSection />
-        </motion.section>
-
+        </motion.section> */}
 
         {/* Comparison Table Section */}
         <div>

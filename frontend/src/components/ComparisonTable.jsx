@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const ComparisonTable = () => {
   const comparisonData = [
@@ -50,10 +52,17 @@ const ComparisonTable = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Render checkmarks & crosses
-  const renderSymbol = (symbol, color) => (
-    <span className={`font-extrabold text-base sm:text-lg ${color}`}>{symbol}</span>
-  );
+  // Render checkmarks & crosses using Font Awesome icons
+  // Render checkmarks & crosses using Font Awesome icons (FA5)
+const renderSymbol = (symbol) => {
+  if (symbol === "✔") {
+    return <i className="fas fa-check text-green-500 text-base sm:text-lg"></i>;
+  } else if (symbol === "✘") {
+    return <i className="fas fa-times text-red-500 text-base sm:text-lg"></i>;
+  }
+  return null;
+};
+
 
   return (
     <section className="py-14 bg-gray-100 relative z-0">
@@ -126,12 +135,14 @@ const ComparisonTable = () => {
                         key={rowIndex}
                         className={rowIndex % 2 === 0 ? "bg-gray-50" : "bg-white"}
                       >
-                        <td className="px-4 py-3 text-gray-900 text-xs sm:text-sm">{row[0]}</td>
-                        <td className="px-4 py-3 text-center">
-                          {renderSymbol(row[1], "text-[#009E00]")}
+                        <td className="px-4 py-3 text-gray-900 text-xs sm:text-sm">
+                          {row[0]}
                         </td>
                         <td className="px-4 py-3 text-center">
-                          {renderSymbol(row[2], "text-[#D3242A]")}
+                          {renderSymbol(row[1])}
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          {renderSymbol(row[2])}
                         </td>
                       </tr>
                     ))}

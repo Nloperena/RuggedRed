@@ -1,63 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BlogCard from "./BlogCard";
+import BlogData from "../data/blogs";
 
-// Sample data
-const blogPostsData = [
-  {
-    id: 1,
-    image:
-      "https://contentgrid.homedepot-static.com/hdus/en_US/DTCCOMNEW/Articles/how-to-clean-kitchen-appliances-2022-step-3.jpg",
-    title: "5 Essential Cleaning Tips",
-    excerpt:
-      "Discover the top five cleaning tips that will transform your home into a spotless sanctuary. These strategies make your cleaning routine efficient and effective.",
-    link: "#carousel1",
-  },
-  {
-    id: 2,
-    image:
-      "https://www.sustainablejungle.com/wp-content/uploads/2022/09/Image-by-ozgurkeser-Getty-Images-Canva-Pro.jpg",
-    title: "Benefits of Non-Toxic Cleaners",
-    excerpt:
-      "Learn why non-toxic cleaners are better for your health and the environment. Explore advantages of using eco-friendly products without harmful chemicals.",
-    link: "#carousel2",
-  },
-  {
-    id: 3,
-    image:
-      "https://www.mcsclean.co.uk/wp-content/uploads/2021/05/shutterstock_738900295-425x319.jpg",
-    title: "Tackling Tough Stains",
-    excerpt:
-      "Struggling with stubborn stains? Here’s how to remove them effortlessly. From coffee spills to ink marks, maintain pristine surfaces with ease.",
-    link: "#carousel3",
-  },
-  {
-    id: 4,
-    image:
-      "https://images.squarespace-cdn.com/content/v1/5f60cebfa8258e3d29185127/1628286912273-FBGPWA1REO6C27A0EW6O/AdobeStock_417842646.jpeg",
-    title: "Eco-Friendly Cleaning Practices",
-    excerpt:
-      "Embrace eco-friendly cleaning practices with these simple strategies. Reduce your carbon footprint while keeping your home spotless and safe.",
-    link: "#carousel4",
-  },
-  {
-    id: 5,
-    image:
-      "https://www.myzen.tv/wp-content/uploads/2024/03/handcraft-handmade-diy-skills-drawing-3-scaled.jpg",
-    title: "DIY Cleaning Solutions",
-    excerpt:
-      "Make your own cleaning solutions with common household items. Cut costs and go green with these quick recipes and tips.",
-    link: "#carousel5",
-  },
-  {
-    id: 6,
-    image: "https://placeimg.com/640/480/nature",
-    title: "Upcycling Cleaning Tools",
-    excerpt:
-      "Repurpose household items for more sustainable cleaning. Embrace upcycling as part of your eco-friendly routine!",
-    link: "#carousel6",
-  },
-];
+// Ensure blogPosts is always an array. If BlogData is an object with a "blogs" property, use that.
+const blogPosts =
+  (BlogData && (Array.isArray(BlogData) ? BlogData : BlogData.blogs)) || [];
 
 // Slide animation variants
 const variants = {
@@ -83,7 +31,7 @@ export default function FeaturesShowcase() {
   const [direction, setDirection] = useState(0); // +1 = next, -1 = prev
   const [itemsPerPage, setItemsPerPage] = useState(1); // default
 
-  // Dynamically compute items per page
+  // Dynamically compute items per page based on viewport width
   const updateItemsPerPage = () => {
     const width = window.innerWidth;
     if (width >= 1024) {
@@ -104,11 +52,13 @@ export default function FeaturesShowcase() {
     return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
-  const totalPages = Math.ceil(blogPostsData.length / itemsPerPage);
+  // Ensure totalPages is at least 1 to avoid division/modulo by zero
+  const totalPages =
+    blogPosts.length > 0 ? Math.ceil(blogPosts.length / itemsPerPage) : 1;
   const startIndex = currentPage * itemsPerPage;
-  const visiblePosts = blogPostsData.slice(startIndex, startIndex + itemsPerPage);
+  const visiblePosts = blogPosts.slice(startIndex, startIndex + itemsPerPage);
 
-  // Next / Prev
+  // Next / Prev navigation
   const goToNextPage = () => {
     setDirection(1);
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -137,8 +87,7 @@ export default function FeaturesShowcase() {
             LEARN SOMETHING NEW!
           </h2>
           <p className="text-white text-lg mb-6">
-            Stay updated with the latest tips and insights to keep your home
-            clean and eco-friendly.
+            Stay updated with the latest tips and insights to keep your home clean and eco-friendly.
           </p>
           <a
             href="#tips-and-blogs"
@@ -198,7 +147,7 @@ export default function FeaturesShowcase() {
           </button>
         </div>
 
-        {/* Circle pagination, with smaller margin on mobile, bigger on desktop */}
+        {/* Circle pagination */}
         <div className="mt-3 sm:mt-6 flex items-center justify-center space-x-2">
           {Array.from({ length: totalPages }).map((_, i) => {
             const isActive = i === currentPage;

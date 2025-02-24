@@ -6,6 +6,7 @@ import FlagIcon from "../assets/icons/Flag Icon.png";
 const AboutRed = () => {
   return (
     <section className="relative bg-white py-32 px-6 sm:px-16">
+      
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between">
         {/* Left Column: Text */}
         <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
@@ -24,6 +25,7 @@ const AboutRed = () => {
             WHO IS RED?
             
           </motion.h2>
+          
 
           {/* Paragraph 1 */}
           <motion.p
@@ -108,7 +110,7 @@ const AboutRed = () => {
             style={{ objectPosition: "bottom" }}
           />
         </motion.div>
-      </div>
+      </div> 
     </section>
   );
 };
