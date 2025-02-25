@@ -71,7 +71,7 @@ const Hero = () => {
 
           @media (min-width: 1024px) {
             #hero .hero-content {
-              margin: -13rem 6rem 2rem;
+              margin: -28rem 6rem 2rem;
               padding: 4rem 0;
             }
           }
@@ -83,7 +83,7 @@ const Hero = () => {
           */
           @media (min-width: 1280px) {
             #hero .hero-content {
-              margin: -10rem auto 2rem;
+              margin: -35rem auto 2rem;
               max-width: 1600px;
               padding: 5rem 0;
             }
@@ -129,7 +129,7 @@ const Hero = () => {
 
           @media (min-width: 1280px) {
             #hero h1 {
-              font-size: 5.4rem; /* Extra-large screens */
+              font-size: 5.6rem; /* Extra-large screens */
             }
             #hero p {
               font-size: 1.5rem; /* Extra-large screens */

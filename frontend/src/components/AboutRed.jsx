@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import RRMascot from "../assets/RRMascot+Type.png";
+import RRMascot from "../assets/RRMascot+Type-smaller.png";
 import FlagIcon from "../assets/icons/Flag Icon.png";
 
 const AboutRed = () => {

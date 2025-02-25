@@ -13,7 +13,6 @@ import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
 import ParallaxSection from "../components/ParallaxSection";
 import OurProductsSection from "../components/OurProductSection";
-import './Home.css';
 
 const Home = () => {
   // InView hooks for key markers.
@@ -115,6 +114,68 @@ const Home = () => {
             className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
             style={{ marginBottom: "0rem", marginRight: "0rem", marginTop: "-7rem" }}
           >
+            <style>
+              {`
+                .product-divider {
+                  margin-top: -7rem;
+                  margin-right: 1rem;
+                  margin-bottom: 9rem;
+                  margin-left: 0;
+                  padding: 0;
+                  max-width: 100%;
+                }
+                @media (max-width: 639px) {
+                  .product-divider {
+                    margin-top: 3rem;
+                    margin-right: 0.5rem;
+                    margin-bottom: 5rem;
+                    margin-left: 4rem;
+                    padding: 0.5rem;
+                    max-width: 65%;
+                  }
+                }
+                @media (min-width: 640px) and (max-width: 767px) {
+                  .product-divider {
+                    margin-top: -1rem;
+                    margin-right: 0;
+                    margin-bottom: 6rem;
+                    margin-left: 6rem;
+                    padding: 1rem;
+                    max-width: 60%;
+                  }
+                }
+                @media (min-width: 768px) and (max-width: 1023px) {
+                  .product-divider {
+                    margin-top: -10rem;
+                    margin-right: 5rem;
+                    margin-bottom: 7rem;
+                    margin-left: 7.5rem;
+                    padding: 1.5rem;
+                    max-width: 70%;
+                  }
+                }
+                @media (min-width: 1024px) and (max-width: 1279px) {
+                  .product-divider {
+                    margin-top: -20rem;
+                    margin-right: 5rem;
+                    margin-bottom: 10rem;
+                    margin-left: 8rem;
+                    padding: 2rem;
+                    max-width: 80%;
+                  }
+                }
+                @media (min-width: 1280px) {
+                  .product-divider {
+                    margin-top: -30rem;
+                    margin-right: -74rem;
+                    margin-bottom: 12rem;
+                    margin-left: -38rem;
+                    padding: 2.5rem;
+                    max-width: 130%;
+                  }
+                }
+              `}
+            </style>
             <img
               src={require("../assets/RR-ProductHeroImg.png")}
               alt="Product Divider"
@@ -136,6 +197,68 @@ const Home = () => {
             className="block transform mx-auto float-left w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]"
             style={{ marginBottom: "5rem" }}
           >
+            <style>
+              {`
+                .mascot-divider {
+                  margin-top: -7rem;
+                  margin-left: 1rem;
+                  margin-bottom: 9rem;
+                  margin-right: 0;
+                  padding: 0;
+                  max-width: 100%;
+                }
+                @media (max-width: 639px) {
+                  .mascot-divider {
+                    margin-top: -4rem;
+                    margin-left: 0.5rem;
+                    margin-bottom: 0;
+                    margin-right: 4rem;
+                    padding: 0.5rem;
+                    max-width: 135%;
+                  }
+                }
+                @media (min-width: 640px) and (max-width: 767px) {
+                  .mascot-divider {
+                    margin-top: -13rem;
+                    margin-left: 1rem;
+                    margin-bottom: 0;
+                    margin-right: 0;
+                    padding: 1rem;
+                    max-width: 83%;
+                  }
+                }
+                @media (min-width: 768px) and (max-width: 1023px) {
+                  .mascot-divider {
+                    margin-top: -24rem;
+                    margin-left: -1.5rem;
+                    margin-bottom: -2rem;
+                    margin-right: 5rem;
+                    padding: 1.5rem;
+                    max-width: 115%;
+                  }
+                }
+                @media (min-width: 1024px) and (max-width: 1279px) {
+                  .mascot-divider {
+                    margin-top: -72rem;
+                    margin-left: -24rem;
+                    margin-bottom: 10rem;
+                    margin-right: 5rem;
+                    padding: 2rem;
+                    max-width: 180%;
+                  }
+                }
+                @media (min-width: 1280px) {
+                  .mascot-divider {
+                    margin-top: -66rem;
+                    margin-left: -0rem;
+                    margin-bottom: 0;
+                    margin-right: 5rem;
+                    padding: 6.5rem 2.5rem 2rem 10rem;
+                    max-width: 215%;
+                  }
+                }
+              `}
+            </style>
             <img
               src={require("../assets/RRMascot-smaller.png")}
               alt="Mascot Divider"

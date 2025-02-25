@@ -8,8 +8,6 @@ import MobileNav from "./MobileNav";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Inversion toggle
   const [isInverted, setIsInverted] = useState(false);
 
   const links = [
@@ -19,20 +17,21 @@ export default function Nav() {
     { name: "About", path: "/about" },
   ];
 
-  // Nav background & text color classes
-  const navClasses = isInverted
-    ? "sticky top-0 z-50 bg-[#D3242A] text-white shadow-md h-20"
-    : "sticky top-0 z-50 bg-white text-red-600 shadow-md h-20";
+  // Navbar height adjustment for large screens
+  const navHeight = "h-20 md:h-24 lg:h-28"; // Thicker for larger displays
 
-  // Desktop link styling
-  //  - If inverted: default text white, hover => background white, text red
-  //  - If not inverted: default text red, hover => background red, text white
+  // Navbar background & text color logic
+  const navClasses = isInverted
+    ? `sticky top-0 z-50 bg-[#D3242A] text-white shadow-md ${navHeight}`
+    : `sticky top-0 z-50 bg-white text-red-600 shadow-md ${navHeight}`;
+
+  // Desktop link hover effect (rounded and snappy)
   const getDesktopLinkClass = (isInverted) =>
     isInverted
-      ? "py-1 px-3 rounded transition-colors hover:bg-white hover:text-[#D3242A]"
-      : "py-1 px-3 rounded transition-colors hover:bg-[#D3242A] hover:text-white";
+      ? "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-white hover:text-[#D3242A]"
+      : "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-[#D3242A] hover:text-white";
 
-  // Switch toggler
+  // Toggle Inversion Mode
   const handleSwitchToggle = () => {
     setIsInverted(!isInverted);
   };
@@ -41,20 +40,19 @@ export default function Nav() {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className={navClasses}
     >
       <div className="container mx-auto flex justify-between items-center h-full px-6">
         {/* Logo */}
         <div>
           <Link to="/">
-            {/* Optionally invert the logo's colors with style={ isInverted ? { filter: "invert(1)" } : {} } */}
-            <img src={RuggedRedLogo} alt="Rugged Red Logo" className="h-16" />
+            <img src={RuggedRedLogo} alt="Rugged Red Logo" className="h-16 lg:h-20" />
           </Link>
         </div>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex space-x-8 text-lg font-semibold" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
+        <ul className="hidden md:flex space-x-8 text-lg lg:text-xl font-semibold" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
           {links.map((link) => (
             <li key={link.name}>
               <Link to={link.path} className={getDesktopLinkClass(isInverted)}>
@@ -64,38 +62,39 @@ export default function Nav() {
           ))}
         </ul>
 
-        {/* Flag + Switch for Desktop */}
-        <div className="hidden md:flex items-center space-x-6">
-          <img
-            src={FlagIcon}
-            alt="Made in America"
-            className="h-16"
-            // style={ isInverted ? { filter: "invert(1)" } : {} }
-          />
+        {/* Flag + Switch (Now Flag is fully to the Right) */}
+        <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
           {/* Toggle Switch */}
           <div className="flex items-center">
-            <span className="mr-2 text-sm font-semibold select-none">
+            <span className="mr-2 text-sm font-semibold select-none lg:text-base">
               {isInverted ? "Invert On" : "Invert Off"}
             </span>
             <div
-              className="relative inline-block w-10 h-6 select-none transition duration-200 ease-in"
+              className="relative inline-block w-12 h-7 select-none transition duration-200 ease-in cursor-pointer"
               onClick={handleSwitchToggle}
             >
               {/* Track */}
               <div
-                className={`absolute inset-0 rounded-full cursor-pointer transition-colors ${
-                  isInverted ? "bg-white" : "bg-red-200"
+                className={`absolute inset-0 rounded-full transition-colors duration-300 ${
+                  isInverted ? "bg-white" : "bg-red-400"
                 }`}
               />
               {/* Knob */}
               <motion.div
-                className="absolute left-0 top-0 bottom-0 w-6 h-6 bg-red-600 rounded-full shadow transform cursor-pointer"
+                className="absolute left-0 top-0 bottom-0 w-7 h-7 bg-[#D3242A] rounded-full shadow transform cursor-pointer"
                 layout
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                style={{ left: isInverted ? "1.25rem" : "0.25rem" }}
+                style={{ left: isInverted ? "1.4rem" : "0.25rem" }}
               />
             </div>
           </div>
+
+          {/* Flag Icon (Fully Right-Aligned) */}
+          <img
+            src={FlagIcon}
+            alt="Made in America"
+            className="h-16 lg:h-20 ml-4"
+          />
         </div>
 
         {/* Mobile Menu (Hamburger) */}
@@ -118,7 +117,7 @@ export default function Nav() {
           isMenuOpen={isMenuOpen}
           onClose={() => setIsMenuOpen(false)}
           links={links}
-          isInverted={isInverted} // pass the state down
+          isInverted={isInverted}
         />
       </div>
     </motion.nav>
