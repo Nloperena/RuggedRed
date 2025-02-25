@@ -107,8 +107,11 @@ const Home = () => {
         <Hero />
 
         {/* Product Divider Section */}
-        <div
+        <motion.div
           className="relative w-full"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
           style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
         >
           <div
@@ -125,11 +128,14 @@ const Home = () => {
               }}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Mascot Divider Section */}
-        <div
+        <motion.div
           className="relative w-full"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 2, duration: 1 }}
           style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
         >
           <div
@@ -146,7 +152,7 @@ const Home = () => {
               }}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Product Line Section (layered above ParallaxSection) */}
         <div
@@ -166,24 +172,6 @@ const Home = () => {
           
           <OurProductsSection />
         </div>
-
-        {/* Animated Rich Text Production Section with its own parallax effect */}
-        {/* <motion.section
-          ref={setRichTextRef}
-          className="relative bg-white pt-12 pb-12 px-6 sm:px-10"
-          style={{
-            marginTop: sectionMarginTop,
-            position: "relative",
-            zIndex: 2,
-            boxShadow: "0px -20px 30px rgba(0,0,0,0.3)",
-            opacity: sectionOpacity,
-            // Increase the vertical translation range for a more pronounced parallax effect:
-            y: sectionY,
-          }}
-          transition={{ duration: 0.8, ease: [0.6, 0.05, 0.2, 0.9] }}
-        >
-          <RichTextProductsSection />
-        </motion.section> */}
 
         {/* Comparison Table Section */}
         <div>
