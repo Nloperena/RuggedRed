@@ -144,12 +144,9 @@
   
   @media (min-width: 2389px) {
     .product-divider {
-        margin-top: -32rem;
-        margin-right: 0rem;
-        margin-bottom: 18rem;
-        margin-left: -44rem;
+        margin: -32rem 0 18rem -34rem;
+        max-width: 115%;
         padding: 2rem;
-        max-width: 135%;
     }
   }
   
@@ -198,12 +195,12 @@
   
   @media (min-width: 900px) and (max-width: 1023px) {
     .mascot-divider {
-      margin-top: -48rem;
-      margin-left: -12rem;
-      margin-bottom: -4rem;
-      margin-right: 5rem;
-      padding: 1.5rem;
-      max-width: 145%;
+        margin-top: -21rem;
+        margin-left: -12rem;
+        margin-bottom: -4rem;
+        margin-right: 5rem;
+        padding: 1.5rem;
+        max-width: 145%;
     }
   }
   
@@ -231,56 +228,57 @@
   
   @media (min-width: 1200px) and (max-width: 1279px) {
     .mascot-divider {
-      margin-top: -76rem;
-      margin-left: -24rem;
-      margin-bottom: 12rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 190%;
+        margin-top: -59rem;
+        margin-left: -17rem;
+        margin-bottom: 12rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 190%;
     }
   }
   
   @media (min-width: 1280px) and (max-width: 1439px) {
     .mascot-divider {
-      margin-top: -78rem;
-      margin-left: -24rem;
-      margin-bottom: 13rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 195%;
+        margin-top: -66rem;
+        margin-left: -19rem;
+        margin-bottom: 13rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 195%;
     }
-  }
+    }
+  
   
   @media (min-width: 1440px) and (max-width: 1599px) {
     .mascot-divider {
-      margin-top: -80rem;
-      margin-left: -24rem;
-      margin-bottom: 14rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 200%;
+        margin-top: -68rem;
+        margin-left: -16rem;
+        margin-bottom: 14rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 200%
     }
   }
   
   @media (min-width: 1600px) and (max-width: 1799px) {
     .mascot-divider {
-      margin-top: -82rem;
-      margin-left: -24rem;
-      margin-bottom: 15rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 205%;
+        margin-top: -68rem;
+        margin-left: -5rem;
+        margin-bottom: 15rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 205%;
     }
   }
   
   @media (min-width: 1800px) and (max-width: 1935px) {
     .mascot-divider {
-      margin-top: -84rem;
-      margin-left: -24rem;
-      margin-bottom: 16rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 210%;
+        margin-top: -68rem;
+        margin-left: -5rem;
+        margin-bottom: 16rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 226%;
     }
   }
   
@@ -301,9 +299,9 @@
         margin-top: -70rem;
         margin-left: 0rem;
         margin-bottom: 18rem;
-        margin-right: 5rem;
+        margin-right: 9rem;
         padding: 2rem;
         max-width: 300%;
-        width: 250%;
+        width: 234%;
     }
   }
