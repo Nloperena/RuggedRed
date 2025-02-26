@@ -3,18 +3,17 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const ParallaxSection = () => {
   const containerRef = useRef(null);
-  // Images are visible as long as the section hasn’t completely scrolled off the top.
   const [isVisible, setIsVisible] = useState(true);
 
-  // Determine layout: vertical for small screens, horizontal otherwise.
-  const [isVertical, setIsVertical] = useState(window.innerWidth <= 768);
+  // Determine layout: use single image for viewports below 900px.
+  const [isVertical, setIsVertical] = useState(window.innerWidth < 900);
   useEffect(() => {
-    const updateLayout = () => setIsVertical(window.innerWidth <= 768);
+    const updateLayout = () => setIsVertical(window.innerWidth < 900);
     window.addEventListener("resize", updateLayout);
     return () => window.removeEventListener("resize", updateLayout);
   }, []);
 
-  // Track scroll progress for parallax effect using Framer Motion.
+  // Track scroll progress for parallax effect.
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -22,35 +21,32 @@ const ParallaxSection = () => {
   const parallaxYBackground = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   const parallaxYRight = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
 
-  // Use a scroll event listener to control the visibility:
-  // Images remain visible as long as the bottom of the section is below the viewport's top.
+  // Listener to keep images visible until the section is entirely offscreen.
   useEffect(() => {
     const handleScroll = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        // As long as the section's bottom is greater than 0, keep images visible.
+        // Images remain visible as long as the bottom of the section is greater than 0.
         setIsVisible(rect.bottom > 0);
       }
     };
     window.addEventListener("scroll", handleScroll);
     // Initial check.
     handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <section
       ref={containerRef}
       className="relative w-full h-screen flex flex-col items-center overflow-hidden"
-      style={{ marginBottom: "-300px" }} // Negative margin tucks extra space under the section.
+      style={{ marginBottom: "-300px" }}
     >
       <motion.div 
         className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${!isVisible ? 'opacity-0' : 'opacity-100'}`}
       >
         {isVertical ? (
-          // Vertical layout: show only one (background) image.
+          // For viewports below 900px: use a single image (the left-hand image) filling the section and show the best part.
           <div className="w-full h-full flex flex-col items-center">
             <motion.div
               style={{ y: parallaxYBackground, position: "fixed" }}
@@ -58,13 +54,14 @@ const ParallaxSection = () => {
             >
               <motion.img
                 src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
-                alt="Top Image"
+                alt="Left Image"
                 className="w-full h-full object-cover"
+                style={{ objectPosition: "30% center" }}
               />
             </motion.div>
           </div>
         ) : (
-          // Horizontal layout: side-by-side images.
+          // For viewports 900px and above: display two images side by side.
           <div className="w-full h-full flex justify-center items-center">
             <motion.div
               style={{ y: parallaxYBackground, position: "fixed" }}
@@ -90,7 +87,7 @@ const ParallaxSection = () => {
         )}
       </motion.div>
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center">
-        {/* This overlay container is for any components you want to display over the images. */}
+        {/* Overlay container for content */}
       </div>
     </section>
   );

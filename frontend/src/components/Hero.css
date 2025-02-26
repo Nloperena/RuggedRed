@@ -2,32 +2,41 @@
    MIN-HEIGHT RULES ON #hero
 ---------------------------------- */
 #hero {
-    min-height: 600px;
+    min-height: 720px;
     background-size: cover;
-    background-position: center center;
+    background-position: center right;
   }
-  
-  @media (min-width: 640px) {
+  @media (min-width: 340px) {
     #hero {
       min-height: 600px;
+      background-position: center right;
+    }
+  }
+  @media (min-width: 640px) {
+    #hero {
+      min-height: 1100px;
+      background-position: center right;
     }
   }
   
   @media (min-width: 768px) {
     #hero {
-      min-height: 850px;
+      min-height: 970px;
+      background-position: center center;
     }
   }
   
   @media (min-width: 1024px) {
     #hero {
       min-height: 1065px;
+      background-position: center center;
     }
   }
   
   @media (min-width: 1280px) {
     #hero {
       min-height: 1230px;
+      background-position: center center;
     }
   }
   
@@ -36,13 +45,13 @@
   ---------------------------------- */
   #hero .hero-content {
     /* Mobile (default) */
-    margin: -8rem 3rem 2rem;
+    margin: -8rem 0.35rem 2rem;
     padding: 2rem 0;
   }
   
   @media (min-width: 640px) {
     #hero .hero-content {
-      margin: -8rem 2rem 2rem;
+      margin: -30rem 2rem 2rem;
       padding: 3rem 0;
     }
   }
@@ -87,7 +96,7 @@
   
   @media (min-width: 640px) {
     #hero h1 {
-      font-size: 3rem; /* Small screens */
+      font-size: 4.5rem; /* Small screens */
     }
     #hero p {
       font-size: 1.25rem; /* Small screens */
