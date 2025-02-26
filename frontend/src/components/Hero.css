@@ -1,0 +1,122 @@
+/* ----------------------------------
+   MIN-HEIGHT RULES ON #hero
+---------------------------------- */
+#hero {
+    min-height: 600px;
+    background-size: cover;
+    background-position: center center;
+  }
+  
+  @media (min-width: 640px) {
+    #hero {
+      min-height: 600px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    #hero {
+      min-height: 850px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    #hero {
+      min-height: 1065px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    #hero {
+      min-height: 1230px;
+    }
+  }
+  
+  /* ----------------------------------
+     WRAPPER MARGIN/PADDING IN EACH BREAKPOINT
+  ---------------------------------- */
+  #hero .hero-content {
+    /* Mobile (default) */
+    margin: -8rem 3rem 2rem;
+    padding: 2rem 0;
+  }
+  
+  @media (min-width: 640px) {
+    #hero .hero-content {
+      margin: -8rem 2rem 2rem;
+      padding: 3rem 0;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    #hero .hero-content {
+      margin: -18rem 6rem 2rem;
+      padding: 4rem 0;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    #hero .hero-content {
+      margin: -28rem 6rem 2rem;
+      padding: 4rem 0;
+    }
+  }
+  
+  /* 
+    On the largest displays,
+    center the container horizontally,
+    and remove the strong negative top margin
+  */
+  @media (min-width: 1280px) {
+    #hero .hero-content {
+      margin: -35rem auto 2rem;
+      max-width: 1600px;
+      padding: 5rem 0;
+    }
+  }
+  
+  /* ----------------------------------
+     FONT-SIZE FOR HEADLINE AND PARAGRAPH
+  ---------------------------------- */
+  #hero h1 {
+    font-size: 2.8rem; /* Mobile default */
+  }
+  
+  #hero p {
+    font-size: 1rem; /* Mobile default */
+  }
+  
+  @media (min-width: 640px) {
+    #hero h1 {
+      font-size: 3rem; /* Small screens */
+    }
+    #hero p {
+      font-size: 1.25rem; /* Small screens */
+    }
+  }
+  
+  @media (min-width: 768px) {
+    #hero h1 {
+      font-size: 4rem; /* Medium screens */
+    }
+    #hero p {
+      font-size: 1.5rem; /* Medium screens */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    #hero h1 {
+      font-size: 3.4rem; /* Large screens */
+    }
+    #hero p {
+      font-size: 1.2rem; /* Large screens */
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    #hero h1 {
+      font-size: 5.6rem; /* Extra-large screens */
+    }
+    #hero p {
+      font-size: 1.5rem; /* Extra-large screens */
+    }
+  }

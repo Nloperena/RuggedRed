@@ -21,6 +21,7 @@ const MobileNav = ({ isMenuOpen, onClose, links, isInverted }) => {
 
   return (
     <motion.div
+      initial={{ x: "100%" }}
       animate={{ x: isMenuOpen ? 0 : "100%" }}
       transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] }}
       className={`fixed top-0 right-0 w-3/4 sm:w-1/2 h-full shadow-2xl z-50 p-8 ${containerClass}`}

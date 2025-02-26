@@ -18,10 +18,10 @@ const ProductLine = () => {
     <>
       {/* MOBILE VIEW */}
       <section className="block md:hidden bg-white pt-16 pb-8 px-6 lg:pt-24 lg:pb-12 lg:px-8 2xl:pt-32 2xl:pb-16 2xl:px-10">
-        <div className="container mx-auto flex flex-col items-start">
+        <div className="container mx-auto flex flex-col items-center">
           {/* HEADLINE */}
           <motion.h2
-            className="text-[#D3242A] text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-extrabold mb-4 text-left uppercase"
+            className="text-[#D3242A] text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-extrabold mb-4 text-center uppercase"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ const ProductLine = () => {
 
           {/* PARAGRAPH */}
           <motion.p
-            className="text-black text-sm sm:text-base lg:text-lg 2xl:text-xl leading-relaxed mb-5 text-left"
+            className="text-black text-sm sm:text-base lg:text-lg 2xl:text-xl leading-relaxed mb-5 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.6, 0.05, 0.2, 0.9] }}
@@ -82,9 +82,9 @@ const ProductLine = () => {
           </div>
 
           {/* RIGHT: TEXT + ICONS */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start">
             <motion.h2
-              className="text-[#D3242A] text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-extrabold mb-6 text-left uppercase"
+              className="text-[#D3242A] text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-extrabold mb-6 text-center lg:text-left uppercase"
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ const ProductLine = () => {
             </motion.h2>
 
             <motion.p
-              className="text-black text-base sm:text-lg lg:text-xl 2xl:text-2xl leading-relaxed mb-5 text-left"
+              className="text-black text-base sm:text-lg lg:text-xl 2xl:text-2xl leading-relaxed mb-5 text-center lg:text-left"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.6, 0.05, 0.2, 0.9] }}

@@ -149,6 +149,8 @@ const Home = () => {
               style={{
                 maskImage: "linear-gradient(to bottom, black 95%, transparent)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
+                maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
               }}
             />
           </div>
@@ -160,10 +162,12 @@ const Home = () => {
             position: "relative",
             zIndex: 2,
             boxShadow: "0px 20px 30px rgba(0,0,0,0.3)",
+            padding: "0 0rem",
           }}
         >
           <ProductLine />
         </div>
+        
         <div ref={setProductLineEndRef} />
 
         {/* Parallax Section (background layer) with OurProductsSection inside */}
