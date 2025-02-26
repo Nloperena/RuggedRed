@@ -26,7 +26,7 @@
       margin-top: -1rem;
       margin-right: 0;
       margin-bottom: 6rem;
-      margin-left: 6rem;
+      margin-left: 5rem;
       padding: 1rem;
       max-width: 60%;
     }
@@ -37,7 +37,7 @@
       margin-top: -10rem;
       margin-right: 5rem;
       margin-bottom: 7rem;
-      margin-left: 7.5rem;
+      margin-left: 6.5rem;
       padding: 1.5rem;
       max-width: 70%;
     }
@@ -45,12 +45,12 @@
   
   @media (min-width: 900px) and (max-width: 1023px) {
     .product-divider {
-      margin-top: -15rem;
-      margin-right: 5rem;
-      margin-bottom: 8rem;
-      margin-left: 7.5rem;
-      padding: 1.5rem;
-      max-width: 75%;
+      margin-top: -10rem;
+        margin-right: 5rem;
+        margin-bottom: 8rem;
+        margin-left: 7rem;
+        padding: 1.5rem;
+        max-width: 75%;
     }
   }
   
@@ -92,9 +92,9 @@
       margin-top: -26rem;
       margin-right: 5rem;
       margin-bottom: 13rem;
-      margin-left: 8rem;
+      margin-left: 2rem;
       padding: 2rem;
-      max-width: 90%;
+      max-width: 83%;
     }
   }
   
@@ -112,24 +112,25 @@
   @media (min-width: 1600px) and (max-width: 1799px) {
     .product-divider {
       margin-top: -30rem;
-      margin-right: 5rem;
-      margin-bottom: 15rem;
-      margin-left: 8rem;
-      padding: 2rem;
-      max-width: 100%;
+        margin-right: 4rem;
+        margin-bottom: 15rem;
+        margin-left: -6rem;
+        padding: 2rem;
+        max-width: 100%;
     }
   }
   
   @media (min-width: 1800px) and (max-width: 1935px) {
     .product-divider {
-      margin-top: -32rem;
-      margin-right: 5rem;
-      margin-bottom: 16rem;
-      margin-left: 8rem;
-      padding: 2rem;
-      max-width: 105%;
+      margin-top: -29rem;
+        /* margin-right: 14rem; */
+        margin-bottom: 16rem;
+        margin-left: -13rem;
+        padding: 2rem;
+        max-width: 97%;
     }
-  }
+    }
+  
   
   @media (min-width: 1936px) and (max-width: 2388px) {
     .product-divider {
@@ -162,23 +163,24 @@
   
   @media (max-width: 639px) {
     .mascot-divider {
-      margin-top: -4rem;
-      margin-left: 0.5rem;
-      margin-bottom: 0;
-      margin-right: 4rem;
-      padding: 0.5rem;
-      max-width: 135%;
+      margin-top: -6rem;
+        margin-left: 0.5rem;
+        margin-bottom: 0;
+        margin-right: 4rem;
+        padding: 0.5rem;
+        max-width: 135%;
     }
-  }
+    }
+  
   
   @media (min-width: 640px) and (max-width: 767px) {
     .mascot-divider {
-      margin-top: -13rem;
-      margin-left: 1rem;
-      margin-bottom: 0;
-      margin-right: 0;
-      padding: 1rem;
-      max-width: 83%;
+      margin-top: -17rem;
+        margin-left: 1rem;
+        margin-bottom: 0;
+        margin-right: 0;
+        padding: 1rem;
+        max-width: 104%;
     }
   }
   
@@ -239,46 +241,50 @@
   
   @media (min-width: 1280px) and (max-width: 1439px) {
     .mascot-divider {
-        margin-top: -66rem;
-        margin-left: -19rem;
-        margin-bottom: 13rem;
-        margin-right: 5rem;
-        padding: 2rem;
-        max-width: 195%;
+      margin-top: -66rem;
+      margin-left: -27rem;
+      margin-bottom: 13rem;
+      margin-right: 5rem;
+      padding: 2rem;
+      width: 220%;
+      max-width: 300%;
     }
     }
   
   
   @media (min-width: 1440px) and (max-width: 1599px) {
     .mascot-divider {
-        margin-top: -68rem;
-        margin-left: -16rem;
-        margin-bottom: 14rem;
-        margin-right: 5rem;
-        padding: 2rem;
-        max-width: 200%
+      margin-top: -69rem;
+      margin-left: -28rem;
+      margin-bottom: 14rem;
+      margin-right: 0rem;
+      padding: 2rem;
+      width: 240%;
+      max-width: 300%;
     }
   }
   
   @media (min-width: 1600px) and (max-width: 1799px) {
     .mascot-divider {
-        margin-top: -68rem;
-        margin-left: -5rem;
-        margin-bottom: 15rem;
-        margin-right: 5rem;
-        padding: 2rem;
-        max-width: 205%;
+      margin-top: -70rem;
+      margin-left: -17rem;
+      margin-bottom: 15rem;
+      margin-right: 5rem;
+      padding: 2rem;
+      max-width: 300%;
+      width: 220%;
     }
   }
   
   @media (min-width: 1800px) and (max-width: 1935px) {
     .mascot-divider {
-        margin-top: -68rem;
-        margin-left: -5rem;
-        margin-bottom: 16rem;
-        margin-right: 5rem;
-        padding: 2rem;
-        max-width: 226%;
+      margin-top: -70rem;
+      margin-left: -14rem;
+      margin-bottom: 15rem;
+      margin-right: 5rem;
+      padding: 2rem;
+      width: 232%;
+      max-width: 300%;
     }
   }
   
@@ -305,3 +311,45 @@
         width: 234%;
     }
   }
+  /* Ensure home components have a higher z-index */
+.home-component {
+  position: relative;
+  z-index: 20; /* Set a higher z-index value */
+}
+
+/* Specific components with higher z-index */
+.hero-section {
+  z-index: 20;
+}
+
+.product-line-section {
+  z-index: 20;
+}
+
+.rich-text-products-section {
+  z-index: 20;
+}
+
+.testimonials-section {
+  z-index: 20;
+}
+
+.auto-scrolling-images-section {
+  z-index: 20;
+}
+
+.about-red-section {
+  z-index: 20;
+}
+
+.blog-section {
+  z-index: 20;
+}
+
+.comparison-table-section {
+  z-index: 20;
+}
+
+.our-products-section {
+  z-index: 20;
+}

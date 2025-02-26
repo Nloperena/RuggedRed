@@ -51,7 +51,7 @@ const Footer = () => {
           className="text-2xl md:text-3xl font-bold mb-4"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
         >
-          Get Updates from the Creators of Rugged Red
+          Get Updates from the Creators of RUGGEDRED
         </h2>
         <p
           className="text-base md:text-lg mb-8"
