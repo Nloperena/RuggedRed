@@ -5,25 +5,18 @@ import kitchen1 from "../assets/kitchen1.png";
 import kitchen2 from "../assets/kitchen2.jpg";
 import kitchen3 from "../assets/kitchen3.png";
 import './Hero.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Hero = () => {
   const images = [kitchen1, kitchen2, kitchen3];
   const [backgroundImage, setBackgroundImage] = useState(kitchen3);
   const [currentIndex, setCurrentIndex] = useState(images.indexOf(kitchen3));
 
-  const handleBackgroundChange = (index) => {
-    setBackgroundImage(images[index]);
-    setCurrentIndex(index);
-  };
-
   const handleNextImage = () => {
     const nextIndex = (currentIndex + 1) % images.length;
-    handleBackgroundChange(nextIndex);
-  };
-
-  const handlePreviousImage = () => {
-    const prevIndex = (currentIndex - 1 + images.length) % images.length;
-    handleBackgroundChange(prevIndex);
+    setBackgroundImage(images[nextIndex]);
+    setCurrentIndex(nextIndex);
   };
 
   return (
@@ -45,7 +38,12 @@ const Hero = () => {
       </div>
 
       {/* Main wrapper: .hero-content with negative top margin for effect */}
-      <div className="hero-content relative z-10 w-full">
+      <motion.div
+        className="hero-content relative z-10 w-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
+      >
         {/* Grid with left & right columns */}
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 h-full">
           {/* Left column: Empty box for aesthetics */}
@@ -60,7 +58,7 @@ const Hero = () => {
               className="font-extrabold leading-snug text-[#D3242A] mb-2"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              transition={{ delay: 1, duration: 0.5 }}
             >
               <span className="block">A PROVEN</span>
               <span className="block">POWERFUL CLEAN</span>
@@ -71,7 +69,7 @@ const Hero = () => {
               className="inline-block bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg rounded-lg drop-shadow-md p-4 sm:p-6 md:p-8"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
             >
               <p className="text-[#222222] leading-relaxed font-medium mb-1">
                 Tough enough for industrial messes, safe enough for your home.
@@ -84,7 +82,7 @@ const Hero = () => {
               className="w-full flex justify-center"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.5 }}
+              transition={{ delay: 2, duration: 0.5 }}
             >
               <a
                 href="#products"
@@ -112,42 +110,18 @@ const Hero = () => {
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Background Image Switcher */}
-      <div className="absolute bottom-4 left-4 flex space-x-2">
-        <button
-          onClick={() => handleBackgroundChange(0)}
-          className="w-8 h-8 rounded-full border-2 border-white"
-          style={{ backgroundImage: `url(${kitchen1})`, backgroundSize: 'cover' }}
-        ></button>
-        <button
-          onClick={() => handleBackgroundChange(1)}
-          className="w-8 h-8 rounded-full border-2 border-white"
-          style={{ backgroundImage: `url(${kitchen2})`, backgroundSize: 'cover' }}
-        ></button>
-        <button
-          onClick={() => handleBackgroundChange(2)}
-          className="w-8 h-8 rounded-full border-2 border-white"
-          style={{ backgroundImage: `url(${kitchen3})`, backgroundSize: 'cover' }}
-        ></button>
-      </div>
-
-      {/* Left Arrow */}
-      <button
-        onClick={handlePreviousImage}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg"
-      >
-        &lt;
-      </button>
-
-      {/* Right Arrow */}
-      <button
+      {/* Change Wallpaper Button */}
+      <motion.button
         onClick={handleNextImage}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-lg"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
       >
-        &gt;
-      </button>
+        <FontAwesomeIcon icon={faArrowRight} />
+      </motion.button>
     </section>
   );
 };
