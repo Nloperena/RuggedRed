@@ -11,19 +11,22 @@ import LoadingScreen from "./components/LoadingScreen";
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Use an effect that resolves once the window has fully loaded.
   useEffect(() => {
     const handleLoad = () => {
       setIsLoading(false);
     };
 
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    if (document.readyState === "complete") {
+      // If page is already loaded, update state immediately.
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
   }, []);
 
-  // Create a ref for the footer
+  // Create a ref for the footer.
   const footerRef = useRef(null);
 
   return (
@@ -39,7 +42,6 @@ const App = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
           </Routes>
-          {/* Pass the ref to the Footer */}
           <div ref={footerRef}>
             <Footer />
           </div>
