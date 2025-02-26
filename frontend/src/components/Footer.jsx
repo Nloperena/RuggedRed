@@ -133,7 +133,7 @@ const Footer = () => {
               className="text-sm"
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
             >
-              &bull; © 2025 Rugged Red. All Rights Reserved.
+              &bull; © 2025 RUGGEDRED. All Rights Reserved.
             </p>
           </div>
         </motion.div>

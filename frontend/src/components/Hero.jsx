@@ -10,8 +10,8 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Hero = () => {
   const images = [kitchen1, kitchen2, kitchen3];
-  const [backgroundImage, setBackgroundImage] = useState(kitchen3);
-  const [currentIndex, setCurrentIndex] = useState(images.indexOf(kitchen3));
+  const [backgroundImage, setBackgroundImage] = useState(kitchen2);
+  const [currentIndex, setCurrentIndex] = useState(images.indexOf(kitchen2));
 
   const handleNextImage = () => {
     const nextIndex = (currentIndex + 1) % images.length;
@@ -115,12 +115,12 @@ const Hero = () => {
       {/* Change Wallpaper Button */}
       <motion.button
         onClick={handleNextImage}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-lg"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-32 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 1 }}
       >
-        <FontAwesomeIcon icon={faArrowRight} />
+        Change Wallpaper <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
       </motion.button>
     </section>
   );
