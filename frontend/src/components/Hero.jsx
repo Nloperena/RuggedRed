@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Stars from "./Stars";
 import kitchen1 from "../assets/kitchen1.png";
 import kitchen2 from "../assets/kitchen2.jpg";
@@ -84,8 +85,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2, duration: 0.5 }}
             >
-              <a
-                href="#products"
+              <Link
+                to="/products"
                 className="inline-block px-6 py-3 sm:px-8 sm:py-4 rounded-full text-sm sm:text-base md:text-lg xl:text-xl font-bold text-white bg-[#D3242A] border-2 border-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white shadow-lg"
                 onMouseDown={(e) => {
                   e.target.style.transform = "scale(0.95)";
@@ -96,17 +97,15 @@ const Hero = () => {
                   e.target.style.boxShadow = "0 0 12px rgba(255, 255, 255, 0.6)";
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.boxShadow =
-                    "0 0 15px rgba(255, 255, 255, 0.8)";
+                  e.target.style.boxShadow = "0 0 15px rgba(255, 255, 255, 0.8)";
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.boxShadow =
-                    "0 0 12px rgba(255, 255, 255, 0.6)";
+                  e.target.style.boxShadow = "0 0 12px rgba(255, 255, 255, 0.6)";
                 }}
                 aria-label="Start Cleaning Products"
               >
                 Start Cleaning Today
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -115,7 +114,7 @@ const Hero = () => {
       {/* Change Wallpaper Button */}
       <motion.button
         onClick={handleNextImage}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-40 h-14 px-4 py-2 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-lg"
+        className="fixed right-4 top-1/2 transform -translate-y-1/2 w-40 h-14 px-4 py-2 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-lg z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 1 }}

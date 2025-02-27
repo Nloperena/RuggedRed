@@ -1,6 +1,8 @@
+// filepath: /c:/Users/nimro/Downloads/BusinessProjects/Forza/RuggedRed/RuggedRed/frontend/src/components/RichTextProductCard.jsx
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Link } from "react-router-dom";
 
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
@@ -133,6 +135,14 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
               >
                 View Product
               </a>
+            )}
+            {isTextLoaded && (
+              <Link
+                to={`/product/${product.sys.id}`}
+                className="bg-blue-500 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105"
+              >
+                View Details
+              </Link>
             )}
           </div>
         </div>

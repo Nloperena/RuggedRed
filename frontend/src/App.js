@@ -6,19 +6,22 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
+import ProductDetail from "./pages/ProductDetail";
 import LoadingScreen from "./components/LoadingScreen";
+import { fetchProducts } from "./data/contentful";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]);
 
-  // Use an effect that resolves once the window has fully loaded.
   useEffect(() => {
     const handleLoad = () => {
+      console.log("Page fully loaded, setting isLoading to false");
       setIsLoading(false);
     };
 
+    console.log("Document readyState:", document.readyState);
     if (document.readyState === "complete") {
-      // If page is already loaded, update state immediately.
       handleLoad();
     } else {
       window.addEventListener("load", handleLoad);
@@ -26,13 +29,29 @@ const App = () => {
     }
   }, []);
 
-  // Create a ref for the footer.
+  useEffect(() => {
+    const loadProducts = async () => {
+      console.log("Starting to load products...");
+      try {
+        const fetchedProducts = await fetchProducts();
+        console.log("Fetched Products:", fetchedProducts);
+        setProducts(fetchedProducts);
+        console.log("Products state updated:", fetchedProducts);
+      } catch (error) {
+        console.error("Error in loadProducts:", error);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const footerRef = useRef(null);
+
+  console.log("Current products in state:", products);
 
   return (
     <>
       <LoadingScreen isLoading={isLoading} />
-
       {!isLoading && (
         <>
           <Nav />
@@ -41,6 +60,10 @@ const App = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
+            <Route
+              path="/product/:productId"
+              element={<ProductDetail products={products} />}
+            />
           </Routes>
           <div ref={footerRef}>
             <Footer />
