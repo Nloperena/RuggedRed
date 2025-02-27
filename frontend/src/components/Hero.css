@@ -1,131 +1,223 @@
+@font-face {
+  font-family: 'TwCenMTCondensedExtraBold';
+  src: url('../assets/fonts/tw-cen-mt-condensed-extrabold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geogrotesque';
+  src: url('../assets/fonts/GeogrotesqueTRIAL-BdIt.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+.subheading-font {
+  font-family: 'TwCenMTCondensedExtraBold', sans-serif !important;
+}
+
+.geogrotesque-heading {
+  font-family: 'Geogrotesque', sans-serif !important;
+  font-weight: bold;
+  font-style: italic;
+}
+
 /* ----------------------------------
    MIN-HEIGHT RULES ON #hero
 ---------------------------------- */
 #hero {
-    min-height: 720px;
-    background-size: cover;
+  min-height: 720px;
+  background-size: cover;
+  background-position: center right;
+}
+
+@media (min-width: 340px) {
+  #hero {
+    min-height: 600px;
     background-position: center right;
   }
-  @media (min-width: 340px) {
-    #hero {
-      min-height: 600px;
-      background-position: center right;
-    }
+}
+
+@media (min-width: 640px) {
+  #hero {
+    min-height: 1100px;
+    background-position: center right;
   }
-  @media (min-width: 640px) {
-    #hero {
-      min-height: 1100px;
-      background-position: center right;
-    }
+}
+
+@media (min-width: 768px) {
+  #hero {
+    min-height: 970px;
+    background-position: center center;
   }
-  
-  @media (min-width: 768px) {
-    #hero {
-      min-height: 970px;
-      background-position: center center;
-    }
+}
+
+@media (min-width: 1024px) {
+  #hero {
+    min-height: 1065px;
+    background-position: center center;
   }
-  
-  @media (min-width: 1024px) {
-    #hero {
-      min-height: 1065px;
-      background-position: center center;
-    }
+}
+
+@media (min-width: 1280px) {
+  #hero {
+    min-height: 1230px;
+    background-position: center center;
   }
-  
-  @media (min-width: 1280px) {
-    #hero {
-      min-height: 1230px;
-      background-position: center center;
-    }
-  }
-  
-  /* ----------------------------------
-     WRAPPER MARGIN/PADDING IN EACH BREAKPOINT
-  ---------------------------------- */
+}
+
+/* ----------------------------------
+   WRAPPER MARGIN/PADDING IN EACH BREAKPOINT
+---------------------------------- */
+#hero .hero-content {
+  /* Mobile (default) */
+  margin: -8rem 0.35rem 2rem;
+  padding: 2rem 0;
+}
+
+@media (min-width: 640px) {
   #hero .hero-content {
-    /* Mobile (default) */
-    margin: -8rem 0.35rem 2rem;
-    padding: 2rem 0;
+    margin: -30rem 2rem 2rem;
+    padding: 3rem 0;
   }
-  
-  @media (min-width: 640px) {
-    #hero .hero-content {
-      margin: -30rem 2rem 2rem;
-      padding: 3rem 0;
-    }
+}
+
+@media (min-width: 768px) {
+  #hero .hero-content {
+    margin: -18rem 6rem 2rem;
+    padding: 4rem 0;
   }
-  
-  @media (min-width: 768px) {
-    #hero .hero-content {
-      margin: -18rem 6rem 2rem;
-      padding: 4rem 0;
-    }
+}
+
+@media (min-width: 1024px) {
+  #hero .hero-content {
+    margin: -28rem 6rem 2rem;
+    padding: 4rem 0;
   }
-  
-  @media (min-width: 1024px) {
-    #hero .hero-content {
-      margin: -28rem 6rem 2rem;
-      padding: 4rem 0;
-    }
+}
+
+@media (min-width: 1280px) {
+  #hero .hero-content {
+    margin: -35rem auto 2rem;
+    max-width: 1600px;
+    padding: 5rem 0;
   }
-  
-  /* 
-    On the largest displays,
-    center the container horizontally,
-    and remove the strong negative top margin
-  */
-  @media (min-width: 1280px) {
-    #hero .hero-content {
-      margin: -35rem auto 2rem;
-      max-width: 1600px;
-      padding: 5rem 0;
-    }
-  }
-  
-  /* ----------------------------------
-     FONT-SIZE FOR HEADLINE AND PARAGRAPH
-  ---------------------------------- */
+}
+
+/* ----------------------------------
+   FONT-SIZE FOR HEADLINE AND PARAGRAPH
+---------------------------------- */
+#hero h1 {
+  font-size: 2.8rem; /* Mobile default */
+}
+
+#hero p {
+  font-size: 1rem; /* Mobile default */
+}
+
+@media (min-width: 640px) {
   #hero h1 {
-    font-size: 2.8rem; /* Mobile default */
+    font-size: 4.5rem; /* Small screens */
   }
-  
   #hero p {
-    font-size: 1rem; /* Mobile default */
+    font-size: 1.25rem; /* Small screens */
   }
-  
-  @media (min-width: 640px) {
-    #hero h1 {
-      font-size: 4.5rem; /* Small screens */
-    }
-    #hero p {
-      font-size: 1.25rem; /* Small screens */
-    }
+}
+
+@media (min-width: 768px) {
+  #hero h1 {
+    font-size: 4rem; /* Medium screens */
   }
-  
-  @media (min-width: 768px) {
-    #hero h1 {
-      font-size: 4rem; /* Medium screens */
-    }
-    #hero p {
-      font-size: 1.5rem; /* Medium screens */
-    }
+  #hero p {
+    font-size: 1.5rem; /* Medium screens */
   }
-  
-  @media (min-width: 1024px) {
-    #hero h1 {
-      font-size: 3.4rem; /* Large screens */
-    }
-    #hero p {
-      font-size: 1.2rem; /* Large screens */
-    }
+}
+
+@media (min-width: 1024px) {
+  #hero h1 {
+    font-size: 3.4rem; /* Large screens */
   }
-  
-  @media (min-width: 1280px) {
-    #hero h1 {
-      font-size: 5.6rem; /* Extra-large screens */
-    }
-    #hero p {
-      font-size: 1.5rem; /* Extra-large screens */
-    }
+  #hero p {
+    font-size: 1.4rem; /* Large screens */
   }
+}
+
+@media (min-width: 1280px) {
+  #hero h1 {
+    font-size: 5.6rem; /* Extra-large screens */
+  }
+  #hero p {
+    font-size: 2.2rem; /* Extra-large screens */
+  }
+}
+
+/* ----------------------------------
+   BUTTON STYLING
+---------------------------------- */
+#hero a {
+  transition: all 0.3s ease-in-out;
+}
+
+#hero a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+#hero a:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* ----------------------------------
+   WALLPAPER CHANGE BUTTON
+---------------------------------- */
+#hero .fixed-button {
+  transition: all 0.3s ease-in-out;
+}
+
+#hero .fixed-button:hover {
+  transform: scale(1.1);
+}
+
+/* ----------------------------------
+   ANIMATIONS & BACKGROUND EFFECTS
+---------------------------------- */
+.sparkle-container {
+  position: relative;
+}
+
+.sparkle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  animation: sparkle-animation 2s infinite ease-in-out;
+  z-index: 1;
+}
+
+.shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #e0e0e0 8%, #f0f0f0 18%, #e0e0e0 33%);
+  background-size: 1000px 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes sparkle-animation {
+  0%, 100% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5) rotate(45deg);
+    opacity: 1;
+  }
+}

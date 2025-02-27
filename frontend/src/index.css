@@ -4,12 +4,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-/* Import the custom font */
+/* Import the custom fonts */
 @font-face {
   font-family: 'Geogrotesque';
   src: url('./assets/fonts/GeogrotesqueTRIAL-BdIt.otf') format('opentype');
   font-weight: bold;
   font-style: italic;
+}
+
+@font-face {
+  font-family: 'TwCenMTCondensedExtraBold';
+  src: url('./assets/fonts/tw-cen-mt-condensed-extrabold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Base styles */
@@ -31,6 +38,11 @@ h1, .geogrotesque-heading {
   font-family: 'Geogrotesque', sans-serif;
   font-weight: bold;
   font-style: italic;
+}
+
+/* Specific styles for TwCenMTCondensedExtraBold */
+.subheading-font {
+  font-family: 'TwCenMTCondensedExtraBold', sans-serif;
 }
 
 /* Example animations and effects */
