@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 /**
  * Shimmer style for the skeleton loader
@@ -12,7 +13,6 @@ const shimmerStyle = {
 
 /**
  * Skeleton loader block for loading states
- * The sizing here should match the final elements
  */
 function SkeletonBlock({ className, style }) {
   return (
@@ -25,7 +25,6 @@ function SkeletonBlock({ className, style }) {
 
 /**
  * Mock product data to simulate loaded content
- * In real usage, you'd fetch from your API / CMS
  */
 const mockProductData = {
   fields: {
@@ -44,15 +43,17 @@ const mockProductData = {
     amazonUrl: "https://www.amazon.com/example",
     productPageUrl: "https://example.com/product-page",
   },
+  sys: {
+    id: "mockProductId",
+  },
 };
 
 const ProductCard = ({ product, delay = 0 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isTextLoaded, setIsTextLoaded] = useState(false);
 
-  // Simulate fetching product data if none is passed in
-  // If you already pass real product data, remove this and rely on the real prop
-  const hasProduct = product?.fields;
+  // Check if product data is passed in
+  const hasProduct = product && product.fields;
   const [localProduct, setLocalProduct] = useState(null);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ const ProductCard = ({ product, delay = 0 }) => {
       // Simulate an async fetch
       timer = setTimeout(() => {
         setLocalProduct(mockProductData);
-      }, 1200); // e.g. 1.2s fetch time
+      }, 1200);
     } else {
       setLocalProduct(product);
     }
@@ -69,14 +70,15 @@ const ProductCard = ({ product, delay = 0 }) => {
   }, [hasProduct, product]);
 
   useEffect(() => {
-    if (localProduct?.fields) {
+    if (localProduct && localProduct.fields) {
       setIsTextLoaded(true);
     }
   }, [localProduct]);
 
-  // Extract data from local or real product
+  // Extract data: sys from the top level, fields from localProduct.fields.
+  const { sys } = localProduct || {};
   const { name, slogan, price, amazonUrl, productPageUrl, images } =
-    localProduct?.fields || {};
+    (localProduct && localProduct.fields) || {};
 
   // First image URL
   const imageUrl =
@@ -97,7 +99,7 @@ const ProductCard = ({ product, delay = 0 }) => {
         hover:shadow-md
         overflow-hidden
       "
-      style={{ minHeight: "550px" }} // Slightly shorter than 600-700
+      style={{ minHeight: "550px" }}
     >
       {/* SKELETON LOADER */}
       <AnimatePresence>
@@ -109,19 +111,14 @@ const ProductCard = ({ product, delay = 0 }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
-            {/* Image skeleton matches final w-64 h-64 shape */}
             {!isImageLoaded && (
               <SkeletonBlock className="w-64 h-64 mb-4" />
             )}
-
-            {/* Text skeletons match the final text arrangement */}
             {!isTextLoaded && (
               <>
-                <SkeletonBlock className="w-48 h-6 mb-3" /> {/* Name skeleton */}
-                <SkeletonBlock className="w-56 h-4 mb-3" /> {/* Slogan skeleton */}
-                <SkeletonBlock className="w-20 h-5 mb-4" /> {/* Price skeleton */}
-
-                {/* Button skeleton(s) */}
+                <SkeletonBlock className="w-48 h-6 mb-3" />
+                <SkeletonBlock className="w-56 h-4 mb-3" />
+                <SkeletonBlock className="w-20 h-5 mb-4" />
                 <SkeletonBlock className="w-32 h-8 mb-2" />
                 <SkeletonBlock className="w-32 h-8" />
               </>
@@ -136,7 +133,6 @@ const ProductCard = ({ product, delay = 0 }) => {
         animate={{ opacity: isImageLoaded && isTextLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Product image with mild drop shadow */}
         {imageUrl && (
           <img
             src={imageUrl}
@@ -146,7 +142,6 @@ const ProductCard = ({ product, delay = 0 }) => {
           />
         )}
 
-        {/* Product name */}
         {isTextLoaded && name && (
           <h3
             className="text-2xl font-semibold text-gray-900 mb-2"
@@ -156,12 +151,10 @@ const ProductCard = ({ product, delay = 0 }) => {
           </h3>
         )}
 
-        {/* Product slogan */}
         {isTextLoaded && slogan && (
           <p className="text-gray-700 italic mb-4">{slogan}</p>
         )}
 
-        {/* Product price */}
         {isTextLoaded && price != null && (
           <p
             className="text-xl font-bold text-gray-900 mb-6"
@@ -171,52 +164,66 @@ const ProductCard = ({ product, delay = 0 }) => {
           </p>
         )}
 
-        {/* Buy on Amazon button */}
-        {isTextLoaded && amazonUrl && (
-          <a
-            href={amazonUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              inline-block
-              mt-2
-              bg-[#D3242A]
-              text-white
-              py-2
-              px-6
-              rounded-full
-              hover:bg-[#B91D23]
-              transition
-              duration-200
-              mr-4
-            "
-          >
-            Buy on Amazon
-          </a>
-        )}
+        {/* Button Container */}
+        <div className="flex flex-wrap gap-4 justify-center mt-4">
+          {isTextLoaded && amazonUrl && (
+            <a
+              href={amazonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                bg-[#D3242A]
+                text-white
+                py-2
+                px-6
+                rounded-full
+                hover:bg-[#B91D23]
+                transition
+                duration-200
+              "
+            >
+              Buy on Amazon
+            </a>
+          )}
 
-        {/* View product details button */}
-        {isTextLoaded && productPageUrl && (
-          <a
-            href={productPageUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              inline-block
-              mt-2
-              bg-black
-              text-white
-              py-2
-              px-6
-              rounded-full
-              hover:bg-gray-800
-              transition
-              duration-200
-            "
-          >
-            View Product Page
-          </a>
-        )}
+          {isTextLoaded && productPageUrl && (
+            <a
+              href={productPageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                bg-black
+                text-white
+                py-2
+                px-6
+                rounded-full
+                hover:bg-gray-800
+                transition
+                duration-200
+              "
+            >
+              View Product Page
+            </a>
+          )}
+
+          {isTextLoaded && sys?.id && (
+            <Link
+              to={`/product/${sys.id}`}
+              className="
+                bg-black
+                text-white
+                py-2
+                px-6
+                rounded-full
+                hover:bg-gray-800
+                transition
+                duration-200
+              "
+            >
+              View Details
+            </Link>
+          )}
+        </div>
       </motion.div>
     </div>
   );

@@ -139,7 +139,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
             {isTextLoaded && (
               <Link
                 to={`/product/${product.sys.id}`}
-                className="bg-blue-500 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105"
+                className="bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105"
               >
                 View Details
               </Link>
