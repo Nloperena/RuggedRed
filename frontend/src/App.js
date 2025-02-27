@@ -9,6 +9,7 @@ import About from "./pages/About";
 import ProductDetail from "./pages/ProductDetail";
 import LoadingScreen from "./components/LoadingScreen";
 import { fetchProducts } from "./data/contentful";
+import ScrollToTop from "./components/ScrollToTop"; // Import the ScrollToTop component
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +56,7 @@ const App = () => {
       {!isLoading && (
         <>
           <Nav />
+          <ScrollToTop /> {/* Add the ScrollToTop component here */}
           <Routes>
             <Route path="/" element={<Home footerRef={footerRef} />} />
             <Route path="/products" element={<Products />} />
