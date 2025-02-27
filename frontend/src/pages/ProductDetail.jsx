@@ -41,16 +41,24 @@ const ProductDetail = ({ products }) => {
   return (
     <div className="container mx-auto p-8">
       <motion.div
-        className="flex flex-col md:flex-row items-center md:items-start gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <ProductImageSection product={product} />
-        <ProductTextSection product={product} />
+        <div className="order-2 md:order-1">
+          <ProductTextSection product={product} />
+        </div>
+        <div className="order-1 md:order-2">
+          <ProductImageSection product={product} />
+        </div>
       </motion.div>
-      <ComparisonTable />
-      <Testimonials />
+      <div className="mt-8">
+        <ComparisonTable />
+      </div>
+      <div className="mt-8">
+        <Testimonials />
+      </div>
     </div>
   );
 };

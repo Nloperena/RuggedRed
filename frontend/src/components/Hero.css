@@ -179,9 +179,24 @@
   transform: scale(1.1);
 }
 
-/* ----------------------------------
-   ANIMATIONS & BACKGROUND EFFECTS
----------------------------------- */
+//* Subheadings and paragraphs use Montserrat */
+p, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Specific styles for Geogrotesque */
+h1, .geogrotesque-heading {
+  font-family: 'Geogrotesque', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Specific styles for TwCenMTCondensedExtraBold */
+.subheading-font {
+  font-family: 'TwCenMTCondensedExtraBold', sans-serif;
+}
+
+/* Example animations and effects */
 .sparkle-container {
   position: relative;
 }
