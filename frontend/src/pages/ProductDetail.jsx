@@ -30,7 +30,7 @@ const ProductDetail = ({ products }) => {
   }, [productId, products]);
 
   if (!product && !notFound) {
-    return <div>Loading...</div>;
+    return <div>Loading..</div>;
   }
 
   if (notFound) {
