@@ -1,13 +1,10 @@
-// src/components/MadeInAmerica.jsx
-
 import React from "react";
 import { motion } from "framer-motion";
 import FlagIcon from "../assets/icons/Flag Icon.png"; // Replace with your flag icon path
-import Hand from "../assets/blueragtransparent.png"; // Import the hand image
 
 const MadeInAmerica = () => {
   return (
-    <section className="relative bg-[#F9F9F9] py-16 px-6 md:px-12 overflow-hidden">
+    <section className="relative py-16 px-6 md:px-12 overflow-hidden">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between relative z-10">
         {/* Text Section */}
         <motion.div
@@ -37,26 +34,18 @@ const MadeInAmerica = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
             {/* Shop Now Button */}
             <a
-              href="/shop"
-              className="w-full sm:w-auto bg-[#D3242A] text-white px-6 py-3 rounded-full text-center font-semibold hover:bg-[#a21f20] transition duration-300"
+              href="/products"
+              className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-[#B91D23] transition-transform transform hover:scale-105 text-center"
             >
               Shop Now
             </a>
 
             {/* Learn More Button */}
             <a
-              href="/learn-more"
-              className="w-full sm:w-auto bg-transparent border border-[#D3242A] text-[#D3242A] px-6 py-3 rounded-full text-center font-semibold hover:bg-[#D3242A] hover:text-white transition duration-300"
+              href="/blog"
+              className="bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-900 transition-transform transform hover:scale-105 text-center"
             >
               Learn More
-            </a>
-
-            {/* Contact Us Button */}
-            <a
-              href="/contact"
-              className="w-full sm:w-auto bg-transparent border border-[#6B7280] text-[#6B7280] px-6 py-3 rounded-full text-center font-semibold hover:bg-[#6B7280] hover:text-white transition duration-300"
-            >
-              Contact Us
             </a>
           </div>
         </motion.div>
@@ -75,9 +64,6 @@ const MadeInAmerica = () => {
           />
         </motion.div>
       </div>
-
-      {/* Animated Hand Image at the Bottom with Fade-Out */}
-      
     </section>
   );
 };

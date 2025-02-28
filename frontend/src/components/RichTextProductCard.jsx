@@ -76,20 +76,22 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
       >
         {/* IMAGE SECTION */}
         {imageUrl && (
-          <img
-            src={imageUrl}
-            alt={productTitle || "Product Image"}
-            className="w-full max-w-lg h-auto rounded-lg"
-            onLoad={() => setIsImageLoaded(true)}
-            style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
-          />
+          <div className="relative w-full md:w-1/2 flex justify-center items-center">
+            <img
+              src={imageUrl}
+              alt={productTitle || "Product Image"}
+              className="max-h-full rounded-lg"
+              onLoad={() => setIsImageLoaded(true)}
+              style={{ maxHeight: 'calc(100% - 2rem)' }} // Adjust the max height to fit within the card
+            />
+          </div>
         )}
 
         {/* TEXT SECTION */}
         <div className="md:w-1/2 text-left">
           {isTextLoaded && productTitle && (
             <h3
-              className="text-3xl font-bold text-[#D3242A] mb-4 uppercase tracking-wide"
+              className="text-5xl font-bold text-[#D3242A] mb-4 uppercase tracking-wide"
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
             >
               {productTitle}
@@ -97,7 +99,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
           )}
 
           {isTextLoaded && shortProductDescription && (
-            <p className="text-lg italic text-gray-600 mb-4 leading-relaxed">
+            <p className="text-sm italic text-gray-600 mb-4 leading-relaxed">
               {shortProductDescription}
             </p>
           )}
