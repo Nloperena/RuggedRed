@@ -75,16 +75,15 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
         transition={{ duration: 0.6, delay }}
       >
         {/* IMAGE SECTION */}
-        <div className="md:w-1/2 flex justify-center items-center">
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt={productTitle || "Product Image"}
-              className="w-full max-w-lg h-[400px] object-cover rounded-lg shadow-md"
-              onLoad={() => setIsImageLoaded(true)}
-            />
-          )}
-        </div>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={productTitle || "Product Image"}
+            className="w-full max-w-lg h-auto rounded-lg"
+            onLoad={() => setIsImageLoaded(true)}
+            style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
+          />
+        )}
 
         {/* TEXT SECTION */}
         <div className="md:w-1/2 text-left">
@@ -116,14 +115,14 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
                 href={buyNowButtonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-[#B91D23] transition-transform transform hover:scale-105"
+                className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-[#B91D23] transition-transform transform hover:scale-105 text-center"
               >
                 Buy Now
               </a>
             )}
             <Link
               to={`/product/${product?.sys?.id}`}
-              className="bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-900 transition-transform transform hover:scale-105"
+              className="bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-900 transition-transform transform hover:scale-105 text-center"
             >
               View Details
             </Link>
