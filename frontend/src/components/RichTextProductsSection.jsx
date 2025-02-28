@@ -45,7 +45,7 @@ const RichTextProductsSection = () => {
     }
 
     client
-      .getEntries({ content_type: "cleaningProduct" })
+      .getEntries({ content_type: "cleaningProductData" })
       .then((response) => {
         if (!response.items.length) {
           setError("No products found in Contentful.");

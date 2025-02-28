@@ -1,7 +1,5 @@
-// filepath: /c:/Users/nimro/Downloads/BusinessProjects/Forza/RuggedRed/RuggedRed/frontend/src/components/RichTextProductCard.jsx
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Link } from "react-router-dom";
 
 const shimmerStyle = {
@@ -13,7 +11,7 @@ const shimmerStyle = {
 function SkeletonBlock({ className, style }) {
   return (
     <div
-      className={`${className} relative overflow-hidden bg-[#A9AAAC]`}
+      className={`${className} relative overflow-hidden bg-[#A9AAAC] rounded-lg`}
       style={{ ...shimmerStyle, ...style }}
     />
   );
@@ -31,35 +29,37 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
     }
   }, [hasProduct]);
 
-  const { name, slogan, price, amazonUrl, productPageUrl, images, description } =
-    product?.fields || {};
+  const {
+    productTitle,
+    productHeroImage,
+    price,
+    buyNowButtonUrl,
+    shortProductDescription,
+  } = product?.fields || {};
 
-  const imageUrl =
-    Array.isArray(images) && images.length > 0
-      ? images[0].fields.file.url
-      : null;
+  const imageUrl = productHeroImage?.fields?.file?.url || null;
 
   return (
-    <div className="relative w-full bg-white p-8">
+    <div className="relative w-full bg-white p-8 rounded-xl shadow-lg border border-gray-200">
       <AnimatePresence>
         {(!isImageLoaded || !isTextLoaded) && (
           <motion.div
             key="skeleton"
-            className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-[#F9FAFB]"
+            className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-[#F9FAFB] rounded-xl"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
             style={{ zIndex: 10 }}
           >
             {!isImageLoaded && (
-              <SkeletonBlock className="w-full h-[500px] rounded-md mb-4" />
+              <SkeletonBlock className="w-full h-[400px] rounded-lg mb-4" />
             )}
             {!isTextLoaded && (
               <>
-                <SkeletonBlock className="w-1/2 h-5 rounded-md mb-2" />
-                <SkeletonBlock className="w-3/4 h-4 rounded-md mb-2" />
-                <SkeletonBlock className="w-24 h-4 rounded-md mb-4" />
-                <SkeletonBlock className="w-32 h-8 rounded-full" />
+                <SkeletonBlock className="w-1/2 h-6 rounded-md mb-2" />
+                <SkeletonBlock className="w-3/4 h-5 rounded-md mb-2" />
+                <SkeletonBlock className="w-24 h-5 rounded-md mb-4" />
+                <SkeletonBlock className="w-32 h-10 rounded-full" />
               </>
             )}
           </motion.div>
@@ -67,7 +67,7 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
       </AnimatePresence>
 
       <motion.div
-        className={`flex flex-col md:flex-row items-center md:items-start gap-6 ${
+        className={`flex flex-col md:flex-row items-center md:items-start gap-8 ${
           flip ? "md:flex-row-reverse" : ""
         }`}
         initial={{ opacity: 0, x: flip ? 50 : -50 }}
@@ -79,8 +79,8 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
           {imageUrl && (
             <img
               src={imageUrl}
-              alt={name || "Product Image"}
-              className="w-full max-w-lg h-[500px] object-cover rounded-lg drop-shadow-2xl" // Darker shadow applied
+              alt={productTitle || "Product Image"}
+              className="w-full max-w-lg h-[400px] object-cover rounded-lg shadow-md"
               onLoad={() => setIsImageLoaded(true)}
             />
           )}
@@ -88,62 +88,45 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
 
         {/* TEXT SECTION */}
         <div className="md:w-1/2 text-left">
-          {isTextLoaded && name && (
+          {isTextLoaded && productTitle && (
             <h3
-              className="text-4xl font-bold text-[#D3242A] mb-3 uppercase" // Larger title with reduced margin
+              className="text-3xl font-bold text-[#D3242A] mb-4 uppercase tracking-wide"
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
             >
-              {name}
+              {productTitle}
             </h3>
           )}
 
-          {isTextLoaded && slogan && (
-            <p className="text-lg italic text-gray-600 mb-2">{slogan}</p>
+          {isTextLoaded && shortProductDescription && (
+            <p className="text-lg italic text-gray-600 mb-4 leading-relaxed">
+              {shortProductDescription}
+            </p>
           )}
 
           {isTextLoaded && typeof price === "number" && (
-            <p className="text-2xl font-semibold text-gray-900 mb-4">
+            <p className="text-2xl font-semibold text-gray-900 mb-6">
               ${price.toFixed(2)}
             </p>
           )}
 
-          {isTextLoaded && description && (
-            <div className="text-gray-700 mb-5 leading-relaxed">
-              {typeof description === "object"
-                ? documentToReactComponents(description)
-                : description}
-            </div>
-          )}
-
-          <div className="flex flex-wrap gap-4">
-            {isTextLoaded && amazonUrl && (
+          {/* Buttons */}
+          <div className="flex space-x-4">
+            {isTextLoaded && buyNowButtonUrl && (
               <a
-                href={amazonUrl}
+                href={buyNowButtonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full hover:bg-[#B91D23] transition-transform transform hover:scale-105"
+                className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-[#B91D23] transition-transform transform hover:scale-105"
               >
-                Buy on Amazon
+                Buy Now
               </a>
             )}
-            {isTextLoaded && productPageUrl && (
-              <a
-                href={productPageUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition-transform transform hover:scale-105"
-              >
-                View Product
-              </a>
-            )}
-            {isTextLoaded && (
-              <Link
-                to={`/product/${product.sys.id}`}
-                className="bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105"
-              >
-                View Details
-              </Link>
-            )}
+            <Link
+              to={`/product/${product?.sys?.id}`}
+              className="bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-900 transition-transform transform hover:scale-105"
+            >
+              View Details
+            </Link>
           </div>
         </div>
       </motion.div>

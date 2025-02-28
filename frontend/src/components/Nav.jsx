@@ -22,14 +22,14 @@ export default function Nav() {
 
   // Navbar background & text color logic
   const navClasses = isInverted
-    ? `sticky top-0 z-50 bg-[#D3242A] text-white shadow-md ${navHeight}`
-    : `sticky top-0 z-50 bg-white text-red-600 shadow-md ${navHeight}`;
+    ? `sticky top-0 z-50 bg-white text-red-600 shadow-md ${navHeight}`
+    : `sticky top-0 z-50 bg-[#D3242A] text-white shadow-md ${navHeight}`;
 
   // Desktop link hover effect (rounded and snappy)
   const getDesktopLinkClass = (isInverted) =>
     isInverted
-      ? "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-white hover:text-[#D3242A]"
-      : "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-[#D3242A] hover:text-white";
+      ? "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-[#D3242A] hover:text-white"
+      : "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-white hover:text-[#D3242A]";
 
   // Toggle Inversion Mode
   const handleSwitchToggle = () => {
@@ -66,25 +66,26 @@ export default function Nav() {
         <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
           {/* Toggle Switch */}
           <div className="flex items-center">
-            <span className="mr-2 text-sm font-semibold select-none lg:text-base">
-              {isInverted ? "Invert On" : "Invert Off"}
-            </span>
             <div
-              className="relative inline-block w-12 h-7 select-none transition duration-200 ease-in cursor-pointer"
+              className="relative inline-block w-14 h-8 select-none transition duration-200 ease-in cursor-pointer"
               onClick={handleSwitchToggle}
             >
               {/* Track */}
-              <div
+              <motion.div
                 className={`absolute inset-0 rounded-full transition-colors duration-300 ${
-                  isInverted ? "bg-white" : "bg-red-400"
+                  isInverted ? "bg-[#D3242A]" : "bg-white"
                 }`}
+                layout
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
               />
               {/* Knob */}
               <motion.div
-                className="absolute left-0 top-0 bottom-0 w-7 h-7 bg-[#D3242A] rounded-full shadow transform cursor-pointer"
+                className={`absolute top-1 w-6 h-6 rounded-full shadow transform cursor-pointer transition-transform duration-300 ${
+                  isInverted ? "bg-white" : "bg-[#D3242A]"
+                }`}
                 layout
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                style={{ left: isInverted ? "1.4rem" : "0.25rem" }}
+                style={{ left: isInverted ? "calc(100% - 1.5rem)" : "0.25rem" }}
               />
             </div>
           </div>

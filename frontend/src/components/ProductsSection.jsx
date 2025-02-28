@@ -37,9 +37,9 @@ const ProductsSection = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch your cleaning products from Contentful
+    // Fetch from the updated Contentful model
     client
-      .getEntries({ content_type: "cleaningProduct" })
+      .getEntries({ content_type: "cleaningProductData" }) // <-- IMPORTANT CHANGE
       .then((response) => {
         setProducts(response.items);
         setIsLoading(false);
@@ -60,16 +60,13 @@ const ProductsSection = () => {
           OUR PRODUCTS
         </h2>
 
-        {/* If loading, show skeleton placeholders */}
         {isLoading ? (
           <SkeletonGrid count={6} />
         ) : products.length === 0 ? (
-          // If there's no data at all
           <div className="text-center">
             <p className="text-black text-lg">No products found!</p>
           </div>
         ) : (
-          // Otherwise, show the actual product cards
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
             initial={{ opacity: 0 }}

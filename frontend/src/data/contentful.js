@@ -9,7 +9,7 @@ export const fetchProducts = async () => {
   });
 
   const query = {
-    content_type: "cleaningProduct"
+    content_type: "cleaningProductData"
   };
 
   console.log("Query parameters:", query);

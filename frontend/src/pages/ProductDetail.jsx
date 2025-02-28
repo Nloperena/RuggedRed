@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import ComparisonTable from "../components/ComparisonTable";
-import Testimonials from "../components/Testimonials";
-import ProductImageSection from "../components/ProductImageSection"; // new child component
-import ProductTextSection from "../components/ProductTextSection";   // new child component
 
 const ProductDetail = ({ products }) => {
   const { productId } = useParams();
@@ -12,14 +8,7 @@ const ProductDetail = ({ products }) => {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    // Logging for debugging
-    console.log("Products array received in ProductDetail:", products);
-    console.log("Product ID from URL:", productId);
-
-    // Find product by productId
     const foundProduct = products.find((p) => p.sys.id === productId);
-    console.log("Found product matching ID:", foundProduct);
-
     if (foundProduct) {
       setProduct(foundProduct);
       setNotFound(false);
@@ -30,27 +19,115 @@ const ProductDetail = ({ products }) => {
   }, [productId, products]);
 
   if (!product && !notFound) {
-    return <div>Loading..</div>;
+    return <div>Loading...</div>;
   }
 
   if (notFound) {
     return <div>Product not found for ID: {productId}</div>;
   }
 
-  // Now that we have a valid product, split out to child components
+  const {
+    productTitle,
+    productHeroImage,
+    price,
+    buyNowButtonUrl,
+    shortProductDescription,
+    detailedProductDescription,
+    keyFeatures = [],
+    keyBenefits = [],
+    productInUseImages = [],
+  } = product?.fields || {};
+
+  const imageUrl = productHeroImage?.fields?.file?.url || null;
+
   return (
     <div className="container mx-auto p-8">
+      {/* Main Product Section - Bento Box Style */}
       <motion.div
-        className="flex flex-col md:flex-row items-center md:items-start gap-6"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
+        className="bg-white p-8 rounded-lg flex flex-col md:flex-row items-center md:items-start gap-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <ProductImageSection product={product} />
-        <ProductTextSection product={product} />
+        <div className="md:w-1/2 text-left">
+          <h3 className="text-4xl font-bold text-[#D3242A] mb-4 uppercase tracking-wide">
+            {productTitle}
+          </h3>
+          <p className="text-lg italic text-gray-600 mb-4 leading-relaxed">
+            {shortProductDescription}
+          </p>
+          <p className="text-2xl font-semibold text-gray-900 mb-6">
+            ${price.toFixed(2)}
+          </p>
+          {buyNowButtonUrl && (
+            <a
+              href={buyNowButtonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-[#B91D23] transition-transform transform hover:scale-105"
+            >
+              Buy Now
+            </a>
+          )}
+        </div>
+
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={productTitle || "Product Image"}
+            className="md:w-1/2 w-full h-[500px] object-cover rounded-lg drop-shadow-xl"
+          />
+        )}
       </motion.div>
-      <ComparisonTable />
-      <Testimonials />
+
+      {/* Key Benefits */}
+      {keyBenefits.length > 0 && (
+        <div className="bg-gray-100 p-6 rounded-lg shadow-md mt-8 text-center">
+          <h4 className="text-2xl font-bold mb-4">Why You'll Love It</h4>
+          <ul className="text-gray-700 list-disc pl-5 inline-block text-left">
+            {keyBenefits.map((benefit, index) => (
+              <li key={index}>{benefit}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Use Case Images */}
+      {productInUseImages.length > 0 && (
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {productInUseImages.slice(0, 3).map((image, index) => (
+            <img
+              key={index}
+              src={image?.fields?.file?.url || ""}
+              alt={`Use Case ${index + 1}`}
+              className="w-full h-80 object-cover rounded-lg drop-shadow-lg"
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Key Features */}
+      {keyFeatures.length > 0 && (
+        <div className="bg-gray-100 p-6 rounded-lg shadow-md mt-8 text-center">
+          <h4 className="text-2xl font-bold mb-4">Key Features</h4>
+          <ul className="text-gray-700 list-disc pl-5 inline-block text-left">
+            {keyFeatures.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Detailed Description */}
+      {detailedProductDescription && (
+        <div className="text-gray-700 mt-8 leading-relaxed bg-white p-6 rounded-lg shadow-md text-left">
+          {detailedProductDescription.split("###").map((section, index) => (
+            <p key={index} className={index > 0 ? "font-bold mt-4" : ""}>
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
