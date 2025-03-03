@@ -17,7 +17,7 @@ const MadeInAmerica = () => {
             className="text-4xl font-bold text-[#D3242A] mb-6"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
-            Made in America
+            MADE IN AMERICA
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
             Our products are proudly crafted in America, ensuring the highest

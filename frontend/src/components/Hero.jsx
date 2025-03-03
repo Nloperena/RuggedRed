@@ -89,6 +89,16 @@ const Hero = () => {
                 Start Cleaning Today
               </Link>
             </motion.div>
+
+            {/* Squeaky Clean Button
+            <motion.div
+              className="w-full flex justify-center mt-4"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.5, duration: 0.5 }}
+            >
+              <SqueakyCleanButton />
+            </motion.div> */}
           </div>
         </div>
       </motion.div>

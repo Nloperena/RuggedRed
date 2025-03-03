@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import RuggedRedLogo from "../assets/RuggedRedTypographyLogo.png";
 import FlagIcon from "../assets/icons/Flag Icon.png";
 import MobileNav from "./MobileNav";
+import SqueakyCleanButton from "./SqueakyCleanButton";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -111,6 +112,7 @@ export default function Nav() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
+          <SqueakyCleanButton />
         </div>
 
         {/* Mobile Navigation */}
