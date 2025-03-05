@@ -32,13 +32,13 @@ const ParallaxSection = () => {
     <section
       ref={containerRef}
       className="relative w-full h-screen flex flex-col items-center overflow-hidden"
-      style={{ marginBottom: "-300px" }}
+      // Removed negative marginBottom to prevent accidental overfill.
     >
       <motion.div 
         className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${!isVisible ? 'opacity-0' : 'opacity-100'}`}
       >
         {isVertical ? (
-          // For viewports below 900px: use a single image (the left-hand image) filling the section and show the best part.
+          // For viewports below 900px: use a single image that never expands beyond the viewport.
           <div className="w-full h-full flex flex-col items-center">
             <motion.div
               style={{ position: "fixed" }}
@@ -48,12 +48,16 @@ const ParallaxSection = () => {
                 src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
                 alt="Left Image"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: "30% center" }}
+                style={{ 
+                  objectPosition: "30% center", 
+                  maxWidth: "100vw", 
+                  maxHeight: "100vh" 
+                }}
               />
             </motion.div>
           </div>
         ) : (
-          // For viewports 900px and above: display two images side by side.
+          // For viewports 900px and above: display two images side by side without exceeding the viewport.
           <div className="w-full h-full flex justify-center items-center">
             <motion.div
               style={{ position: "fixed" }}
@@ -63,6 +67,7 @@ const ParallaxSection = () => {
                 src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
                 alt="Left Image"
                 className="w-full h-full object-cover"
+                style={{ maxWidth: "100vw", maxHeight: "100vh" }}
               />
             </motion.div>
             <motion.div
@@ -73,6 +78,7 @@ const ParallaxSection = () => {
                 src="https://images.ctfassets.net/hdznx4p7ef81/4qZzk5uIy0wOYMAQFsuUKc/261d1fbaa8c110973c50185e1f2a909e/RR_Cleaning_Mess_Zoomed_Out.jpg"
                 alt="Right Image"
                 className="w-full h-full object-cover"
+                style={{ maxWidth: "100vw", maxHeight: "100vh" }}
               />
             </motion.div>
           </div>

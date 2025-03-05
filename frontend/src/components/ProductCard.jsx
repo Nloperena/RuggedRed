@@ -21,6 +21,7 @@ const ProductCard = ({ product, delay = 0 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isTextLoaded, setIsTextLoaded] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   const hasProduct = product && product.fields;
   const [localProduct, setLocalProduct] = useState(null);
@@ -37,6 +38,16 @@ const ProductCard = ({ product, delay = 0 }) => {
     }
   }, [localProduct]);
 
+  // When the card is flipped and the user leaves the card, flip it back after a short delay.
+  useEffect(() => {
+    if (isFlipped && !isHovering) {
+      const timer = setTimeout(() => {
+        setIsFlipped(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isFlipped, isHovering]);
+
   const { sys } = localProduct || {};
   const {
     productTitle,
@@ -49,6 +60,14 @@ const ProductCard = ({ product, delay = 0 }) => {
   } = (localProduct && localProduct.fields) || {};
 
   const imageUrl = productHeroImage?.fields?.file?.url || null;
+  
+  const handleCardClick = (e) => {
+    // Prevent the flip when clicking on links or buttons.
+    if (e.target.tagName === "A" || e.target.closest("a")) {
+      return;
+    }
+    setIsFlipped((prev) => !prev);
+  };
 
   return (
     <div
@@ -57,7 +76,9 @@ const ProductCard = ({ product, delay = 0 }) => {
         perspective: "1000px", // 3D perspective
         height: "500px",       // Card height
       }}
-      onClick={() => setIsFlipped(!isFlipped)}
+      onClick={handleCardClick}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       <motion.div
         className="w-full h-full relative"
@@ -152,17 +173,8 @@ const ProductCard = ({ product, delay = 0 }) => {
                   href={buyNowButtonUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
-                    bg-[#D3242A]
-                    text-white
-                    py-4
-                    px-8
-                    rounded-full
-                    hover:bg-[#B91D23]
-                    transition
-                    whitespace-nowrap
-                    text-center
-                  "
+                  className="bg-[#D3242A] text-white py-4 px-8 rounded-full hover:bg-[#B91D23] transition whitespace-nowrap text-center"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   Buy Now
                 </a>
@@ -170,17 +182,8 @@ const ProductCard = ({ product, delay = 0 }) => {
               {isTextLoaded && sys?.id && (
                 <Link
                   to={`/product/${sys.id}`}
-                  className="
-                    bg-black
-                    text-white
-                    py-4
-                    px-8
-                    rounded-full
-                    hover:bg-gray-800
-                    transition
-                    whitespace-nowrap
-                    text-center
-                  "
+                  className="bg-black text-white py-4 px-8 rounded-full hover:bg-gray-800 transition whitespace-nowrap text-center"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   More Details
                 </Link>

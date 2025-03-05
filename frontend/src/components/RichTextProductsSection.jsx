@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import client from "../contentful";
 import RichTextProductCard from "./RichTextProductCard";
 
@@ -7,10 +7,9 @@ import RichTextProductCard from "./RichTextProductCard";
  * A skeleton list to show while fetching data
  */
 function SkeletonList() {
-  // Example: 3 skeleton cards
   return (
     <div className="flex flex-col gap-12">
-      {Array.from({ length: 3 }).map((_, index) => (
+      {Array.from({ length: 2 }).map((_, index) => (
         <motion.div
           key={index}
           className="bg-[#F2F2F2] rounded-xl p-8 shadow-lg"
@@ -29,9 +28,6 @@ function SkeletonList() {
   );
 }
 
-/**
- * Fetches and displays products in a vertical column layout.
- */
 const RichTextProductsSection = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -81,7 +77,7 @@ const RichTextProductsSection = () => {
     );
   }
 
-  // Error state
+  // Display error state if needed.
   if (error) {
     return (
       <section className="bg-white pt-8 pb-16">
@@ -99,7 +95,9 @@ const RichTextProductsSection = () => {
     );
   }
 
-  // Actual products display
+  // Only show the first two products
+  const visibleProducts = products.slice(0, 2);
+
   return (
     <section className="bg-white pt-8 pb-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,22 +112,30 @@ const RichTextProductsSection = () => {
           Our Products
         </motion.h2>
 
-        {/* Map over products in a vertical list (flex-col). */}
+        {/* Display the first two product cards with a "pull-out" effect */}
         <motion.div
           className="flex flex-col gap-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          {products.map((product, index) => (
-            <RichTextProductCard
+          {visibleProducts.map((product, index) => (
+            <motion.div
               key={product.sys.id || index}
-              product={product}
-              flip={index % 2 !== 0} // Alternate flipping if desired
-              delay={index * 0.1}
-            />
+              whileHover={{ scale: 1.05, x: 20, zIndex: 5 }}
+              whileTap={{ scale: 1.1, x: 40 }}
+              transition={{ duration: 0.3 }}
+            >
+              <RichTextProductCard
+                product={product}
+                flip={index % 2 !== 0} // Optionally alternate the flip effect.
+                delay={index * 0.1}
+              />
+            </motion.div>
           ))}
         </motion.div>
+
+        
       </div>
     </section>
   );
