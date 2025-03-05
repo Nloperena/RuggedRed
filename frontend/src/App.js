@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import LoadingScreen from "./components/LoadingScreen";
 import { fetchProducts } from "./data/contentful";
 import ScrollToTop from "./components/ScrollToTop"; // Import the ScrollToTop component
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +57,7 @@ const App = () => {
       {!isLoading && (
         <>
           <Nav />
-          <ScrollToTop /> {/* Add the ScrollToTop component here */}
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home footerRef={footerRef} />} />
             <Route path="/products" element={<Products />} />
@@ -72,6 +73,7 @@ const App = () => {
           </div>
         </>
       )}
+      <Analytics />
     </>
   );
 };
