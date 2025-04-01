@@ -39,8 +39,7 @@ const ProductsSection = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [viewStyle, setViewStyle] = useState('grid'); // 'grid' or 'carousel'
-  const productsPerPage = viewStyle === 'grid' ? 6 : 3;
+  const productsPerPage = 6;
 
   useEffect(() => {
     // Fetch from the updated Contentful model
@@ -56,12 +55,6 @@ const ProductsSection = () => {
       });
   }, []);
 
-  // Reset to page 1 when changing view styles
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [viewStyle]);
-
-  // Pagination logic
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -71,7 +64,6 @@ const ProductsSection = () => {
   const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
 
-  // Render page numbers for pagination
   const renderPageNumbers = () => {
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -92,17 +84,6 @@ const ProductsSection = () => {
     return pages;
   };
 
-  // Render a product card with consistent props
-  const renderProductCard = (product, index) => {
-    return (
-      <ProductCard 
-        key={product.sys.id || index} 
-        product={product}
-        delay={index * 0.1}
-      />
-    );
-  };
-
   return (
     <section className="bg-white py-16 w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,24 +94,6 @@ const ProductsSection = () => {
           OUR PRODUCTS
         </h2>
 
-        {/* View Toggle */}
-        <div className="flex justify-center mb-6">
-          <div className="bg-gray-100 rounded-full p-1 flex">
-            <button 
-              className={`px-4 py-2 rounded-full transition ${viewStyle === 'grid' ? 'bg-white shadow-md font-medium' : 'text-gray-700'}`}
-              onClick={() => setViewStyle('grid')}
-            >
-              Grid View
-            </button>
-            <button 
-              className={`px-4 py-2 rounded-full transition ${viewStyle === 'carousel' ? 'bg-white shadow-md font-medium' : 'text-gray-700'}`}
-              onClick={() => setViewStyle('carousel')}
-            >
-              Carousel
-            </button>
-          </div>
-        </div>
-
         <div className="flex justify-center w-full">
           {isLoading ? (
             <SkeletonGrid count={6} />
@@ -140,59 +103,20 @@ const ProductsSection = () => {
             </div>
           ) : (
             <div className="w-full max-w-7xl mx-auto">
-              {viewStyle === 'grid' ? (
-                <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {currentProducts.map((product, index) => (
-                    renderProductCard(product, index)
-                  ))}
-                </motion.div>
-              ) : (
-                /* Carousel View */
-                <div className="relative">
-                  <button 
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 bg-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-50 transition"
-                    onClick={prevPage}
-                    disabled={currentPage === 1}
-                    aria-label="Previous page"
-                  >
-                    <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" />
-                  </button>
-                  
-                  <div className="flex overflow-hidden">
-                    <motion.div
-                      className="flex transition-transform"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                      style={{ 
-                        width: '100%',
-                        display: 'flex',
-                        gap: '2rem'
-                      }}
-                    >
-                      {currentProducts.map((product, index) => (
-                        <div key={product.sys.id || index} className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0">
-                          {renderProductCard(product, index)}
-                        </div>
-                      ))}
-                    </motion.div>
-                  </div>
-                  
-                  <button 
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 bg-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-50 transition"
-                    onClick={nextPage}
-                    disabled={currentPage === totalPages}
-                    aria-label="Next page"
-                  >
-                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
-                  </button>
-                </div>
-              )}
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                {currentProducts.map((product, index) => (
+                  <ProductCard 
+                    key={product.sys.id || index} 
+                    product={product}
+                    delay={index * 0.1}
+                  />
+                ))}
+              </motion.div>
               
               {/* Pagination Controls */}
               {totalPages > 1 && (

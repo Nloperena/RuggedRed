@@ -1,31 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Stars from "./Stars";
-import kitchen1 from "../assets/kitchen1.png";
-import kitchen2 from "../assets/kitchen2.jpg";
 import kitchen3 from "../assets/kitchen3.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import './Hero.css';
 
 const Hero = () => {
-  const images = [kitchen1, kitchen2, kitchen3];
-  const [backgroundImage, setBackgroundImage] = useState(kitchen2);
-  const [currentIndex, setCurrentIndex] = useState(images.indexOf(kitchen2));
-
-  const handleNextImage = () => {
-    const nextIndex = (currentIndex + 1) % images.length;
-    setBackgroundImage(images[nextIndex]);
-    setCurrentIndex(nextIndex);
-  };
-
   return (
     <section
       id="hero"
       className="relative z-10 flex items-center"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 1)), url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 1)), url(${kitchen3})`,
       }}
     >
       {/* Sparkly Stars in the background */}
@@ -89,30 +75,9 @@ const Hero = () => {
                 Start Cleaning Today
               </Link>
             </motion.div>
-
-            {/* Squeaky Clean Button
-            <motion.div
-              className="w-full flex justify-center mt-4"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.5, duration: 0.5 }}
-            >
-              <SqueakyCleanButton />
-            </motion.div> */}
           </div>
         </div>
       </motion.div>
-
-      {/* Change Wallpaper Button */}
-      <motion.button
-        onClick={handleNextImage}
-        className="fixed right-4 top-1/2 transform -translate-y-1/2 w-14 h-14 p-2 rounded-full bg-white text-black flex items-center justify-center shadow-lg z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        <FontAwesomeIcon icon={faSyncAlt} className="w-full h-full" />
-      </motion.button>
     </section>
   );
 };
