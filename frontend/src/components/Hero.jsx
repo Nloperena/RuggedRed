@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Stars from "./Stars";
-import kitchen3 from "../assets/kitchen3.png";
+import kitchen3 from "../assets/Kitchen4.jpg";
 import './Hero.css';
 
 const Hero = () => {
