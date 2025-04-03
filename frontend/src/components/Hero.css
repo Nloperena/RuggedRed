@@ -26,9 +26,14 @@
    MIN-HEIGHT RULES ON #hero
 ---------------------------------- */
 #hero {
-  min-height: 720px;
+  min-height: 100vh;
+  margin-top: 0;
+  padding-top: 0;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center right;
+  overflow: hidden;
 }
 
 @media (min-width: 340px) {
@@ -220,4 +225,16 @@
     transform: scale(1.5) rotate(45deg);
     opacity: 1;
   }
+}
+
+/* Ensure the hero section is at the very top */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }

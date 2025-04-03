@@ -9,7 +9,8 @@ import About from "./pages/About";
 import ProductDetail from "./pages/ProductDetail";
 import LoadingScreen from "./components/LoadingScreen";
 import { fetchProducts } from "./data/contentful";
-import ScrollToTop from "./components/ScrollToTop"; // Import the ScrollToTop component
+import ScrollToTop from "./components/ScrollToTop";
+import ScrollLock from "./components/ScrollLock";
 import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
@@ -52,7 +53,7 @@ const App = () => {
   console.log("Current products in state:", products);
 
   return (
-    <>
+    <ScrollLock>
       <LoadingScreen isLoading={isLoading} />
       {!isLoading && (
         <>
@@ -74,7 +75,7 @@ const App = () => {
         </>
       )}
       <Analytics />
-    </>
+    </ScrollLock>
   );
 };
 

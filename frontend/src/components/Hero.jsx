@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Stars from "./Stars";
@@ -6,12 +6,53 @@ import kitchen3 from "../assets/Kitchen4.jpg";
 import './Hero.css';
 
 const Hero = () => {
+  // Add scroll behavior control
+  useEffect(() => {
+    const preventScrollUp = (e) => {
+      if (window.scrollY === 0 && e.deltaY < 0) {
+        e.preventDefault();
+      }
+    };
+
+    // Add event listener for mouse wheel
+    window.addEventListener('wheel', preventScrollUp, { passive: false });
+    
+    // Add event listener for touch devices
+    let touchStart = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStart = e.touches[0].clientY;
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+      const touchEnd = e.touches[0].clientY;
+      if (window.scrollY === 0 && touchEnd > touchStart) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('wheel', preventScrollUp);
+      window.removeEventListener('touchstart', (e) => {
+        touchStart = e.touches[0].clientY;
+      });
+      window.removeEventListener('touchmove', (e) => {
+        const touchEnd = e.touches[0].clientY;
+        if (window.scrollY === 0 && touchEnd > touchStart) {
+          e.preventDefault();
+        }
+      });
+    };
+  }, []);
+
   return (
     <section
       id="hero"
-      className="relative z-10 flex items-center"
+      className="relative z-10 flex items-center min-h-screen"
       style={{
         backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 1)), url(${kitchen3})`,
+        marginTop: 0,
+        paddingTop: 0,
       }}
     >
       {/* Sparkly Stars in the background */}

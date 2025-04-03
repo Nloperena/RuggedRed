@@ -1,43 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import { comparisonData } from "../data/comparisonData";
 
 const ComparisonTable = () => {
-  const comparisonData = [
-    {
-      title: "Multi-Surface Cleaner",
-      color: "bg-[#009E00]", // Green
-      rows: [
-        ["Safe on Surfaces", "✔", "✔"],
-        ["Cleans More Dirt & Germs*", "✔", "✘"],
-        ["Destroys Odor at Source", "✔", "✘"],
-        ["100% Derived from Nature", "✔", "✘"],
-      ],
-    },
-    {
-      title: "Heavy Duty Degreaser",
-      color: "bg-[#D3242A]", // Red
-      rows: [
-        ["Safe on Industrial Surfaces", "✔", "✔"],
-        ["100% Biodegradable", "✔", "✔"],
-        ["More Grease Fighting Power", "✔", "✘"],
-        ["Cuts Grease Faster", "✔", "✘"],
-      ],
-    },
-    {
-      title: "Glass Cleaner",
-      color: "bg-[#22A7AD]", // Blue
-      rows: [
-        ["Streak-Free Shine", "✔", "✔"],
-        ["Ammonia-Free Formula", "✔", "✘"],
-        ["Zero Toxicity", "✔", "✘"],
-        ["100% Derived from Nature", "✔", "✘"],
-        ["100% Biodegradable", "✔", "✘"],
-      ],
-    },
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -53,16 +19,14 @@ const ComparisonTable = () => {
   };
 
   // Render checkmarks & crosses using Font Awesome icons
-  // Render checkmarks & crosses using Font Awesome icons (FA5)
-const renderSymbol = (symbol) => {
-  if (symbol === "✔") {
-    return <i className="fas fa-check text-green-500 text-base sm:text-lg"></i>;
-  } else if (symbol === "✘") {
-    return <i className="fas fa-times text-red-500 text-base sm:text-lg"></i>;
-  }
-  return null;
-};
-
+  const renderSymbol = (symbol) => {
+    if (symbol === "✔") {
+      return <i className="fas fa-check text-green-500 text-base sm:text-lg"></i>;
+    } else if (symbol === "✘") {
+      return <i className="fas fa-times text-red-500 text-base sm:text-lg"></i>;
+    }
+    return null;
+  };
 
   return (
     <section className="py-14 bg-gray-100 relative z-0">
@@ -125,7 +89,7 @@ const renderSymbol = (symbol) => {
                         Rugged Red
                       </th>
                       <th className="px-4 py-2 text-gray-800 text-center text-xs sm:text-sm uppercase tracking-wide">
-                        National Brand
+                        {item.competitor}
                       </th>
                     </tr>
                   </thead>
