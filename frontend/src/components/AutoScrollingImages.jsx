@@ -6,6 +6,9 @@ import Cookware from "../assets/versatileSurfaces/Cookware.jpg";
 import PaintedSurfaces from "../assets/versatileSurfaces/Painted Surfaces.jpg";
 import Appliances from "../assets/versatileSurfaces/Appliances.jpg";
 import Glass from "../assets/versatileSurfaces/Glass.jpg";
+import Carpet from "../assets/versatileSurfaces/Carpet.jpg";
+import Fabric from "../assets/versatileSurfaces/Fabric.jpg";
+import Upholstery from "../assets/versatileSurfaces/Upholstery.jpg";
 
 export default function AutoScrollingImages() {
   const images = [
@@ -16,6 +19,9 @@ export default function AutoScrollingImages() {
     { src: PaintedSurfaces, label: "Painted Surfaces" },
     { src: Appliances, label: "Appliances" },
     { src: Glass, label: "Glass" },
+    { src: Carpet, label: "Carpet" },
+    { src: Fabric, label: "Fabric" },
+    { src: Upholstery, label: "Upholstery" },
   ];
 
   const [imagesPerView, setImagesPerView] = useState(() => {
