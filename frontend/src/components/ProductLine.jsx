@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ProductHeroImg from "../assets/RR-ProductHeroImg.png";
+import ProductHeroImg from "../assets/RR Bottles Reflection 2.png";
 import PowerfulIcon from "../assets/icons/Powerful Icon.png";
 import BiodegradableIcon from "../assets/icons/Biodegradable Icon.png";
 import ProvenIcon from "../assets/icons/Proven Icon.png";

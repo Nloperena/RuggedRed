@@ -82,13 +82,13 @@ const Hero = () => {
           <div className="flex flex-col justify-center items-start text-left space-y-6">
             <motion.h1
               className="font-extrabold leading-snug text-[#D3242A] mb-2"
-              style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif" }}
+              style={{ fontFamily: "Geogrotesque, sans-serif", fontStyle: "normal" }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.5 }}
             >
               <span className="block">A PROVEN</span>
-              <span className="block">POWERFUL CLEAN</span>
+              <span className="block whitespace-nowrap">POWERFUL CLEAN</span>
             </motion.h1>
 
             {/* Subheading */}
@@ -98,9 +98,9 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.5 }}
             >
-              <p className="text-[#222222] leading-relaxed font-medium mb-1 subheading-font">
+              <p className="text-[#222222] leading-snug font-medium mb-1 subheading-font" style={{ fontStyle: "normal" }}>
                 Tough enough for industrial messes, safe enough for your home.
-                Get the clean you can trust.
+                Get the clean you can&nbsp;trust.
               </p>
             </motion.div>
 
@@ -116,7 +116,7 @@ const Hero = () => {
                 variant="primary"
                 size="large"
               >
-                Shop Now
+                Start Cleaning
               </Button>
             </motion.div>
           </div>
