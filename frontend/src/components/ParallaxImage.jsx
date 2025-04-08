@@ -9,8 +9,6 @@ const ParallaxImage = ({ src, alt, className = "", isLarger = false }) => {
     offset: ["start end", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], isLarger ? [1.4, 1.5, 1.4] : [1.2, 1.3, 1.2]);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -23,20 +21,20 @@ const ParallaxImage = ({ src, alt, className = "", isLarger = false }) => {
   return (
     <div
       ref={ref}
-      className={`relative overflow-visible ${className}`}
+      className={`fixed inset-0 overflow-visible ${className}`}
       style={{
         width: '100%',
-        minWidth: '100%'
+        height: '100vh',
+        minHeight: '100vh'
       }}
     >
       <motion.div
         className="absolute inset-0"
         style={{ 
-          y,
-          scale,
           zIndex: isLarger ? 2 : 1,
           width: '100%',
-          minWidth: '100%'
+          height: '100vh',
+          minHeight: '100vh'
         }}
         initial={{ opacity: 0 }}
         animate={{
@@ -47,19 +45,15 @@ const ParallaxImage = ({ src, alt, className = "", isLarger = false }) => {
           ease: "easeOut",
         }}
       >
-        <div className="relative" style={{ width: '100%', minWidth: '100%' }}>
+        <div className="relative w-full h-full">
           <img
             src={src}
             alt={alt}
-            className={`transition-all duration-700 ${
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
             style={{ 
-              objectPosition: 'center',
-              transform: `scale(${isLarger ? 5 : 4.5})`,
-              transformOrigin: 'center center',
-              width: '100%',
-              minWidth: '100%'
+              objectPosition: 'center'
             }}
           />
           <div

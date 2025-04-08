@@ -53,7 +53,7 @@ const ParallaxSection = () => {
         style={{ maxWidth: '100vw' }}
       >
         {isVertical ? (
-          // For viewports below 900px: use a single image with parallax effect
+          // For viewports below 900px: use a single image
           <div className="w-full h-full flex flex-col items-center max-w-[100vw]">
             <motion.div
               style={{ position: "fixed", maxWidth: '100vw' }}
@@ -66,14 +66,13 @@ const ParallaxSection = () => {
                 style={{ 
                   objectPosition: "30% center", 
                   maxWidth: "100vw", 
-                  maxHeight: "100vh",
-                  y: y1
+                  maxHeight: "100vh"
                 }}
               />
             </motion.div>
           </div>
         ) : (
-          // For viewports 900px and above: display two images with parallax effect
+          // For viewports 900px and above: display two images
           <div className="w-full h-full flex justify-center items-center max-w-[100vw]">
             <motion.div
               style={{ position: "fixed", maxWidth: '50vw' }}
@@ -85,8 +84,7 @@ const ParallaxSection = () => {
                 className="w-full h-full object-cover"
                 style={{ 
                   maxWidth: "50vw", 
-                  maxHeight: "100vh",
-                  y: y1
+                  maxHeight: "100vh"
                 }}
               />
             </motion.div>
@@ -100,8 +98,7 @@ const ParallaxSection = () => {
                 className="w-full h-full object-cover"
                 style={{ 
                   maxWidth: "50vw", 
-                  maxHeight: "100vh",
-                  y: y2
+                  maxHeight: "100vh"
                 }}
               />
             </motion.div>
