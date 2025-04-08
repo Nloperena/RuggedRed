@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import ProductHeroImg from "../assets/RR-ProductHeroImg.png";
+import ProductHeroImg from "../assets/RR Bottles Reflection 2.png";
 import "./ProductDivider.css";
 
 const ProductDivider = ({ flip }) => {

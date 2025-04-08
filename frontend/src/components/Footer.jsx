@@ -92,8 +92,7 @@ const Footer = () => {
                   href="https://formoclean.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold hover:text-gray-300 transition-colors duration-200"
-                  style={{ fontFamily: "Geogrotesque, sans-serif" }}
+                  className="hover:text-gray-200 transition-colors"
                 >
                   FormoClean
                 </a>
@@ -102,16 +101,16 @@ const Footer = () => {
                 className="text-sm"
                 style={{ fontFamily: "Geogrotesque, sans-serif" }}
               >
-                &bull; © {new Date().getFullYear()} RUGGEDRED. All Rights Reserved.
+                © {new Date().getFullYear()} RUGGEDRED. All rights reserved.
               </p>
             </div>
           </motion.div>
         </motion.div>
       </footer>
-      <NewsletterModal 
-        isOpen={isNewsletterOpen} 
+      <NewsletterModal
+        isOpen={isNewsletterOpen}
         onClose={() => setIsNewsletterOpen(false)}
-        initialEmail={email}
+        email={email}
       />
     </>
   );
