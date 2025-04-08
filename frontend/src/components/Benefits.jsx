@@ -61,10 +61,10 @@ const Benefits = () => {
             className="text-5xl font-extrabold text-center mb-8"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
-            Rugged Red in Action
+            RuggedRed in Action
           </h1>
           <p className="text-center max-w-2xl mx-auto mb-12 text-lg">
-            Heavy-duty cleaning power for life’s messiest moments.
+            Heavy-duty cleaning power for life's messiest moments.
           </p>
 
           {/* Scenarios grid */}

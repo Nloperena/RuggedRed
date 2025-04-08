@@ -51,7 +51,7 @@ export default function BlogPost({ post }) {
       <h1 className="text-4xl font-extrabold mb-4 text-gray-900">{post.title}</h1>
 
       <p className="text-gray-500 text-sm mb-6">
-        {new Date(post.publishDate).toLocaleDateString()} by {post.author || "Rugged Red"}
+        {new Date(post.publishDate).toLocaleDateString()} by {post.author || "RuggedRed"}
       </p>
 
       {post.featuredImage && (

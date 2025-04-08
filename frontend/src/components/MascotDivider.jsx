@@ -26,7 +26,7 @@ const MascotDivider = ({ flip }) => {
         {/* Mascot Image */}
         <img
           src={Mascot}
-          alt="Rugged Red Mascot"
+          alt="RuggedRed Mascot"
           className={`
             w-full block
             w-[230px] sm:w-[260px] md:w-[400px] lg:w-[420px] xl:w-[650px]

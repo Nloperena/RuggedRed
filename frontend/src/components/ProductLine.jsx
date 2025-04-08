@@ -37,7 +37,7 @@ const ProductLine = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.6, 0.05, 0.2, 0.9] }}
           >
-            Discover a line of products crafted to tackle every challenge with professional-grade power. Designed with safety and sustainability in mind, Rugged Red delivers the clean you can trust.
+            Discover a line of products crafted to tackle every challenge with professional-grade power. Designed with safety and sustainability in mind, RuggedRed delivers the clean you can trust.
           </motion.p>
 
           {/* ICONS */}
@@ -56,7 +56,7 @@ const ProductLine = () => {
           <div className="w-full flex justify-center">
             <motion.img
               src={ProductHeroImg}
-              alt="Rugged Red Product Line"
+              alt="RuggedRed Product Line"
               className="rounded-lg drop-shadow-lg w-full max-w-sm lg:max-w-md 2xl:max-w-lg"
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -73,7 +73,7 @@ const ProductLine = () => {
           <div className="w-full md:w-2/3 lg:w-1/2 flex justify-center mb-8 md:mb-0">
             <motion.img
               src={ProductHeroImg}
-              alt="Rugged Red Product Line"
+              alt="RuggedRed Product Line"
               className="rounded-lg drop-shadow-lg max-w-md w-full lg:max-w-lg 2xl:max-w-xl"
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -99,7 +99,7 @@ const ProductLine = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.6, 0.05, 0.2, 0.9] }}
             >
-              Discover a line of products crafted to tackle every challenge with professional-grade power. Designed with safety and sustainability in mind, Rugged Red delivers the clean you can trust.
+              Discover a line of products crafted to tackle every challenge with professional-grade power. Designed with safety and sustainability in mind, RuggedRed delivers the clean you can trust.
             </motion.p>
 
             {/* ICONS */}

@@ -1,5 +1,6 @@
 import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Button from "./Button";
 
 export default function ProductTextSection({ product }) {
   const { name, slogan, price, amazonUrl, productDetailDescription } = product.fields;
@@ -20,14 +21,15 @@ export default function ProductTextSection({ product }) {
             ${safePrice.toFixed(2)}
           </p>
           {amazonUrl && (
-            <a
+            <Button
               href={amazonUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full hover:bg-[#B91D23] transition-transform transform hover:scale-105 mb-6 inline-block"
+              variant="primary"
+              size="medium"
             >
               Buy on Amazon
-            </a>
+            </Button>
           )}
         </div>
         <div className="p-6 text-left text-gray-700 leading-relaxed">

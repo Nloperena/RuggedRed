@@ -38,7 +38,7 @@ const OurStory = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Rugged Red was born in a modest garage where a small team of passionate innovators experimented with nature’s cleaning power. They dreamed of a product that was both robust and kind to our planet—a dream that would one day redefine cleaning.
+              RuggedRed was born in a modest garage where a small team of passionate innovators experimented with nature's cleaning power. They dreamed of a product that was both robust and kind to our planet—a dream that would one day redefine cleaning.
             </motion.p>
           </div>
         </div>
@@ -101,7 +101,7 @@ const OurStory = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Today, Rugged Red stands as a testament to innovation, quality, and sustainability. Our products continue to empower households and businesses alike, while our commitment to the environment inspires future generations. This is more than a brand—it’s a legacy of clean, green progress.
+              Today, RuggedRed stands as a testament to innovation, quality, and sustainability. Our products continue to empower households and businesses alike, while our commitment to the environment inspires future generations. This is more than a brand—it's a legacy of clean, green progress.
             </motion.p>
           </div>
           <div className="lg:w-1/2 mt-8 lg:mt-0">

@@ -34,7 +34,7 @@ const LoadingScreen = ({ isLoading }) => {
           <i className="fas fa-spinner fa-spin text-white text-4xl"></i>
 
           {/* Text */}
-          <p className="text-white mt-4 text-lg">Welcome to Rugged Red!</p>
+          <p className="text-white mt-4 text-lg">Welcome to RuggedRed!</p>
         </motion.div>
       )}
     </AnimatePresence>

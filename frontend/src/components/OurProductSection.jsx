@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import RichTextProductsSection from "./RichTextProductsSection";
+import ProductsSection from "./ProductsSection";
 
 const OurProductsSection = () => {
   // Return margin‑top values based on viewport width.
@@ -35,6 +36,7 @@ const OurProductsSection = () => {
       // You can also add your scroll-driven animation props here if needed.
     >
       <RichTextProductsSection />
+      <ProductsSection />
     </motion.section>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import ProductsSection from "../components/ProductsSection";
 import CustomHeader from "../components/CustomHeader";
-import kitchen1 from "../assets/kitchen1.png";
+import kitchen3 from "../assets/kitchen3.png";
 import ComparisonTable from "../components/ComparisonTable";
 import Testimonials from "../components/Testimonials";
 
@@ -9,12 +9,12 @@ const Products = () => {
   return (
     <>
       <CustomHeader
-        backgroundImg={kitchen1}
-        layeredImage={kitchen1}
-        heading="Our Product Line"
-        subheading="Rugged, Reliable, and Ready to Clean"
-        description="Explore a variety of professional-grade cleaning products designed with sustainability and safety in mind. Perfect for any tough job you throw at it."
-        highlightLine="Discover innovative solutions for every cleaning challenge."
+        backgroundImg={kitchen3}
+        layeredImage={kitchen3}
+        heading="Our Products"
+        subheading="Powerful & Sustainable"
+        description="Professional-grade cleaning solutions for any challenge."
+        highlightLine="Built to perform."
         buttonLabel="Shop Now"
       />
       <ProductsSection />

@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import RuggedRedLogo from "../assets/RuggedRedTypographyLogo.png";
 import FlagIcon from "../assets/icons/Flag Icon.png";
 import MobileNav from "./MobileNav";
+import SqueakyCleanButton from "./SqueakyCleanButton";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isInverted, setIsInverted] = useState(false);
 
   const links = [
     { name: "Home", path: "/" },
     { name: "Products", path: "/products" },
-    { name: "Tips", path: "/blog" },
+    // { name: "Tips", path: "/blog" },
     { name: "About", path: "/about" },
   ];
 
@@ -21,20 +21,10 @@ export default function Nav() {
   const navHeight = "h-20 md:h-24 lg:h-28"; // Thicker for larger displays
 
   // Navbar background & text color logic
-  const navClasses = isInverted
-    ? `sticky top-0 z-50 bg-[#D3242A] text-white shadow-md ${navHeight}`
-    : `sticky top-0 z-50 bg-white text-red-600 shadow-md ${navHeight}`;
+  const navClasses = `sticky top-0 z-50 bg-[#D3242A] text-white shadow-md ${navHeight}`;
 
   // Desktop link hover effect (rounded and snappy)
-  const getDesktopLinkClass = (isInverted) =>
-    isInverted
-      ? "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-white hover:text-[#D3242A]"
-      : "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-[#D3242A] hover:text-white";
-
-  // Toggle Inversion Mode
-  const handleSwitchToggle = () => {
-    setIsInverted(!isInverted);
-  };
+  const getDesktopLinkClass = () => "py-2 px-5 rounded-full transition-all duration-200 ease-in-out hover:bg-white hover:text-[#D3242A]";
 
   return (
     <motion.nav
@@ -47,7 +37,7 @@ export default function Nav() {
         {/* Logo */}
         <div>
           <Link to="/">
-            <img src={RuggedRedLogo} alt="Rugged Red Logo" className="h-16 lg:h-20" />
+            <img src={RuggedRedLogo} alt="RuggedRed Logo" className="h-16 lg:h-20" />
           </Link>
         </div>
 
@@ -55,41 +45,15 @@ export default function Nav() {
         <ul className="hidden md:flex space-x-8 text-lg lg:text-xl font-semibold" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
           {links.map((link) => (
             <li key={link.name}>
-              <Link to={link.path} className={getDesktopLinkClass(isInverted)}>
+              <Link to={link.path} className={getDesktopLinkClass()}>
                 {link.name}
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* Flag + Switch (Now Flag is fully to the Right) */}
-        <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
-          {/* Toggle Switch */}
-          <div className="flex items-center">
-            <span className="mr-2 text-sm font-semibold select-none lg:text-base">
-              {isInverted ? "Invert On" : "Invert Off"}
-            </span>
-            <div
-              className="relative inline-block w-12 h-7 select-none transition duration-200 ease-in cursor-pointer"
-              onClick={handleSwitchToggle}
-            >
-              {/* Track */}
-              <div
-                className={`absolute inset-0 rounded-full transition-colors duration-300 ${
-                  isInverted ? "bg-white" : "bg-red-400"
-                }`}
-              />
-              {/* Knob */}
-              <motion.div
-                className="absolute left-0 top-0 bottom-0 w-7 h-7 bg-[#D3242A] rounded-full shadow transform cursor-pointer"
-                layout
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                style={{ left: isInverted ? "1.4rem" : "0.25rem" }}
-              />
-            </div>
-          </div>
-
-          {/* Flag Icon (Fully Right-Aligned) */}
+        {/* Flag Icon */}
+        <div className="hidden md:flex items-center">
           <img
             src={FlagIcon}
             alt="Made in America"
@@ -114,10 +78,9 @@ export default function Nav() {
 
         {/* Mobile Navigation */}
         <MobileNav
-          isMenuOpen={isMenuOpen}
+          isOpen={isMenuOpen}
           onClose={() => setIsMenuOpen(false)}
           links={links}
-          isInverted={isInverted}
         />
       </div>
     </motion.nav>

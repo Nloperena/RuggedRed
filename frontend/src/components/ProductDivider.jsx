@@ -1,56 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 import ProductHeroImg from "../assets/RR-ProductHeroImg.png";
+import "./ProductDivider.css";
 
 const ProductDivider = ({ flip }) => {
   return (
-    <div
-      className={`relative w-full ${flip ? "rotate-180" : ""}`}
+    <motion.div
+      className={`relative w-full max-w-[100vw] ${flip ? "rotate-180" : ""}`}
       style={{
         zIndex: 1001,
+      }}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ 
+        delay: 1.5, 
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] // Custom easing for smooth animation
       }}
     >
       {/* Wrapper for Product Image */}
       <div
-        className={`
-          relative 
-          block 
-          transform 
-          mx-auto
-          sm:float-right   // Float right for larger screens
-        `}
+        className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
         style={{
-          marginTop: "6rem", // Ensure consistent margin-top
-          marginBottom: "-5rem", // Consistent bottom margin
+          marginBottom: "0rem",
+          marginRight: "0rem",
+          marginTop: "-7rem",
         }}
       >
         {/* Product image */}
         <img
           src={ProductHeroImg}
-          alt="Rugged Red Product Hero"
-          className={`
-            block
-            w-full
-            // Responsive sizes
-            w-[180px]        // Smaller size for mobile
-            sm:w-[240px] 
-            md:w-[385px] 
-            lg:w-[400px] 
-            xl:w-[700px]
-            float-right      // Align to the right for mobile and above
-            mr-[1rem]        // Add margin-right for spacing on smaller screens
-            sm:mr-[2rem]     // Increase margin-right for sm breakpoint
-            lg:mr-8          // Consistent margin for large screens
-            xl:mr-12         // Larger margin for extra-large screens
-          `}
+          alt="RuggedRed Product Hero"
+          className="block object-contain product-divider"
           style={{
-            position: "relative",
-            maxWidth: "30%", // Keep the image width to 30%
-            transform: "translateX(15px)", // Move slightly to the right for smaller displays
+            maskImage: "linear-gradient(to bottom, black 95%, transparent)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
           }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,8 +1,7 @@
-// filepath: /c:/Users/nimro/Downloads/BusinessProjects/Forza/RuggedRed/RuggedRed/frontend/src/components/RichTextProductCard.jsx
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 const shimmerStyle = {
   animation: "shimmer 2s infinite linear",
@@ -13,7 +12,7 @@ const shimmerStyle = {
 function SkeletonBlock({ className, style }) {
   return (
     <div
-      className={`${className} relative overflow-hidden bg-[#A9AAAC]`}
+      className={`${className} relative overflow-hidden bg-[#A9AAAC] rounded-lg`}
       style={{ ...shimmerStyle, ...style }}
     />
   );
@@ -31,123 +30,127 @@ const RichTextProductCard = ({ product, flip = false, delay = 0 }) => {
     }
   }, [hasProduct]);
 
-  const { name, slogan, price, amazonUrl, productPageUrl, images, description } =
-    product?.fields || {};
+  const {
+    productTitle,
+    productHeroImage,
+    price,
+    buyNowButtonUrl,
+    shortProductDescription,
+  } = product?.fields || {};
 
-  const imageUrl =
-    Array.isArray(images) && images.length > 0
-      ? images[0].fields.file.url
-      : null;
+  const imageUrl = productHeroImage?.fields?.file?.url || null;
 
   return (
-    <div className="relative w-full bg-white p-8">
+    <motion.div 
+      className="w-full bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay }}
+    >
       <AnimatePresence>
         {(!isImageLoaded || !isTextLoaded) && (
           <motion.div
             key="skeleton"
-            className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-[#F9FAFB]"
+            className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-[#F9FAFB] rounded-xl"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
             style={{ zIndex: 10 }}
           >
             {!isImageLoaded && (
-              <SkeletonBlock className="w-full h-[500px] rounded-md mb-4" />
+              <SkeletonBlock className="w-full h-[400px] rounded-lg mb-4" />
             )}
             {!isTextLoaded && (
               <>
-                <SkeletonBlock className="w-1/2 h-5 rounded-md mb-2" />
-                <SkeletonBlock className="w-3/4 h-4 rounded-md mb-2" />
-                <SkeletonBlock className="w-24 h-4 rounded-md mb-4" />
-                <SkeletonBlock className="w-32 h-8 rounded-full" />
+                <SkeletonBlock className="w-1/2 h-6 rounded-md mb-2" />
+                <SkeletonBlock className="w-3/4 h-5 rounded-md mb-2" />
+                <SkeletonBlock className="w-24 h-5 rounded-md mb-4" />
+                <SkeletonBlock className="w-32 h-10 rounded-full" />
               </>
             )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.div
-        className={`flex flex-col md:flex-row items-center md:items-start gap-6 ${
-          flip ? "md:flex-row-reverse" : ""
-        }`}
-        initial={{ opacity: 0, x: flip ? 50 : -50 }}
-        animate={{ opacity: isImageLoaded && isTextLoaded ? 1 : 0, x: 0 }}
-        transition={{ duration: 0.6, delay }}
-      >
+      <div className={`flex flex-col md:flex-row ${flip ? "md:flex-row-reverse" : ""}`}>
         {/* IMAGE SECTION */}
-        <div className="md:w-1/2 flex justify-center items-center">
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt={name || "Product Image"}
-              className="w-full max-w-lg h-[500px] object-cover rounded-lg drop-shadow-2xl" // Darker shadow applied
-              onLoad={() => setIsImageLoaded(true)}
-            />
-          )}
-        </div>
+        {imageUrl && (
+          <div className="md:w-1/2">
+            <div className="h-full flex items-center justify-center p-6">
+              <img
+                src={imageUrl}
+                alt={productTitle || "Product Image"}
+                className="w-full h-auto max-h-[450px] object-contain rounded-lg shadow-sm"
+                onLoad={() => setIsImageLoaded(true)}
+              />
+            </div>
+          </div>
+        )}
 
         {/* TEXT SECTION */}
-        <div className="md:w-1/2 text-left">
-          {isTextLoaded && name && (
-            <h3
-              className="text-4xl font-bold text-[#D3242A] mb-3 uppercase" // Larger title with reduced margin
-              style={{ fontFamily: "Geogrotesque, sans-serif" }}
-            >
-              {name}
-            </h3>
-          )}
-
-          {isTextLoaded && slogan && (
-            <p className="text-lg italic text-gray-600 mb-2">{slogan}</p>
-          )}
-
-          {isTextLoaded && typeof price === "number" && (
-            <p className="text-2xl font-semibold text-gray-900 mb-4">
-              ${price.toFixed(2)}
-            </p>
-          )}
-
-          {isTextLoaded && description && (
-            <div className="text-gray-700 mb-5 leading-relaxed">
-              {typeof description === "object"
-                ? documentToReactComponents(description)
-                : description}
-            </div>
-          )}
-
-          <div className="flex flex-wrap gap-4">
-            {isTextLoaded && amazonUrl && (
-              <a
-                href={amazonUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#D3242A] text-white font-bold py-3 px-6 rounded-full hover:bg-[#B91D23] transition-transform transform hover:scale-105"
+        <div className="md:w-1/2 flex flex-col justify-between p-8">
+          <div>
+            {isTextLoaded && productTitle && (
+              <h3
+                className="text-4xl sm:text-5xl font-bold text-[#D3242A] mb-6 uppercase tracking-wide leading-tight"
+                style={{ fontFamily: "Geogrotesque, sans-serif" }}
               >
-                Buy on Amazon
-              </a>
+                {productTitle}
+              </h3>
             )}
-            {isTextLoaded && productPageUrl && (
-              <a
-                href={productPageUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition-transform transform hover:scale-105"
-              >
-                View Product
-              </a>
-            )}
-            {isTextLoaded && (
-              <Link
-                to={`/product/${product.sys.id}`}
-                className="bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-transform transform hover:scale-105"
-              >
-                View Details
-              </Link>
+
+            {isTextLoaded && shortProductDescription && (
+              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                {shortProductDescription}
+              </p>
             )}
           </div>
+
+          <div className="mt-auto">
+            {isTextLoaded && typeof price === "number" && (
+              <p className="text-3xl font-bold text-gray-900 mb-6">
+                ${price.toFixed(2)}
+              </p>
+            )}
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              {isTextLoaded && buyNowButtonUrl && (
+                <Button
+                  href={buyNowButtonUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  size="large"
+                  fullWidth
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(buyNowButtonUrl, '_blank');
+                  }}
+                >
+                  Buy Now
+                </Button>
+              )}
+              <Link
+                to={`/product/${product?.sys?.id}`}
+                className="w-full"
+              >
+                <Button
+                  variant="secondary"
+                  size="large"
+                  fullWidth
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  View Details
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

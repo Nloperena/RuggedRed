@@ -7,10 +7,10 @@ const StickyImage = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-0"> {/* z-0 instead of -z-10 */}
+    <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
       <div className="flex w-full h-full">
         {/* Left Half */}
-        <div className="w-1/2 relative h-full">
+        <div className="w-1/2 relative h-full overflow-hidden">
           <img
             src={images[0]}
             alt="Left"
@@ -18,7 +18,7 @@ const StickyImage = () => {
           />
         </div>
         {/* Right Half */}
-        <div className="w-1/2 relative h-full">
+        <div className="w-1/2 relative h-full overflow-hidden">
           <img
             src={images[1]}
             alt="Right"

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Button from "./Button";
 
 export default function CustomHeader({
   backgroundImg,      // URL for the full-screen background image
@@ -9,6 +10,8 @@ export default function CustomHeader({
   highlightLine = "Experience the next generation of cleaning solutions.",
   buttonLabel = "Learn More",
   onButtonClick = () => {},
+  ctaUrl,
+  ctaText,
 }) {
   return (
     <section className="relative w-full py-12 px-6 overflow-hidden">
@@ -55,12 +58,15 @@ export default function CustomHeader({
             {highlightLine}
           </p>
           {buttonLabel && (
-            <button
-              onClick={onButtonClick}
-              className="inline-block bg-[#D3242A] text-white py-3 px-6 rounded-full font-semibold hover:bg-[#B91D23] transition-colors duration-300 max-w-xs"
+            <Button
+              href={ctaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              size="medium"
             >
               {buttonLabel}
-            </button>
+            </Button>
           )}
         </motion.div>
       </div>

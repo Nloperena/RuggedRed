@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import client from "../contentful";
 import RichTextProductCard from "./RichTextProductCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 /**
  * A skeleton list to show while fetching data
  */
 function SkeletonList() {
-  // Example: 3 skeleton cards
   return (
     <div className="flex flex-col gap-12">
-      {Array.from({ length: 3 }).map((_, index) => (
+      {Array.from({ length: 2 }).map((_, index) => (
         <motion.div
           key={index}
           className="bg-[#F2F2F2] rounded-xl p-8 shadow-lg"
@@ -29,13 +30,12 @@ function SkeletonList() {
   );
 }
 
-/**
- * Fetches and displays products in a vertical column layout.
- */
 const RichTextProductsSection = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     if (!client) {
@@ -45,7 +45,7 @@ const RichTextProductsSection = () => {
     }
 
     client
-      .getEntries({ content_type: "cleaningProduct" })
+      .getEntries({ content_type: "cleaningProductData" })
       .then((response) => {
         if (!response.items.length) {
           setError("No products found in Contentful.");
@@ -65,9 +65,9 @@ const RichTextProductsSection = () => {
   if (isLoading) {
     return (
       <section className="bg-white pt-8 pb-16">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
-            className="text-5xl font-bold text-center text-black mb-12 uppercase"
+            className="text-center text-[#D3242A] uppercase text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-12"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -81,11 +81,11 @@ const RichTextProductsSection = () => {
     );
   }
 
-  // Error state
+  // Display error state if needed.
   if (error) {
     return (
       <section className="bg-white pt-8 pb-16">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.p
             className="text-red-600 text-lg font-semibold"
             initial={{ opacity: 0, y: -20 }}
@@ -99,11 +99,35 @@ const RichTextProductsSection = () => {
     );
   }
 
-  // Actual products display
+  // Only show the first two products
+  const visibleProducts = products.slice(0, 2);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`mx-2 p-2 rounded-full ${
+            currentPage === i ? "bg-gray-300" : "bg-gray-200 hover:bg-gray-300"
+          } transition`}
+          aria-label={`Page ${i}`}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pageNumbers;
+  };
+
   return (
     <section className="bg-white pt-8 pb-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
         <motion.h2
           className="text-center text-[#D3242A] uppercase text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-12"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
@@ -114,22 +138,43 @@ const RichTextProductsSection = () => {
           Our Products
         </motion.h2>
 
-        {/* Map over products in a vertical list (flex-col). */}
-        <motion.div
-          className="flex flex-col gap-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          {products.map((product, index) => (
-            <RichTextProductCard
-              key={product.sys.id || index}
-              product={product}
-              flip={index % 2 !== 0} // Alternate flipping if desired
-              delay={index * 0.1}
-            />
-          ))}
-        </motion.div>
+        <div className="w-full max-w-[1400px] mx-auto">
+          <motion.div
+            className="flex flex-col gap-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            {visibleProducts.map((product, index) => (
+              <motion.div
+                key={product.sys.id}
+                initial={{ 
+                  opacity: 0,
+                  x: index % 2 === 0 ? -100 : 100
+                }}
+                animate={{ 
+                  opacity: 1,
+                  x: 0
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  ease: "easeOut",
+                  delay: index * 0.2
+                }}
+                whileHover={{ 
+                  scale: 1.02,
+                  x: index % 2 === 0 ? -10 : 10,
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <RichTextProductCard
+                  product={product}
+                  index={index}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -9,11 +9,11 @@ const Blog = () => {
       <CustomHeader
         backgroundImg={kitchen3}
         layeredImage={kitchen3}
-        heading="Our Blog"
-        subheading="Insights and Inspiration"
-        description="Dive into articles, tips, and trends in professional cleaning solutions."
-        highlightLine="Stay updated with the latest in cleaning innovation."
-        buttonLabel="Read More"
+        heading="Insights"
+        subheading="Cleaning Innovation"
+        description="Expert tips and industry trends for professional cleaning."
+        highlightLine="Stay ahead with the latest."
+        buttonLabel="Explore"
       />
       <BlogSectionExtended />
     </>

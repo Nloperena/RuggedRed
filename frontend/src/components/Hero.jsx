@@ -1,31 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Stars from "./Stars";
-import kitchen1 from "../assets/kitchen1.png";
-import kitchen2 from "../assets/kitchen2.jpg";
-import kitchen3 from "../assets/kitchen3.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import kitchen3 from "../assets/Kitchen4.jpg";
 import './Hero.css';
+import Button from "./Button";
 
 const Hero = () => {
-  const images = [kitchen1, kitchen2, kitchen3];
-  const [backgroundImage, setBackgroundImage] = useState(kitchen2);
-  const [currentIndex, setCurrentIndex] = useState(images.indexOf(kitchen2));
+  // Add scroll behavior control
+  useEffect(() => {
+    const preventScrollUp = (e) => {
+      if (window.scrollY === 0 && e.deltaY < 0) {
+        e.preventDefault();
+      }
+    };
 
-  const handleNextImage = () => {
-    const nextIndex = (currentIndex + 1) % images.length;
-    setBackgroundImage(images[nextIndex]);
-    setCurrentIndex(nextIndex);
-  };
+    // Add event listener for mouse wheel
+    window.addEventListener('wheel', preventScrollUp, { passive: false });
+    
+    // Add event listener for touch devices
+    let touchStart = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStart = e.touches[0].clientY;
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+      const touchEnd = e.touches[0].clientY;
+      if (window.scrollY === 0 && touchEnd > touchStart) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('wheel', preventScrollUp);
+      window.removeEventListener('touchstart', (e) => {
+        touchStart = e.touches[0].clientY;
+      });
+      window.removeEventListener('touchmove', (e) => {
+        const touchEnd = e.touches[0].clientY;
+        if (window.scrollY === 0 && touchEnd > touchStart) {
+          e.preventDefault();
+        }
+      });
+    };
+  }, []);
 
   return (
     <section
       id="hero"
-      className="relative z-10 flex items-center"
+      className="relative z-10 flex items-center min-h-screen"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 1)), url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 1)), url(${kitchen3})`,
+        marginTop: 0,
+        paddingTop: 0,
       }}
     >
       {/* Sparkly Stars in the background */}
@@ -53,7 +81,8 @@ const Hero = () => {
           {/* Right column */}
           <div className="flex flex-col justify-center items-start text-left space-y-6">
             <motion.h1
-              className="font-extrabold leading-snug text-[#D3242A] mb-2 geogrotesque-heading"
+              className="font-extrabold leading-snug text-[#D3242A] mb-2"
+              style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif" }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.5 }}
@@ -82,27 +111,17 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2, duration: 0.5 }}
             >
-              <Link
+              <Button
                 to="/products"
-                className="inline-block px-6 py-3 sm:px-8 sm:py-4 rounded-full text-sm sm:text-base md:text-lg xl:text-xl font-bold text-white bg-[#D3242A] border-2 border-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white shadow-lg"
+                variant="primary"
+                size="large"
               >
-                Start Cleaning Today
-              </Link>
+                Shop Now
+              </Button>
             </motion.div>
           </div>
         </div>
       </motion.div>
-
-      {/* Change Wallpaper Button */}
-      <motion.button
-        onClick={handleNextImage}
-        className="fixed right-4 top-1/2 transform -translate-y-1/2 w-14 h-14 p-2 rounded-full bg-white text-black flex items-center justify-center shadow-lg z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        <FontAwesomeIcon icon={faSyncAlt} className="w-full h-full" />
-      </motion.button>
     </section>
   );
 };

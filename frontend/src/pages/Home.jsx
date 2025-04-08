@@ -8,8 +8,9 @@ import StickyImage from "../components/StickyImage";
 import RichTextProductsSection from "../components/RichTextProductsSection";
 import Testimonials from "../components/Testimonials";
 import AutoScrollingImages from "../components/AutoScrollingImages";
-import AboutRed from "../components/AboutRed";
-import BlogSection from "../components/BlogSection";
+import RedSection from "../components/About/RedSection";
+import ProductDivider from "../components/ProductDivider";
+// import BlogSection from "../components/BlogSection";
 import ComparisonTable from "../components/ComparisonTable";
 import ParallaxSection from "../components/ParallaxSection";
 import OurProductsSection from "../components/OurProductSection";
@@ -98,36 +99,26 @@ const Home = () => {
       {/* Sticky Image Section */}
       <motion.section
         className="relative"
-        style={{ opacity: stickyActive ? fadeOpacity : 0 }}
+        style={{ 
+          opacity: stickyActive ? fadeOpacity : 0,
+          pointerEvents: stickyActive ? 'auto' : 'none',
+          width: stickyActive ? '100%' : '1px',
+          overflow: 'hidden'
+        }}
       >
         <StickyImage />
       </motion.section>
 
-      <div className="relative z-10">
+      <div className="relative w-full max-w-[100vw] overflow-x-hidden">
         <Hero />
 
         {/* Product Divider Section */}
         <motion.div
-          className="relative w-full"
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div
-            className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
-            style={{ marginBottom: "0rem", marginRight: "0rem", marginTop: "-7rem" }}
-          >
-            <img
-              src={require("../assets/RR-ProductHeroImg.png")}
-              alt="Product Divider"
-              className="block object-contain product-divider"
-              style={{
-                maskImage: "linear-gradient(to bottom, black 95%, transparent)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
-              }}
-            />
-          </div>
+          <ProductDivider />
         </motion.div>
 
         {/* Mascot Divider Section */}
@@ -171,19 +162,19 @@ const Home = () => {
         <div ref={setProductLineEndRef} />
 
         {/* Parallax Section (background layer) with OurProductsSection inside */}
-        <div style={{ position: "relative", zIndex: 1, marginTop: "0rem", paddingBottom: "" }}>
+        <div style={{ position: "relative", width: "100%", maxWidth: "100vw", marginTop: "0rem", paddingBottom: "" }}>
           <ParallaxSection />
           
           <OurProductsSection />
         </div>
 
         {/* Comparison Table Section */}
-        <div>
+        <div style={{ position: 'relative', width: "100%", maxWidth: "100vw" }}>
           <ComparisonTable />
         </div>
 
         {/* Testimonials Section */}
-        <section className="relative z-30 text-white py-20 px-6 overflow-hidden">
+        <section className="relative w-full max-w-[100vw] text-white py-20 px-6 overflow-hidden">
           <div
             className="absolute inset-0 -z-10 bg-cover bg-center filter blur-sm"
             style={{
@@ -200,8 +191,8 @@ const Home = () => {
 
         {/* Additional Content Sections */}
         <AutoScrollingImages />
-        <AboutRed />
-        <BlogSection />
+        <RedSection />
+        {/* <BlogSection /> */}
       </div>
 
       {/* Footer Sentinel */}
