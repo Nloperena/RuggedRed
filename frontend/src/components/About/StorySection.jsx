@@ -34,7 +34,7 @@ const StorySection = () => {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-gray-700 leading-relaxed"
             >
-              Meet RuggedRed: a man carved from a dying steel town, hands rough as the mill floors he scrubbed clean. His dad, a line worker, left him one rule: "If it's yours, make it tough." Store-bought cleaners—weak, imported, useless—lit a fuse in him.
+              A man carved from a dying steel town, hands rough as the mill floors he scrubbed clean. His dad, a line worker, left him one rule: "If it's yours, make it tough." Store-bought cleaners—weak, imported, useless—lit a fuse in him.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

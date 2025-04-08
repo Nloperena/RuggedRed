@@ -66,7 +66,17 @@ const OurProductsSection = () => {
   };
 
   return (
-    <section className="bg-white py-16 w-full">
+    <motion.section
+      id="our-products"
+      className="relative bg-white pt-12 pb-12 px-6 sm:px-10"
+      style={{
+        marginTop: marginTop,
+        position: "relative",
+        zIndex: 2,
+        boxShadow: "rgba(0, 0, 0, 0.3) 0px -20px 30px",
+      }}
+      // You can also add your scroll-driven animation props here if needed.
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={titleRef}
@@ -213,7 +223,7 @@ const OurProductsSection = () => {
           )}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

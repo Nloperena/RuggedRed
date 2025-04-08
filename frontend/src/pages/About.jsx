@@ -1,23 +1,26 @@
 import React from "react";
-import RedSection from "../components/About/RedSection";
-import CompanySection from "../components/About/CompanySection";
 import CustomHeader from "../components/CustomHeader";
-import kitchen2 from "../assets/kitchen2.jpg";
+import kitchen3 from "../assets/kitchen3.png";
+import CompanySection from "../components/About/CompanySection";
+import MissionSection from "../components/About/MissionSection";
+import ValuesSection from "../components/About/ValuesSection";
+import RedSection from "../components/About/RedSection";
 
 const About = () => {
   return (
     <>
       <CustomHeader
-        backgroundImg={kitchen2}
-        layeredImage={kitchen2}
+        backgroundImg={kitchen3}
+        layeredImage={kitchen3}
         heading="Our Story"
         subheading="Built on Innovation"
-        description="A journey of quality and sustainability, blending craftsmanship with modern solutions."
-        highlightLine="Discover what drives us."
-        buttonLabel="Learn More"
+        description="Discover the journey behind RuggedRed's commitment to powerful, sustainable cleaning solutions."
       />
+  
+      <MissionSection />
+      <ValuesSection />
       <RedSection />
-      <CompanySection />
+    
     </>
   );
 };

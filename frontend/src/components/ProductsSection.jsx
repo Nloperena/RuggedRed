@@ -85,7 +85,7 @@ const ProductsSection = () => {
   };
 
   return (
-    <section className="bg-white py-16 w-full">
+    <section id="our-products" className="bg-white py-16 w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           className="text-5xl font-bold text-[#D3242A] mb-12 uppercase tracking-wide text-center"

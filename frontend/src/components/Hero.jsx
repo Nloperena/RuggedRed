@@ -46,6 +46,19 @@ const Hero = () => {
     };
   }, []);
 
+  const scrollToProducts = () => {
+    // Check if we're on the home page
+    if (window.location.pathname === '/') {
+      const productsSection = document.getElementById('our-products');
+      if (productsSection) {
+        productsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If we're not on the home page, navigate to the products page
+      window.location.href = '/products';
+    }
+  };
+
   return (
     <section
       id="hero"
@@ -112,9 +125,9 @@ const Hero = () => {
               transition={{ delay: 2, duration: 0.5 }}
             >
               <Button
-                to="/products"
                 variant="primary"
                 size="large"
+                onClick={scrollToProducts}
               >
                 Start Cleaning
               </Button>

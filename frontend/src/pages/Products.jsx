@@ -14,10 +14,10 @@ const Products = () => {
         heading="Our Products"
         subheading="Powerful & Sustainable"
         description="Professional-grade cleaning solutions for any challenge."
-        highlightLine="Built to perform."
-        buttonLabel="Shop Now"
       />
-      <ProductsSection />
+      <div id="our-products">
+        <ProductsSection />
+      </div>
       <ComparisonTable />
       <Testimonials />
     </>
