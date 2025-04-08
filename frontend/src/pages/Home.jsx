@@ -179,9 +179,9 @@ const Home = () => {
             className="absolute inset-0 -z-10 bg-cover bg-center filter blur-sm"
             style={{
               backgroundImage: `url('https://images.ctfassets.net/hdznx4p7ef81/4bmH8LUErm4lVMKisci0EQ/afe5be750a53f06d5c46903aafd010e5/CD_Cleaning_Grease_on_Table.jpg')`,
-              backgroundPosition: "center top",
-              transform: "translateY(-2rem)",
-              backgroundSize: "cover",
+              backgroundPosition: "center 75%",
+              transform: "scaleX(-1)",
+              backgroundSize: "120%",
               opacity: 0.7,
             }}
           ></div>
