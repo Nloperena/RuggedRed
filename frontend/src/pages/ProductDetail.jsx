@@ -279,12 +279,11 @@ const ProductDetail = ({ products }) => {
       </section>
 
       {/* Comparison Table - Full Width */}
-      <section className="py-16 px-6 md:px-12 lg:px-24">
+      <section className="py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100"
         >
           <ComparisonTable />
         </motion.div>
