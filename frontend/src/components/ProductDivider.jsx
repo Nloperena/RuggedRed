@@ -44,11 +44,6 @@ const ProductDivider = ({ flip }) => {
       {/* Wrapper for Product Image */}
       <div
         className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
-        style={{
-          marginBottom: "0",
-          marginRight: "0",
-          marginTop: "0",
-        }}
       >
         {/* Product image */}
         <img

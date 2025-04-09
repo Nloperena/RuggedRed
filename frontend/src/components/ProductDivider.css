@@ -119,10 +119,10 @@
 @media (min-width: 1800px) and (max-width: 1935px) {
   .product-divider {
     margin-top: -22rem;
-    /* margin-right: 14rem; */
+    margin-right: 14rem;
     margin-left: -22rem;
     padding: 2rem;
-    max-width: 140%;  
+    max-width: 140%;
   }
 }
 
