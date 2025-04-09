@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -13,9 +13,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import ScrollLock from "./components/ScrollLock";
 import { Analytics } from "@vercel/analytics/react"
 
-const App = () => {
+const AppContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const footerRef = useRef(null);
 
   useEffect(() => {
     const handleLoad = () => {
@@ -48,8 +49,6 @@ const App = () => {
     loadProducts();
   }, []);
 
-  const footerRef = useRef(null);
-
   console.log("Current products in state:", products);
 
   return (
@@ -64,10 +63,7 @@ const App = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
-            <Route
-              path="/product/:productId"
-              element={<ProductDetail products={products} />}
-            />
+            <Route path="/product/:productId" element={<ProductDetail products={products} />} />
           </Routes>
           <div ref={footerRef}>
             <Footer />
@@ -76,6 +72,14 @@ const App = () => {
       )}
       <Analytics />
     </ScrollLock>
+  );
+};
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 };
 
