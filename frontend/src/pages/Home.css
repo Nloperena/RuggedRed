@@ -217,7 +217,7 @@
   
   @media (min-width: 1024px) and (max-width: 1139px) {
     .mascot-divider {
-      margin-top: -65rem;
+      margin-top: -59rem;
       margin-left: -6rem;
       margin-bottom: 10rem;
       margin-right: 5rem;
@@ -228,23 +228,23 @@
   
   @media (min-width: 1140px) and (max-width: 1199px) {
     .mascot-divider {
-      margin-top: -74rem;
-      margin-left: -24rem;
-      margin-bottom: 11rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 185%;
+      margin-top: -65rem;
+        margin-left: -8rem;
+        margin-bottom: 11rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 142%;
     }
   }
   
   @media (min-width: 1200px) and (max-width: 1279px) {
     .mascot-divider {
-        margin-top: -59rem;
-        margin-left: -17rem;
-        margin-bottom: 12rem;
-        margin-right: 5rem;
-        padding: 2rem;
-        max-width: 190%;
+      margin-top: -50rem;
+      margin-left: -10rem;
+      margin-bottom: 12rem;
+      margin-right: 5rem;
+      padding: 2rem;
+      max-width: 148%;
     }
   }
   
@@ -276,7 +276,7 @@
   
   @media (min-width: 1600px) and (max-width: 1799px) {
     .mascot-divider {
-      margin-top: -56rem;
+      margin-top: -50rem;
         margin-left: -4rem;
         margin-bottom: 15rem;
         margin-right: 5rem;
@@ -300,7 +300,7 @@
   
   @media (min-width: 1920px) and (max-width: 1935px) {
     .mascot-divider {
-      margin-top: -65rem;
+      margin-top: -51rem;
       margin-left: -14rem;
       margin-bottom: 15rem;
       margin-right: 5rem;
