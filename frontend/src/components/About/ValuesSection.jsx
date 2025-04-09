@@ -61,8 +61,8 @@ const ValuesSection = () => {
             transition={{ delay: index * 0.2 }}
             className="bg-white p-6 rounded-3xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-105"
           >
-            <div className="bg-[#D3242A] p-4 rounded-full mb-4">
-              <img src={value.icon} alt={value.title} className="h-12 w-12 [filter:brightness(0)_invert(1)]" />
+            <div className="bg-white p-4 rounded-full mb-4 shadow-lg border-2 border-gray-100">
+              <img src={value.icon} alt={value.title} className="h-12 w-12 [filter:invert(20%)_sepia(100%)_saturate(2000%)_hue-rotate(350deg)_brightness(90%)_contrast(100%)]" />
             </div>
             <h3 className="text-xl font-bold text-[#D3242A] mb-2">{value.title}</h3>
             <p className="text-gray-700 text-base">{value.description}</p>
