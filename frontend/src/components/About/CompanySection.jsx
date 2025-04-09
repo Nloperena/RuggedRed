@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 import Button from "../Button";
 import ProductHeroImg from "../../assets/RR-ProductHeroImg.png";
 import FlagIcon from "../../assets/icons/Flag Icon.png";
+import PowerfulIcon from "../../assets/icons/Powerful Icon.svg";
+import ProvenIcon from "../../assets/icons/Proven Icon.svg";
+import EcoFriendlyIcon from "../../assets/icons/Eco Friendly Icon.svg";
+import LightBulbIcon from "../../assets/icons/LightBulb Icon.svg";
+import AmericanFlagIcon from "../../assets/icons/American Flag Icon.svg";
+import CommunityIcon from "../../assets/icons/Community Icon.svg";
 
 const CompanySection = () => {
   const [teamworkImageLoaded, setTeamworkImageLoaded] = useState(false);
@@ -94,32 +100,32 @@ const CompanySection = () => {
             {
               title: "Powerful Performance",
               description: "Our custom formulations pack a punch, blasting away even the toughest messes while remaining safe for everyday use.",
-              icon: "star"
+              icon: PowerfulIcon
             },
             {
               title: "Proven Quality",
               description: "Every product is crafted with precision in our American facilities, tested for excellence, and backed by our satisfaction guarantee.",
-              icon: "check"
+              icon: ProvenIcon
             },
             {
               title: "Eco-Conscious",
               description: "Made with biodegradable ingredients, our products deliver powerful cleaning while protecting our environment.",
-              icon: "gem"
+              icon: EcoFriendlyIcon
             },
             {
               title: "Visionary Innovation",
               description: "Leading the industry with groundbreaking cleaning solutions that set new standards for performance and sustainability.",
-              icon: "lightbulb"
+              icon: LightBulbIcon
             },
             {
               title: "American Manufacturing",
               description: "Proudly made in the USA, supporting local jobs and communities while ensuring the highest quality standards.",
-              icon: "building"
+              icon: AmericanFlagIcon
             },
             {
               title: "Community Focused",
               description: "Committed to supporting American workers and businesses, strengthening our local economies.",
-              icon: "handshake"
+              icon: CommunityIcon
             }
           ].map((value, index) => (
             <motion.div
@@ -130,8 +136,8 @@ const CompanySection = () => {
               transition={{ delay: index * 0.2 }}
               className="bg-white p-6 rounded-3xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-105"
             >
-              <div className="bg-[#D3242A] p-3 rounded-full mb-4">
-                {icons[value.icon]}
+              <div className="bg-[#D3242A] p-4 rounded-full mb-4">
+                <img src={value.icon} alt={value.title} className="h-12 w-12 [filter:brightness(0)_invert(1)]" />
               </div>
               <h3 className="text-xl font-bold text-[#D3242A] mb-2">{value.title}</h3>
               <p className="text-gray-700 text-base">{value.description}</p>

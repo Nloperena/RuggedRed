@@ -67,12 +67,12 @@ const Button = ({
     };
   }, [mouseX, mouseY, x, y]);
 
-  const baseStyles = "inline-flex items-center justify-center rounded-full font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  const baseStyles = "inline-flex items-center justify-center rounded-full font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer select-none";
   
   const variants = {
-    primary: "bg-[#D3242A] text-white hover:bg-[#9B1218] focus:ring-[#D3242A]",
-    secondary: "bg-white text-[#D3242A] hover:bg-gray-50 focus:ring-[#D3242A] border-2 border-[#D3242A]",
-    tertiary: "bg-transparent text-[#D3242A] hover:bg-gray-50 focus:ring-[#D3242A]",
+    primary: "bg-[#D3242A] text-white hover:bg-[#9B1218] hover:text-white focus:ring-[#D3242A] hover:shadow-lg cursor-pointer",
+    secondary: "bg-white text-[#D3242A] hover:bg-gray-50 hover:text-[#9B1218] focus:ring-[#D3242A] border-2 border-[#D3242A] hover:border-[#9B1218] hover:shadow-lg cursor-pointer",
+    tertiary: "bg-transparent text-[#D3242A] hover:bg-gray-50 hover:text-[#9B1218] focus:ring-[#D3242A] hover:shadow-lg cursor-pointer",
   };
 
   const sizes = {
@@ -86,7 +86,7 @@ const Button = ({
   const buttonContent = (
     <motion.div
       ref={buttonRef}
-      style={{ x, y }}
+      style={{ x, y, cursor: 'pointer' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={{ 
@@ -113,6 +113,7 @@ const Button = ({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
+        className="select-none cursor-pointer"
       >
         {children}
       </motion.span>
@@ -122,7 +123,7 @@ const Button = ({
   return (
     <>
       {to && !isComingSoon ? (
-        <Link to={to} className={widthClass}>
+        <Link to={to} className={`${widthClass} cursor-pointer select-none`} style={{ cursor: 'pointer' }}>
           {buttonContent}
         </Link>
       ) : (
