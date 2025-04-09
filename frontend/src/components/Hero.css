@@ -19,7 +19,7 @@
 .geogrotesque-heading {
   font-family: 'Geogrotesque', sans-serif !important;
   font-weight: bold;
-  font-style: italic;
+  font-style: normal;
 }
 
 /* ----------------------------------
@@ -194,7 +194,7 @@ p, h2, h3, h4, h5, h6 {
 .geogrotesque-heading {
   font-family: 'Geogrotesque', sans-serif;
   font-weight: bold;
-  font-style: italic;
+  font-style: normal;
 }
 
 /* Specific styles for TwCenMTCondensedExtraBold */

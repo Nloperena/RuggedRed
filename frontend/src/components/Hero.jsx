@@ -111,7 +111,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.5 }}
             >
-              <p className="text-[#222222] leading-snug font-medium mb-1 geogrotesque-heading" style={{ fontStyle: "italic" }}>
+              <p className="text-[#222222] leading-snug font-medium mb-1" style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif", fontStyle: "normal" }}>
                 Tough enough for industrial messes, safe enough for your home.
                 Get the clean you can&nbsp;trust.
               </p>
