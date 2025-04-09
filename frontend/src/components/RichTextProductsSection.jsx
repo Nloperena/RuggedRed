@@ -36,6 +36,23 @@ const RichTextProductsSection = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if we're on mobile/tablet
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!client) {
@@ -60,6 +77,11 @@ const RichTextProductsSection = () => {
         setIsLoading(false);
       });
   }, []);
+
+  // If on mobile/tablet, don't render this component at all
+  if (isMobile) {
+    return null;
+  }
 
   // Display skeleton while loading.
   if (isLoading) {
@@ -147,7 +169,7 @@ const RichTextProductsSection = () => {
           >
             {visibleProducts.map((product, index) => (
               <motion.div
-                key={product.sys.id}
+                key={`desktop-${product.sys.id}`}
                 initial={{ 
                   opacity: 0,
                   x: index % 2 === 0 ? -100 : 100
