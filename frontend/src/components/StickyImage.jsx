@@ -26,18 +26,7 @@ const StickyImage = () => {
   }, []);
 
   return (
-    <div 
-      className="fixed inset-0 z-0 pointer-events-none select-none"
-      style={{
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        MozUserSelect: 'none',
-        msUserSelect: 'none',
-        touchAction: 'none',
-        WebkitTouchCallout: 'none',
-        WebkitTapHighlightColor: 'transparent'
-      }}
-    >
+    <div className="fixed inset-0 z-0">
       {isPortrait ? (
         // Top/Bottom Layout for Mobile and Portrait
         <div className="flex flex-col h-full">
@@ -47,7 +36,6 @@ const StickyImage = () => {
               src={images[0]}
               alt="Top Image"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ pointerEvents: 'none' }}
             />
           </div>
           {/* Bottom Image */}
@@ -56,7 +44,6 @@ const StickyImage = () => {
               src={images[1]}
               alt="Bottom Image"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ pointerEvents: 'none' }}
             />
           </div>
         </div>
@@ -69,7 +56,6 @@ const StickyImage = () => {
               src={images[0]}
               alt="Left Image"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ pointerEvents: 'none' }}
             />
           </div>
           {/* Right Image */}
@@ -78,7 +64,6 @@ const StickyImage = () => {
               src={images[1]}
               alt="Right Image"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ pointerEvents: 'none' }}
             />
           </div>
         </div>

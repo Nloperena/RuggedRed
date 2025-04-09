@@ -160,42 +160,89 @@ const RichTextProductsSection = () => {
           Our Products
         </motion.h2>
 
-        <div className="w-full max-w-[1400px] mx-auto">
-          <motion.div
-            className="flex flex-col gap-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            {visibleProducts.map((product, index) => (
-              <motion.div
-                key={`desktop-${product.sys.id}`}
-                initial={{ 
-                  opacity: 0,
-                  x: index % 2 === 0 ? -100 : 100
-                }}
-                animate={{ 
-                  opacity: 1,
-                  x: 0
-                }}
-                transition={{ 
-                  duration: 0.8,
-                  ease: "easeOut",
-                  delay: index * 0.2
-                }}
-                whileHover={{ 
-                  scale: 1.02,
-                  x: index % 2 === 0 ? -10 : 10,
-                  transition: { duration: 0.3 }
-                }}
-              >
-                <RichTextProductCard
-                  product={product}
-                  index={index}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+        {/* Mobile View */}
+        <div className="md:hidden">
+          {visibleProducts.map((product, index) => (
+            <motion.div
+              key={`mobile-${product.sys.id}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="mb-8"
+            >
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="relative h-48 w-full">
+                  {product.fields?.productImage?.fields?.file?.url && (
+                    <img
+                      src={product.fields.productImage.fields.file.url}
+                      alt={product.fields.productImage.fields.title || 'Product image'}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-bold text-[#D3242A] mb-2" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
+                    {product.fields?.productName || 'Product Name'}
+                  </h3>
+                  <p className="text-gray-600 mb-4" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
+                    {product.fields?.productDescription || 'Product description coming soon.'}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-[#D3242A]">${product.fields?.price || '0.00'}</span>
+                    {product.fields?.productLink && (
+                      <button
+                        onClick={() => window.location.href = product.fields.productLink}
+                        className="bg-[#D3242A] text-white py-2 px-4 rounded-lg font-semibold hover:bg-[#B31E24] transition-colors"
+                      >
+                        Buy Now
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop View */}
+        <div className="hidden md:block">
+          <div className="w-full max-w-[1400px] mx-auto">
+            <motion.div
+              className="flex flex-col gap-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              {visibleProducts.map((product, index) => (
+                <motion.div
+                  key={`desktop-${product.sys.id}`}
+                  initial={{ 
+                    opacity: 0,
+                    x: index % 2 === 0 ? -100 : 100
+                  }}
+                  animate={{ 
+                    opacity: 1,
+                    x: 0
+                  }}
+                  transition={{ 
+                    duration: 0.8,
+                    ease: "easeOut",
+                    delay: index * 0.2
+                  }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    x: index % 2 === 0 ? -10 : 10,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <RichTextProductCard
+                    product={product}
+                    index={index}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

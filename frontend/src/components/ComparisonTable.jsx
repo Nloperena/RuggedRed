@@ -56,7 +56,7 @@ const ComparisonTable = () => {
       {/* Single Grid: 1 col on mobile, 2 cols at sm, 3 cols at xl */}
       <div className="container mx-auto px-4 max-w-7xl">
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center"
+          className="flex flex-col lg:grid lg:grid-cols-3 gap-8 justify-items-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

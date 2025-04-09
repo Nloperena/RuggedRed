@@ -6,6 +6,7 @@ import MadeInAmerica from "../components/MadeInAmerica";
 import Button from "../components/Button";
 import "../index.css"; 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import SparkleIcon from "../assets/icons/Sparkle.svg";
 
 const ProductDetail = ({ products }) => {
   const { productId } = useParams();
@@ -106,13 +107,13 @@ const ProductDetail = ({ products }) => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 flex flex-col justify-center bg-white p-8 rounded-3xl shadow-lg border border-gray-100"
+            className="order-2 lg:order-first lg:col-span-5 flex flex-col justify-center bg-white p-8 rounded-3xl shadow-lg border border-gray-100"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#D3242A] mb-6 uppercase" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
               {productTitle}
             </h1>
             {shortProductDescription && (
-              <p className="text-lg md:text-xl text-gray-700 mb-8" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
+              <p className="text-lg md:text-xl text-gray-700 mb-8" style={{ fontFamily: "Montserrat, sans-serif" }}>
                 {shortProductDescription}
               </p>
             )}
@@ -138,7 +139,7 @@ const ProductDetail = ({ products }) => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-7 flex items-center justify-center"
+              className="order-1 lg:order-last lg:col-span-7 flex items-center justify-center"
             >
               <img
                 src={imageUrl}
@@ -152,13 +153,11 @@ const ProductDetail = ({ products }) => {
 
       {/* In Action - Full Width Row */}
       {productInUseImages && productInUseImages.length > 0 && (
-        <section className="py-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-green-50 to-white">
+        <section className="py-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-red-50 to-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center gap-3 mb-12">
-              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                <img src={SparkleIcon} alt="Sparkle Icon" className="w-6 h-6" />
               </div>
               <h2 className="text-2xl font-bold text-[#D3242A] uppercase" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
                 In Action
@@ -197,9 +196,7 @@ const ProductDetail = ({ products }) => {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <img src={SparkleIcon} alt="Sparkle Icon" className="w-6 h-6" />
                   </div>
                   <h2 className="text-2xl font-bold text-[#D3242A] uppercase" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
                     Key Features
@@ -226,13 +223,11 @@ const ProductDetail = ({ products }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow min-h-[400px] flex flex-col"
+                className="bg-gradient-to-br from-red-50 to-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow min-h-[400px] flex flex-col"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                  <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                    <img src={SparkleIcon} alt="Sparkle Icon" className="w-6 h-6" />
                   </div>
                   <h2 className="text-2xl font-bold text-[#D3242A] uppercase" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
                     Benefits
@@ -245,7 +240,7 @@ const ProductDetail = ({ products }) => {
                       whileHover={{ x: 5 }}
                       className="flex items-start p-4 rounded-xl bg-white/50 hover:bg-white transition-colors border border-gray-100"
                     >
-                      <span className="text-blue-600 mr-3">•</span>
+                      <span className="text-red-600 mr-3">•</span>
                       <span style={{ fontFamily: "Geogrotesque, sans-serif" }}>{benefit}</span>
                     </motion.li>
                   ))}
@@ -264,7 +259,7 @@ const ProductDetail = ({ products }) => {
                 <h2 className="text-2xl font-bold text-[#D3242A] mb-6 uppercase" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
                   Detailed Description
                 </h2>
-                <div className="prose prose-lg max-w-none" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
+                <div className="prose prose-lg max-w-none" style={{ fontFamily: "Montserrat, sans-serif" }}>
                   {renderRichText(detailedProductDescription)}
                 </div>
               </motion.div>
