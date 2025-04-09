@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Stars from "./Stars";
-import kitchen3 from "../assets/Kitchen4.jpg";
+import kitchen3 from "../assets/Kitchen5.png";
 import './Hero.css';
 import Button from "./Button";
 

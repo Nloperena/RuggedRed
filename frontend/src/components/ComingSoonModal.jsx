@@ -14,8 +14,22 @@ const ComingSoonModal = ({ isOpen, onClose }) => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+            className="mb-6"
           >
-            <i className="fas fa-clock text-6xl text-red-600 mb-6"></i>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1}
+              stroke="currentColor"
+              className="w-16 h-16 mx-auto text-red-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
           </motion.div>
           
           <motion.h2
