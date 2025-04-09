@@ -30,16 +30,16 @@
   margin-top: 0;
   padding-top: 0;
   position: relative;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
+  background-size: contain;
 }
 
 @media (min-width: 340px) {
   #hero {
     min-height: 850px;
     background-position: center right;
+    background-size: cover;
   }
 }
 
