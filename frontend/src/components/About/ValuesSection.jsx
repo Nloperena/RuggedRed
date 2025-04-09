@@ -25,7 +25,7 @@ const ValuesSection = () => {
       icon: EcoFriendlyIcon
     },
     {
-      title: "Visionary Innovation",
+      title: "American Ingenuity",
       description: "Leading the industry with groundbreaking cleaning solutions that set new standards for performance and sustainability.",
       icon: LightBulbIcon
     },

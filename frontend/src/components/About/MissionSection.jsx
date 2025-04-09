@@ -27,7 +27,7 @@ const MissionSection = () => {
           className="space-y-4"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#D3242A] uppercase" style={{ fontFamily: "Geogrotesque, sans-serif" }}>
-            American Innovation
+            Made in America
           </h2>
           <p className="text-lg text-gray-700">
             We're revolutionizing cleaning with powerful, sustainable solutions made right here in the USA. Our American-made products deliver exceptional results while supporting local jobs and communities. No tariffs, no compromises - just pure American cleaning power.

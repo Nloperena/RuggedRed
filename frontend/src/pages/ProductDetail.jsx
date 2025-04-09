@@ -124,11 +124,19 @@ const ProductDetail = ({ products }) => {
             )}
             {buyNowButtonUrl && (
               <Button
-                href={buyNowButtonUrl}
+                href={buyNowButtonUrl === "Coming Soon!" ? undefined : buyNowButtonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="primary"
                 size="large"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (buyNowButtonUrl !== "Coming Soon!") {
+                    window.open(buyNowButtonUrl, '_blank');
+                  }
+                }}
               >
-                Buy Now
+                {buyNowButtonUrl === "Coming Soon!" ? "Coming Soon!" : "Buy Now"}
               </Button>
             )}
           </motion.div>

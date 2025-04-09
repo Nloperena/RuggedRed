@@ -174,14 +174,16 @@ const CompanySection = () => {
             <p className="text-lg text-gray-700">
               We're revolutionizing cleaning with powerful, sustainable solutions made right here in the USA. Our American-made products deliver exceptional results while supporting local jobs and communities. No tariffs, no compromises - just pure American cleaning power.
             </p>
-            <Link to="/products">
-              <Button
-                variant="primary"
-                size="large"
-              >
-                Explore Our Products
-              </Button>
-            </Link>
+            <div className="space-y-6">
+              <Link to="/products">
+                <Button
+                  variant="primary"
+                  size="large"
+                >
+                  Explore Our Products
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
