@@ -48,7 +48,7 @@ const Footer = () => {
             className="text-2xl md:text-3xl font-bold mb-4"
             style={{ fontFamily: "Geogrotesque, sans-serif" }}
           >
-            Get Updates from RUGGEDRED
+            Get Updates from RUGGED RED
           </h2>
           <p
             className="text-base md:text-lg mb-8"
@@ -101,7 +101,7 @@ const Footer = () => {
                 className="text-sm"
                 style={{ fontFamily: "Geogrotesque, sans-serif" }}
               >
-                © {new Date().getFullYear()} RUGGEDRED. All rights reserved.
+                © {new Date().getFullYear()} RUGGED RED. All rights reserved.
               </p>
             </div>
           </motion.div>

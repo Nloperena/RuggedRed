@@ -63,7 +63,8 @@ const CompanySection = () => {
               American-Made Excellence
             </h1>
             <p className="text-lg md:text-xl text-gray-700">
-              Born and built in the USA, RuggedRed Co combines American craftsmanship with cutting-edge cleaning technology. Our products are proudly manufactured in American facilities, supporting local jobs and communities.
+              Born and built in the USA, RUGGED RED combines American craftsmanship with cutting-edge cleaning technology. 
+              Our products are proudly manufactured in American facilities, supporting local jobs and communities.
             </p>
             <div className="flex items-center space-x-4">
               <img src={FlagIcon} alt="Made in America" className="h-12" />

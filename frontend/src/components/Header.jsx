@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MobileNav from './MobileNav';
+import withTextTransform from './withTextTransform';
 
-export default function Header() {
+const Header = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const toggleMobileNav = () => {
@@ -15,7 +16,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-[#D3242A]">
-            RuggedRed
+            RUGGED RED
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,4 +61,7 @@ export default function Header() {
       <MobileNav isOpen={isMobileNavOpen} onClose={toggleMobileNav} />
     </header>
   );
-} 
+};
+
+// Apply the text transformation HOC to the Header component
+export default withTextTransform(Header, 'separate'); 

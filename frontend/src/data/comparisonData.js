@@ -1,3 +1,5 @@
+import { separateUppercase, combineSpaced } from '../utils/textTransform';
+
 export const comparisonData = [
   {
     title: "All-Purpose Cleaner",
@@ -32,4 +34,7 @@ export const comparisonData = [
       ["100% Biodegradable", "✔", "✘"],
     ],
   },
-]; 
+];
+
+// In your component:
+const text = "RUGGED RED"; // Returns "RuggedRed" 

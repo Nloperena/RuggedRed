@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useInView } from "react-intersection-observer";
 import BackgroundImage from "../assets/CD Cleaning Grease on Table.jpg"; // or remove if no background
-import testimonials from "../data/testimonials"; // Ensure this path is correct
+import { testimonials } from '../data/testimonials';  // Changed from default import to named import
 
 // Section fade-in
 const sectionVariants = {
@@ -61,7 +61,7 @@ export default function Testimonials() {
           className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#D3242A] mb-8 uppercase"
           style={{ fontFamily: "Geogrotesque, sans-serif" }}
         >
-          SEE WHY THEY LOVE RUGGEDRED
+          SEE WHY THEY LOVE RUGGED RED
         </h2>
 
         {/* 3 → 2 → 1 layout, bigger gap (gap-8) */}

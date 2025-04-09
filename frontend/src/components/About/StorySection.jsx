@@ -6,7 +6,7 @@ import MascotImg from "../../assets/RRMascot+Type-smaller.png";
 import AmericanFlag from "../../assets/American-Flag.png";
 import NewsletterModal from "../NewsletterModal";
 
-const StorySection = () => {
+export default function StorySection() {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ const StorySection = () => {
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#D3242A] uppercase leading-tight"
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
             >
-              Meet RuggedRed
+              Meet RUGGED RED
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -87,6 +87,4 @@ const StorySection = () => {
       />
     </>
   );
-};
-
-export default StorySection;
+}
