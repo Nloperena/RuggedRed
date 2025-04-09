@@ -26,7 +26,7 @@ export default function StorySection() {
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#D3242A] uppercase leading-tight"
               style={{ fontFamily: "Geogrotesque, sans-serif" }}
             >
-              Meet RUGGED RED
+              MEET RUGGED RED
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export default function StorySection() {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-gray-700 leading-relaxed"
             >
-              For Randy To Finalize:  A man carved from a dying steel town, hands rough as the mill floors he scrubbed clean. His dad, a line worker, left him one rule: "If it's yours, make it tough." Store-bought cleaners—weak, imported, useless—lit a fuse in him.
+              Rugged Red isn't a mascot—he's the real deal. A seasoned pro who's led industrial and commercial cleaning crews for decades. From greasy kitchen hoods to construction trailers, office carpets to factory floors—he's seen it all, and cleaned it all.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,31 @@ export default function StorySection() {
               transition={{ delay: 0.6 }}
               className="text-lg md:text-xl text-gray-700 leading-relaxed"
             >
-              In a shed, he fought back, brewing a cleaner that hit grime hard and didn't flinch. It wasn't just soap—it was his rebellion, his proof that American grit still mattered. Now, every bottle with his name carries that fight: relentless, real, ready for the mess.
+              Over the years, he's tested hundreds of cleaners. Most didn't cut it. So, he got to work—refining, mixing, and field-testing until he landed on something better. A formula tough enough for the job, safe enough to trust around people, and made entirely from natural ingredients.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="text-lg md:text-xl text-gray-700 leading-relaxed"
+            >
+              Now, his proven formulas are available to the public. No gimmicks. Just powerful, professional-grade cleaners that work—backed by a lifetime of experience.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              className="text-lg md:text-xl text-gray-700 leading-relaxed"
+            >
+              Introducing Rugged Red Cleaners.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="text-lg md:text-xl text-gray-700 leading-relaxed"
+            >
+              A Proven Powerful Clean
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

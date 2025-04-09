@@ -92,7 +92,7 @@ const Hero = () => {
           </div>
 
           {/* Right column */}
-          <div className="flex flex-col justify-center items-start text-left space-y-6">
+          <div className="flex flex-col justify-center items-start text-left space-y-4 md:space-y-6">
             <motion.h1
               className="font-extrabold leading-tight text-[#D3242A] mb-1"
               style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif", fontStyle: "normal" }}
@@ -100,7 +100,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.5 }}
             >
-              <span className="block mb-[-1.5rem]">A PROVEN</span>
+              <span className="block mb-[-0.5rem]">A PROVEN</span>
               <span className="block whitespace-nowrap">POWERFUL CLEAN</span>
             </motion.h1>
 
