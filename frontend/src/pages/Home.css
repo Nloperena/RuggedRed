@@ -21,12 +21,12 @@
   }
   @media (max-width: 639px) {
     .product-divider {
-      margin-top: 1.5rem;
+      margin-top: -17.5rem;
         margin-right: 0.5rem;
         margin-bottom: 5rem;
-        margin-left: 1rem;
+        margin-left: -5rem;
         padding: 0.5rem;
-        max-width: 84%;
+        max-width: 156%;
     }
   }
   
@@ -98,29 +98,29 @@
   
   @media (min-width: 1280px) and (max-width: 1439px) {
     .product-divider {
-      margin-top: -26rem;
-      margin-right: 5rem;
-      margin-bottom: 13rem;
-      margin-left: 2rem;
-      padding: 2rem;
-      max-width: 83%;
+      margin-top: -12rem;
+        margin-right: 5rem;
+        margin-bottom: 13rem;
+        margin-left: 2rem;
+        padding: 2rem;
+        max-width: 100%;
     }
   }
   
   @media (min-width: 1440px) and (max-width: 1599px) {
     .product-divider {
-        margin-top: -23rem;
-        margin-right: 0rem;
-        margin-bottom: 14rem;
-        margin-left: -3rem;
-        /* padding: 2rem; */
-        max-width: 90%;
+      margin-top: -9rem;
+      margin-right: 0rem;
+      margin-bottom: 14rem;
+      margin-left: -4rem;
+      /* padding: 2rem; */
+      max-width: 108%;
     }
   }
   
   @media (min-width: 1600px) and (max-width: 1799px) {
     .product-divider {
-      margin-top: -30rem;
+      margin-top: -10rem;
         margin-right: 4rem;
         margin-bottom: 15rem;
         margin-left: -6rem;
@@ -131,12 +131,12 @@
   
   @media (min-width: 1800px) and (max-width: 1935px) {
     .product-divider {
-      margin-top: -29rem;
+      margin-top: -12rem;
         /* margin-right: 14rem; */
         margin-bottom: 16rem;
-        margin-left: -13rem;
+        margin-left: -15rem;
         padding: 2rem;
-        max-width: 97%;
+        max-width: 110%;
     }
     }
   
@@ -172,7 +172,7 @@
   
   @media (max-width: 639px) {
     .mascot-divider {
-      margin-top: -17rem;
+      margin-top: -25rem;
       margin-left: -7.5rem;
       margin-bottom: 0;
       margin-right: 4rem;
@@ -217,12 +217,12 @@
   
   @media (min-width: 1024px) and (max-width: 1139px) {
     .mascot-divider {
-      margin-top: -72rem;
-      margin-left: -24rem;
+      margin-top: -65rem;
+      margin-left: -6rem;
       margin-bottom: 10rem;
       margin-right: 5rem;
       padding: 2rem;
-      max-width: 180%;
+      max-width: 120%;
     }
   }
   
@@ -250,49 +250,50 @@
   
   @media (min-width: 1280px) and (max-width: 1439px) {
     .mascot-divider {
-      margin-top: -66rem;
-      margin-left: -27rem;
-      margin-bottom: 13rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      width: 220%;
-      max-width: 300%;
+      margin-top: -48rem;
+        margin-left: -4rem;
+        margin-bottom: 13rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        width: 142%;
+        max-width: 300%;
     }
     }
+    
   
   
   @media (min-width: 1440px) and (max-width: 1599px) {
     .mascot-divider {
-      margin-top: -69rem;
-      margin-left: -28rem;
+      margin-top: -50rem;
+      margin-left: -5rem;
       margin-bottom: 14rem;
       margin-right: 0rem;
       padding: 2rem;
-      width: 240%;
+      width: 156%;
       max-width: 300%;
     }
   }
   
   @media (min-width: 1600px) and (max-width: 1799px) {
     .mascot-divider {
-      margin-top: -70rem;
-      margin-left: -17rem;
-      margin-bottom: 15rem;
-      margin-right: 5rem;
-      padding: 2rem;
-      max-width: 300%;
-      width: 220%;
+      margin-top: -56rem;
+        margin-left: -4rem;
+        margin-bottom: 15rem;
+        margin-right: 5rem;
+        padding: 2rem;
+        max-width: 300%;
+        width: 163%;
     }
   }
   
   @media (min-width: 1800px) and (max-width: 1935px) {
     .mascot-divider {
-      margin-top: -70rem;
-      margin-left: -14rem;
+      margin-top: -52rem;
+      margin-left: -5rem;
       margin-bottom: 15rem;
       margin-right: 5rem;
       padding: 2rem;
-      width: 232%;
+      width: 171%;
       max-width: 300%;
     }
   }
