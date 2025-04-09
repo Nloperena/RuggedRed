@@ -6,12 +6,12 @@ import ProductsSection from "./ProductsSection";
 const OurProductsSection = () => {
   // Return margin‑top values based on viewport width.
   const getMarginTop = (width) => {
-    if (width >= 2560) return "-50px";    // 4K displays (2560px and above)
-    else if (width >= 1536) return "-100px"; // Large desktops
-    else if (width >= 1280) return "-240px"; // Standard desktops
-    else if (width >= 1024) return "-200px"; // Smaller desktops / large tablets
-    else if (width >= 768) return "-240px";   // Tablets
-    else return "-300px";                     // Mobile devices
+    if (width >= 2560) return "-25vh";    // 4K displays (2560px and above)
+    else if (width >= 1536) return "-25vh"; // Large desktops
+    else if (width >= 1280) return "-25vh"; // Standard desktops
+    else if (width >= 1024) return "-25vh"; // Smaller desktops / large tablets
+    else if (width >= 768) return "-25vh";   // Tablets
+    else return "-25vh";                     // Mobile devices
   };
 
   const [marginTop, setMarginTop] = useState(getMarginTop(window.innerWidth));

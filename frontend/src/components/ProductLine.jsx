@@ -15,9 +15,9 @@ const iconData = [
 
 const ProductLine = () => {
   return (
-    <>
+    <div className="relative w-full" style={{ marginBottom: "-35vh" }}>
       {/* MOBILE VIEW */}
-      <section className="block md:hidden bg-white pt-16 pb-8 px-6 lg:pt-24 lg:pb-12 lg:px-8 2xl:pt-32 2xl:pb-16 2xl:px-10">
+      <section className="block md:hidden bg-white pt-8 pb-16 px-6 lg:pt-12 lg:pb-16 lg:px-8 2xl:pt-16 2xl:pb-16 2xl:px-10">
         <div className="container mx-auto flex flex-col items-center">
           {/* HEADLINE */}
           <motion.h2
@@ -67,7 +67,7 @@ const ProductLine = () => {
       </section>
 
       {/* DESKTOP VIEW */}
-      <section className="hidden md:block bg-white pt-16 pb-8 px-6 lg:pt-24 lg:pb-12 lg:px-10 2xl:pt-32 2xl:pb-16 2xl:px-12">
+      <section className="hidden md:block bg-white pt-8 pb-16 px-6 lg:pt-12 lg:pb-16 lg:px-10 2xl:pt-16 2xl:pb-16 2xl:px-12">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
           {/* LEFT: IMAGE */}
           <div className="w-full md:w-2/3 lg:w-1/2 flex justify-center mb-8 md:mb-0">
@@ -116,7 +116,7 @@ const ProductLine = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

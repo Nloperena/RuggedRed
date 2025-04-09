@@ -117,6 +117,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
+          style={{ marginBottom: "-18rem" }}
         >
           <ProductDivider />
         </motion.div>
@@ -127,11 +128,11 @@ const Home = () => {
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 2, duration: 1 }}
-          style={{ zIndex: 1001, position: "relative", marginTop: "-8rem" }}
+          style={{ zIndex: 1001, position: "relative", marginTop: "-16rem" }}
         >
           <div
             className="block transform mx-auto float-left w-[240px] sm:w-[385px] md:w-[400px] lg:w-[615px]"
-            style={{ marginBottom: "5rem" }}
+            style={{ marginBottom: "0" }}
           >
             <img
               src={require("../assets/RRMascot-smaller.png")}
@@ -154,6 +155,7 @@ const Home = () => {
             zIndex: 2,
             boxShadow: "0px 20px 30px rgba(0,0,0,0.3)",
             padding: "0 0rem",
+            marginTop: "-6rem"
           }}
         >
           <ProductLine />
