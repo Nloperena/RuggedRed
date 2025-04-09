@@ -94,13 +94,13 @@ const Hero = () => {
           {/* Right column */}
           <div className="flex flex-col justify-center items-start text-left space-y-6">
             <motion.h1
-              className="font-extrabold leading-snug text-[#D3242A] mb-2"
+              className="font-extrabold leading-tight text-[#D3242A] mb-1"
               style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif", fontStyle: "normal" }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.5 }}
             >
-              <span className="block">A PROVEN</span>
+              <span className="block mb-[-1.5rem]">A PROVEN</span>
               <span className="block whitespace-nowrap">POWERFUL CLEAN</span>
             </motion.h1>
 
@@ -111,7 +111,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.5 }}
             >
-              <p className="text-[#222222] leading-snug font-medium mb-1" style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif", fontStyle: "normal" }}>
+              <p className="text-[#222222] leading-tight font-medium mb-0" style={{ fontFamily: "TwCenMTCondensedExtraBold, sans-serif", fontStyle: "normal" }}>
                 Tough enough for industrial messes, safe enough for your home.
                 Get the clean you can&nbsp;trust.
               </p>
