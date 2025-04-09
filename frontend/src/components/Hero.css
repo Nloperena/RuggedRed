@@ -191,15 +191,16 @@ p, h2, h3, h4, h5, h6 {
 }
 
 /* Specific styles for Geogrotesque */
-h1, .geogrotesque-heading {
+.geogrotesque-heading {
   font-family: 'Geogrotesque', sans-serif;
   font-weight: bold;
   font-style: italic;
 }
 
 /* Specific styles for TwCenMTCondensedExtraBold */
-.subheading-font {
+h1, .subheading-font {
   font-family: 'TwCenMTCondensedExtraBold', sans-serif;
+  font-style: normal;
 }
 
 /* Example animations and effects */

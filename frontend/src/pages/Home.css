@@ -154,7 +154,7 @@
   
   @media (min-width: 2389px) {
     .product-divider {
-        margin: -32rem 0 18rem -34rem;
+        margin: -13rem 0 18rem -34rem;
         max-width: 115%;
         padding: 2rem;
     }
@@ -324,7 +324,7 @@
   
   @media (min-width: 2389px) {
     .mascot-divider {
-        margin-top: -70rem;
+        margin-top: -52rem;
         margin-left: 0rem;
         margin-bottom: 18rem;
         margin-right: 9rem;
