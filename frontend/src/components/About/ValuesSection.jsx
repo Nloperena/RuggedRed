@@ -2,12 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faBolt, 
-  faShieldAlt, 
-  faLeaf, 
-  faLightbulb,
+  faTrophy,
+  faShieldAlt,
+  faRecycle,
+  faCogs,
   faIndustry,
-  faUsers
+  faHandshake
 } from '@fortawesome/free-solid-svg-icons';
 
 const ValuesSection = () => {
@@ -15,7 +15,7 @@ const ValuesSection = () => {
     {
       title: "Powerful Performance",
       description: "Our custom formulations pack a punch, blasting away even the toughest messes while remaining safe for everyday use.",
-      icon: faBolt
+      icon: faTrophy
     },
     {
       title: "Proven Quality",
@@ -25,12 +25,12 @@ const ValuesSection = () => {
     {
       title: "Eco-Conscious",
       description: "Made with biodegradable ingredients, our products deliver powerful cleaning while protecting our environment.",
-      icon: faLeaf
+      icon: faRecycle
     },
     {
       title: "Visionary Innovation",
       description: "Leading the industry with groundbreaking cleaning solutions that set new standards for performance and sustainability.",
-      icon: faLightbulb
+      icon: faCogs
     },
     {
       title: "American Manufacturing",
@@ -40,7 +40,7 @@ const ValuesSection = () => {
     {
       title: "Community Focused",
       description: "Committed to supporting American workers and businesses, strengthening our local economies.",
-      icon: faUsers
+      icon: faHandshake
     }
   ];
 

@@ -6,13 +6,13 @@ import ProductHeroImg from "../../assets/RR-ProductHeroImg.png";
 import FlagIcon from "../../assets/icons/Flag Icon.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faBolt, 
-  faShieldAlt, 
-  faLeaf, 
+  faStar,
+  faCheckCircle,
+  faGem,
   faLightbulb,
-  faIndustry,
-  faUsers
-} from '@fortawesome/free-solid-svg-icons';
+  faBuilding,
+  faHandshake
+} from '@fortawesome/free-regular-svg-icons';
 
 const CompanySection = () => {
   const [teamworkImageLoaded, setTeamworkImageLoaded] = useState(false);
@@ -70,17 +70,17 @@ const CompanySection = () => {
             {
               title: "Powerful Performance",
               description: "Our custom formulations pack a punch, blasting away even the toughest messes while remaining safe for everyday use.",
-              icon: faBolt
+              icon: faStar
             },
             {
               title: "Proven Quality",
               description: "Every product is crafted with precision in our American facilities, tested for excellence, and backed by our satisfaction guarantee.",
-              icon: faShieldAlt
+              icon: faCheckCircle
             },
             {
               title: "Eco-Conscious",
               description: "Made with biodegradable ingredients, our products deliver powerful cleaning while protecting our environment.",
-              icon: faLeaf
+              icon: faGem
             },
             {
               title: "Visionary Innovation",
@@ -90,12 +90,12 @@ const CompanySection = () => {
             {
               title: "American Manufacturing",
               description: "Proudly made in the USA, supporting local jobs and communities while ensuring the highest quality standards.",
-              icon: faIndustry
+              icon: faBuilding
             },
             {
               title: "Community Focused",
               description: "Committed to supporting American workers and businesses, strengthening our local economies.",
-              icon: faUsers
+              icon: faHandshake
             }
           ].map((value, index) => (
             <motion.div
@@ -107,7 +107,7 @@ const CompanySection = () => {
               className="bg-white p-6 rounded-3xl shadow-lg flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-105"
             >
               <div className="bg-[#D3242A] p-3 rounded-full mb-4">
-                <FontAwesomeIcon icon={value.icon} className="h-6 w-6 text-white" />
+                <FontAwesomeIcon icon={value.icon} className="h-6 w-6 text-white" style={{ stroke: 'white', strokeWidth: '1px' }} />
               </div>
               <h3 className="text-xl font-bold text-[#D3242A] mb-2">{value.title}</h3>
               <p className="text-gray-700 text-base">{value.description}</p>

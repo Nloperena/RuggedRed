@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Button from "./Button";
 
 export default function CustomHeader({
   backgroundImg,      // URL for the full-screen background image
@@ -8,10 +7,6 @@ export default function CustomHeader({
   subheading = "Powerful, Sustainable, Ready for Anything",
   description = "Discover how our products can tackle any challenge—from quick spills to industrial grime.",
   highlightLine = "Experience the next generation of cleaning solutions.",
-  buttonLabel = "Learn More",
-  onButtonClick = () => {},
-  ctaUrl,
-  ctaText,
 }) {
   return (
     <section className="relative w-full py-12 px-6 overflow-hidden">
@@ -54,20 +49,9 @@ export default function CustomHeader({
           <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-2">
             {description}
           </p>
-          <p className="text-base sm:text-lg md:text-xl text-gray-800 font-bold mb-6">
+          <p className="text-base sm:text-lg md:text-xl text-gray-800 font-bold">
             {highlightLine}
           </p>
-          {buttonLabel && (
-            <Button
-              href={ctaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="primary"
-              size="medium"
-            >
-              {buttonLabel}
-            </Button>
-          )}
         </motion.div>
       </div>
     </section>
