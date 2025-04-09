@@ -1,82 +1,83 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import FlagImage from "../assets/icons/Flag Icon.png";
 
 // The mobile nav also changes color scheme if isInverted is true
-const MobileNav = ({ isMenuOpen, onClose, links, isInverted }) => {
-  // container class: if inverted => red background, white text
-  // else => white background, red text
-  const containerClass = isInverted ? "bg-[#D3242A] text-white" : "bg-white text-red-600";
-
-  // link styling: invert text/hover background
-  // if inverted => default white, hover => bg-white, text-red
-  // if not => default red, hover => bg-red, text-white
-  const getLinkClass = (isInverted) =>
-    isInverted
-      ? "block font-semibold text-4xl transition-colors hover:bg-white hover:text-[#D3242A] px-2 py-1 rounded"
-      : "block font-semibold text-4xl transition-colors hover:bg-[#D3242A] hover:text-white px-2 py-1 rounded";
+const MobileNav = ({ isOpen, onClose }) => {
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
 
   return (
-    <motion.div
-      initial={{ x: "100%" }}
-      animate={{ x: isMenuOpen ? 0 : "100%" }}
-      transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] }}
-      className={`fixed top-0 right-0 w-3/4 sm:w-1/2 h-full shadow-2xl z-50 p-8 ${containerClass}`}
-    >
-      {/* Close Button */}
-      <button onClick={onClose} className="absolute top-8 right-8 text-4xl sm:text-6xl">
-        <FontAwesomeIcon icon={faTimes} />
-      </button>
-
-      {/* Navigation Links for mobile */}
-      <ul className="flex flex-col space-y-8 items-end mt-24">
-        {links.map((link, index) => (
-          <li key={index}>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5, delay: index * 0.2, ease: "easeOut" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                to={link.path}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setTimeout(() => {
-                    onClose();
-                    window.location.href = link.path;
-                  }, 500);
-                }}
-                className={getLinkClass(isInverted)}
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            onClick={onClose}
+          />
+          
+          {/* Mobile Navigation Menu */}
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-xl"
+          >
+            <div className="p-6">
+              {/* Close Button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
               >
-                {link.name}
-              </Link>
-            </motion.div>
-          </li>
-        ))}
-      </ul>
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
 
-      {/* Decorative Flag Image */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 50 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="mt-16 w-full"
-      >
-        <img
-          src={FlagImage}
-          alt="Decorative Flag"
-          className="w-full h-auto object-contain"
-          // Optionally invert flag in mobile nav:
-          // style={ isInverted ? { filter: "invert(1)" } : {} }
-        />
-      </motion.div>
-    </motion.div>
+              {/* Navigation Links */}
+              <nav className="mt-12">
+                <ul className="space-y-6">
+                  {navLinks.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        to={link.path}
+                        onClick={onClose}
+                        className="text-lg font-semibold text-gray-800 hover:text-[#D3242A] transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 

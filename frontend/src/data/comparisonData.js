@@ -2,7 +2,7 @@ export const comparisonData = [
   {
     title: "All-Purpose Cleaner",
     color: "bg-[#009E00]", // Green
-    competitor: "Simple Green",
+    competitor: "National Brand",
     rows: [
       ["Safe on Surfaces", "✔", "✔"],
       ["Cleans More Dirt & Grime", "✔", "✘"],
@@ -13,7 +13,7 @@ export const comparisonData = [
   {
     title: "Cleaner & Degreaser",
     color: "bg-[#D3242A]", // Red
-    competitor: "Simple Green",
+    competitor: "National Brand",
     rows: [
       ["Safe on Industrial Surfaces", "✔", "✔"],
       ["100% Biodegradable", "✔", "✔"],
@@ -24,7 +24,7 @@ export const comparisonData = [
   {
     title: "Glass Cleaner",
     color: "bg-[#22A7AD]", // Blue
-    competitor: "Windex",
+    competitor: "National Brand",
     rows: [
       ["Streak-Free Shine", "✔", "✔"],
       ["Ammonia-Free Formula", "✔", "✘"],
