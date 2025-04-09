@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import FamilyImage from "../assets/Family.png";
 
 const ParallaxSection = () => {
   const containerRef = useRef(null);
@@ -60,7 +61,7 @@ const ParallaxSection = () => {
               className="top-0 left-0 w-full h-full"
             >
               <motion.img
-                src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
+                src={FamilyImage}
                 alt="Left Image"
                 className="w-full h-full object-cover"
                 style={{ 
@@ -79,7 +80,7 @@ const ParallaxSection = () => {
               className="top-0 left-0 w-1/2 h-full"
             >
               <motion.img
-                src="https://images.ctfassets.net/hdznx4p7ef81/7iA5UBx6HnqzASrlpsYanj/b0316a9e6795a9aacf2893150beae9ba/Home_Cleaning_Tips_Blog-edit1.png"
+                src={FamilyImage}
                 alt="Left Image"
                 className="w-full h-full object-cover"
                 style={{ 
