@@ -24,10 +24,6 @@ const ProductDivider = ({ flip = false }) => {
         src={ProductHeroImg}
         alt="Product Divider"
         className="product-divider-image"
-        style={{
-          maskImage: "linear-gradient(to bottom, black 95%, transparent)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
-        }}
       />
     </motion.div>
   );

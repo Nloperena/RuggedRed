@@ -195,25 +195,4 @@
   .product-divider-image {
     width: 1000px;
   }
-}
-
-/* Subtle white fade with blur effect */
-.product-divider::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 255, 255, 0.1) 20%,
-    rgba(255, 255, 255, 0.2) 40%,
-    rgba(255, 255, 255, 0.3) 60%,
-    rgba(255, 255, 255, 0.4) 80%,
-    rgba(255, 255, 255, 0.5) 100%
-  );
-  backdrop-filter: blur(2px);
-  pointer-events: none;
 } 
