@@ -1,61 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import ProductHeroImg from "../assets/RR Bottles Reflection 2.png";
+import ProductHeroImg from "../assets/RRBottlesHeroImage.png";
 import "./ProductDivider.css";
 
-const ProductDivider = ({ flip }) => {
+const ProductDivider = ({ flip = false }) => {
   const scrollToProducts = () => {
-    // Check if we're on the home page
-    if (window.location.pathname === '/') {
-      const productsSection = document.getElementById('our-products');
-      if (productsSection) {
-        productsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // If we're not on the home page, navigate to the products page
-      window.location.href = '/products';
+    const productsSection = document.getElementById('our-products');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <motion.div
-      className={`relative w-full max-w-[100vw] ${flip ? "rotate-180" : ""}`}
-      style={{
-        zIndex: 1001,
-        cursor: 'pointer'
-      }}
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ 
-        delay: 1.5, 
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1] // Custom easing for smooth animation
-      }}
+      className={`product-divider ${flip ? 'flip' : ''}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.5, duration: 0.8 }}
       onClick={scrollToProducts}
-      role="button"
-      tabIndex={0}
-      onKeyPress={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          scrollToProducts();
-        }
-      }}
     >
-      {/* Wrapper for Product Image */}
-      <div
-        className="block transform mx-auto float-right w-[240px] sm:w-[385px] md:w-[500px] lg:w-[615px]"
-      >
-        {/* Product image */}
-        <img
-          src={ProductHeroImg}
-          alt="RuggedRed Product Hero"
-          className="block object-contain product-divider"
-          style={{
-            maskImage: "linear-gradient(to bottom, black 95%, transparent)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
-          }}
-        />
-      </div>
+      <img
+        src={ProductHeroImg}
+        alt="Product Divider"
+        className="product-divider-image"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 95%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
+        }}
+      />
     </motion.div>
   );
 };
