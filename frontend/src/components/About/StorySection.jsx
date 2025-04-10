@@ -23,8 +23,11 @@ export default function StorySection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#D3242A] uppercase leading-tight"
-              style={{ fontFamily: "Geogrotesque, sans-serif" }}
+              className="font-bold text-[#D3242A] uppercase leading-tight whitespace-nowrap"
+              style={{ 
+                fontFamily: "Geogrotesque, sans-serif",
+                fontSize: "clamp(1.5rem, 5vw, 3rem)"
+              }}
             >
               MEET RUGGED RED
             </motion.h2>
