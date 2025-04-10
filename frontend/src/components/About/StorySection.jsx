@@ -26,7 +26,7 @@ export default function StorySection() {
               className="font-bold text-[#D3242A] uppercase leading-tight whitespace-nowrap"
               style={{ 
                 fontFamily: "Geogrotesque, sans-serif",
-                fontSize: "clamp(1.5rem, 5vw, 3rem)"
+                fontSize: "clamp(2.2rem, 5vw, 3rem)"
               }}
             >
               MEET RUGGED RED
