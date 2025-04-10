@@ -160,7 +160,7 @@ const ProductDetail = ({ products }) => {
       </section>
 
       {/* In Action - Full Width Row */}
-      {productInUseImages && productInUseImages.length > 0 && (
+      {/* {productInUseImages && productInUseImages.length > 0 && (
         <section className="py-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-red-50 to-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center gap-3 mb-12">
@@ -188,7 +188,7 @@ const ProductDetail = ({ products }) => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* Bento Grid Layout */}
       {(keyFeatures?.length > 0 || keyBenefits?.length > 0 || detailedProductDescription) && (
