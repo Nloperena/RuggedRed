@@ -37,4 +37,4 @@ export const comparisonData = [
 ];
 
 // In your component:
-const text = "RUGGED RED"; // Returns "RuggedRed" 
+const text = "RUGGED RED"; // Returns "RUGGED RED" 

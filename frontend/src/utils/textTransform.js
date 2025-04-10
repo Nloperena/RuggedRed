@@ -1,11 +1,11 @@
-// Function to convert RuggedRed to RuggedRed
+// Function to convert RuggedRed to RUGGED RED
 export const separateUppercase = (text) => {
-  return text.replace(/RuggedRed/g, 'RuggedRed');
+  return text.replace(/RuggedRed/g, 'RUGGED RED');
 };
 
-// Function to convert RuggedRed to RuggedRed
+// Function to convert Rugged Red to RUGGED RED
 export const combineSpaced = (text) => {
-  return text.replace(/Rugged\s+Red/g, 'RuggedRed');
+  return text.replace(/Rugged\s+Red/g, 'RUGGED RED');
 };
 
 // Function to apply both transformations based on context
