@@ -31,28 +31,25 @@
   padding-top: 0;
   position: relative;
   background-position: center bottom;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
-@media (min-width: 340px) {
+@media (min-width: 300px) {
   #hero {
-    min-height: 850px;
-    background-position: center right;
-    background-size: cover;
+    min-height: 600px;
+    background-position: center center;
   }
 }
 
 @media (min-width: 640px) {
   #hero {
-    min-height: 1100px;
-    background-position: center right;
+    min-height: 600px;
+    background-position: center center;
   }
 }
 
 @media (min-width: 768px) {
   #hero {
-    min-height: 600px;
+    min-height: 1000px;
     background-position: center center;
   }
 }
@@ -66,7 +63,8 @@
 
 @media (min-width: 970px) {
   #hero {
-    min-height: 800px;
+    min-height: 1000px;
+    background-size: cover;
     background-position: center 62%;
   }
 }
@@ -76,37 +74,43 @@
 ---------------------------------- */
 #hero .hero-content {
   /* Mobile (default) */
-  margin: -16rem 2.35rem 2rem;
-  padding: 2rem 0;
+  margin: -9rem 6rem 2rem;
+  padding: 4rem 0;
 }
 
-
-@media (min-width: 640px) {
+@media (min-width: 300px) {
   #hero .hero-content {
-    margin: -30rem 2rem 2rem;
-    padding: 3rem 0;
+    margin: -16rem 2rem 2rem;
+    padding: 4rem 0;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   #hero .hero-content {
     margin: -9rem 6rem 2rem;
     padding: 4rem 0;
   }
 }
 
+@media (min-width: 768px) {
+  #hero .hero-content {
+    margin: -22rem 6rem 2rem;
+        padding: 4rem 0;
+  }
+}
+
 @media (min-width: 1024px) {
   #hero .hero-content {
     margin: -20rem 6rem 2rem;
-    padding: 4rem 0;
+    padding: 4rem 1rem;
   }
 }
 
 @media (min-width: 1280px) {
   #hero .hero-content {
-    margin: -10rem auto 2rem;
+    
     max-width: 1600px;
-    padding: 5rem 0;
+    padding: 5rem 1rem;
   }
 }
 
@@ -114,46 +118,57 @@
    FONT-SIZE FOR HEADLINE AND PARAGRAPH
 ---------------------------------- */
 #hero h1 {
-  font-size: 2.8rem; /* Mobile default */
+  font-size: clamp(2rem, 8vw, 5.6rem);
+  line-height: 1.2;
 }
 
 #hero p {
-  font-size: 1rem; /* Mobile default */
+  font-size: clamp(0.875rem, 3vw, 2.2rem);
+  line-height: 1.4;
+}
+
+@media (min-width: 300px) {
+  #hero h1 {
+    font-size: clamp(2rem, 8vw, 5.6rem);
+  }
+  #hero p {
+    font-size: clamp(0.875rem, 3vw, 2.2rem);
+  }
 }
 
 @media (min-width: 640px) {
   #hero h1 {
-    font-size: 4.5rem; /* Small screens */
+    font-size: clamp(2.5rem, 8vw, 5.6rem);
   }
   #hero p {
-    font-size: 1.25rem; /* Small screens */
+    font-size: clamp(1rem, 3vw, 2.2rem);
   }
 }
 
 @media (min-width: 768px) {
   #hero h1 {
-    font-size: 4rem; /* Medium screens */
+    font-size: clamp(3rem, 8vw, 5.6rem);
   }
   #hero p {
-    font-size: 1.5rem; /* Medium screens */
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
   }
 }
 
 @media (min-width: 1024px) {
   #hero h1 {
-    font-size: 3.4rem; /* Large screens */
+    font-size: clamp(3.5rem, 8vw, 3.6rem);
   }
   #hero p {
-    font-size: 1.4rem; /* Large screens */
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
   }
 }
 
 @media (min-width: 1280px) {
   #hero h1 {
-    font-size: 5.6rem; /* Extra-large screens */
+    font-size: 5.6rem;
   }
   #hero p {
-    font-size: 2.2rem; /* Extra-large screens */
+    font-size: 2.2rem;
   }
 }
 
@@ -255,3 +270,4 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+

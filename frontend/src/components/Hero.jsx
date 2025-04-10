@@ -5,6 +5,8 @@ import Stars from "./Stars";
 import kitchen3 from "../assets/Kitchen5.png";
 import './Hero.css';
 import Button from "./Button";
+import Mascot from "./Mascot";
+import ProductDivider from "./ProductDivider";
 
 const Hero = () => {
   // Add scroll behavior control
@@ -67,6 +69,7 @@ const Hero = () => {
         backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 85%, rgba(255, 255, 255, 1)), url(${kitchen3})`,
         marginTop: 0,
         paddingTop: 0,
+        position: 'relative',
       }}
     >
       {/* Sparkly Stars in the background */}
@@ -135,6 +138,12 @@ const Hero = () => {
           </div>
         </div>
       </motion.div>
+
+      {/* Mascot positioned absolutely within the hero section */}
+      <Mascot />
+
+      {/* Product Divider positioned absolutely within the hero section */}
+      <ProductDivider flip={false} />
     </section>
   );
 };

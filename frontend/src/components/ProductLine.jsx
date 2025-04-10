@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ProductHeroImg from "../assets/RR Bottles Reflection 2.png";
+import ProductHeroImg from "../assets/RRBottlesHeroImage.png";
 import PowerfulIcon from "../assets/icons/Powerful Icon.png";
 import BiodegradableIcon from "../assets/icons/Biodegradable Icon.png";
 import ProvenIcon from "../assets/icons/Proven Icon.png";
@@ -15,9 +15,17 @@ const iconData = [
 
 const ProductLine = () => {
   return (
-    <div className="relative w-full" style={{ marginBottom: "-35vh" }}>
+    <div 
+      style={{ 
+        position: "relative",
+        zIndex: 2,
+        boxShadow: "rgba(0, 0, 0, 0.3) 0px 20px 30px",
+        padding: "85px 0rem 0 0",
+        marginTop: "-6rem"
+      }}
+    >
       {/* MOBILE VIEW */}
-      <section className="block md:hidden bg-white pt-8 pb-16 px-6 lg:pt-12 lg:pb-16 lg:px-8 2xl:pt-16 2xl:pb-16 2xl:px-10">
+      <section className="block md:hidden bg-white pt-40 pb-16 px-6 min-[905px]:pt-48 lg:pt-16 lg:pb-16 lg:px-8 2xl:pt-20 2xl:pb-16 2xl:px-10">
         <div className="container mx-auto flex flex-col items-center">
           {/* HEADLINE */}
           <motion.h2
