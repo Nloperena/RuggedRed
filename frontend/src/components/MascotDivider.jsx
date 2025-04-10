@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Mascot from "../assets/RRMascot.png";
 
 const MascotDivider = ({ flip }) => {
@@ -10,15 +10,22 @@ const MascotDivider = ({ flip }) => {
       style={{ zIndex: 1001 }}
     >
       {/* Wrapper for Mascot */}
-      <div
+      <motion.div
         className="relative block transform mx-auto float-left"
         style={{
           marginTop: "-40rem",
           marginLeft: "18rem",
         }}
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ 
+          duration: 1,
+          ease: [0.6, 0.05, 0.2, 0.9],
+          delay: 0.5
+        }}
       >
         {/* Mascot Image */}
-        <img
+        <motion.img
           src={Mascot}
           alt="RuggedRed Mascot"
           className={`
@@ -31,8 +38,15 @@ const MascotDivider = ({ flip }) => {
             maskImage: "linear-gradient(to bottom, black 95%, transparent)",
             WebkitMaskImage: "linear-gradient(to bottom, black 95%, transparent)",
           }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ 
+            duration: 1.5,
+            ease: [0.6, 0.05, 0.2, 0.9],
+            delay: 0.5
+          }}
         />
-      </div>
+      </motion.div>
     </div>
   );
 };
