@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { comparisonData } from "../data/comparisonData";
-import { transformText } from "../utils/textTransform";
 
 const ComparisonTable = () => {
   const containerVariants = {
@@ -87,7 +86,7 @@ const ComparisonTable = () => {
                         Feature
                       </th>
                       <th className="px-4 py-2 text-gray-800 text-center text-xs sm:text-sm uppercase tracking-wide">
-                        {transformText("RuggedRed")}
+                        RuggedRed
                       </th>
                       <th className="px-4 py-2 text-gray-800 text-center text-xs sm:text-sm uppercase tracking-wide">
                         {item.competitor}
