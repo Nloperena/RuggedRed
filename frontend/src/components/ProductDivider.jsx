@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import ProductHeroImg from "../assets/RRBottlesHeroImage.png";
+import ProductHeroImg from "../assets/thumbnail_Rugged Red- All Purpose Cleaner- Amazon Launch- Interlock.png";
 import "./ProductDivider.css";
 
 const ProductDivider = ({ flip = false }) => {
