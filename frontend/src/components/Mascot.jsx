@@ -1,5 +1,5 @@
 import React from 'react';
-import mascotImage from '../assets/RRMascot-smaller.png';
+import mascotImage from '../assets/thumbnail_Rugged Red Amazon Product Launch- Interloock Beta-001.png';
 import './Mascot.css';
 
 const Mascot = () => {
