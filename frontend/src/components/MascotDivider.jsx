@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import Mascot from "../assets/thumbnail_Rugged Red Amazon Product Launch- Interloock Beta-001.png";
+import Mascot from "../assets/Rugged Red Amazon Product Launch- Interloock Beta-001.png";
 
 const MascotDivider = ({ flip }) => {
   return (
