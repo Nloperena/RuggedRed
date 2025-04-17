@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -17,6 +17,7 @@ const AppContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const footerRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleLoad = () => {
@@ -56,7 +57,7 @@ const AppContent = () => {
       <LoadingScreen isLoading={isLoading} />
       {!isLoading && (
         <>
-          <Nav />
+          {location.pathname !== "/" && <Nav />}
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home footerRef={footerRef} />} />
