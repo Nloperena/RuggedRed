@@ -24,6 +24,9 @@ const Header = () => {
             <Link to="/" className="text-gray-800 hover:text-[#D3242A] transition-colors">
               Home
             </Link>
+            <Link to="/split-view" className="text-gray-800 hover:text-[#D3242A] transition-colors">
+              Split View
+            </Link>
             <Link to="/products" className="text-gray-800 hover:text-[#D3242A] transition-colors">
               Products
             </Link>

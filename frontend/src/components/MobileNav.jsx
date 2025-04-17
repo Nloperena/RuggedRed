@@ -9,6 +9,7 @@ import FlagImage from "../assets/icons/Flag Icon.png";
 const MobileNav = ({ isOpen, onClose }) => {
   const navLinks = [
     { name: 'Home', path: '/' },
+    { name: 'Split View', path: '/split-view' },
     { name: 'Products', path: '/products' },
     { name: 'About', path: '/about' },
   ];
