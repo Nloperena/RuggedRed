@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import MascotImg from "../../assets/RRMascot+Type-smaller.png";
+import MascotImg from "../../assets/Rugged Red Logo Mr. Rugged Red Small- Interlock Dynamic.png";
 import AmericanFlag from "../../assets/American-Flag.png";
 import NewsletterModal from "../NewsletterModal";
 
