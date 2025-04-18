@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import MascotImg from "../../assets/Rugged Red Logo Mr. Rugged Red Small- Interlock Dynamic.png";
 import AmericanFlag from "../../assets/American-Flag.png";
 import NewsletterModal from "../NewsletterModal";
 
@@ -95,7 +94,7 @@ export default function StorySection() {
             className="flex justify-center"
           >
             <img
-              src={MascotImg}
+              src="/images/Rugged Red Logo Mr. Rugged Red Small- Interlock Dynamic.png"
               alt="RuggedRed Mascot"
               className="w-full max-w-md rounded-2xl [filter:drop-shadow(0_20px_13px_rgb(0_0_0_/_0.3))]"
             />

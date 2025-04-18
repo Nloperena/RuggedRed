@@ -8,7 +8,7 @@ import Blog from "./pages/Blog";
 import About from "./pages/About";
 import ProductDetail from "./pages/ProductDetail";
 import LoadingScreen from "./components/LoadingScreen";
-import { fetchProducts } from "./data/contentful";
+import { fetchProducts } from "./contentful";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollLock from "./components/ScrollLock";
 import { Analytics } from "@vercel/analytics/react"

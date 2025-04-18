@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import client from "../../data/contentful";
+import client from "../contentful";
 
 export async function getStaticPaths() {
   const res = await client.getEntries({ content_type: "blogPost" });

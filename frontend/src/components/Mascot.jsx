@@ -1,11 +1,14 @@
 import React from 'react';
-import mascotImage from '../assets/Rugged Red Amazon Product Launch- Interloock Beta-001.png';
 import './Mascot.css';
 
 const Mascot = () => {
   return (
     <div className="mascot-divider">
-      <img src={mascotImage} alt="Rugged Red Mascot" className="mascot-image" />
+      <img 
+        src="/images/Rugged Red Logo Small With Mr. Rugged Red - Right Side Logo Interlock Dynamic.png" 
+        alt="Rugged Red Mascot" 
+        className="mascot-image" 
+      />
     </div>
   );
 };

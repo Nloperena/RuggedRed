@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-import RuggedRedLogo from "../assets/RuggedRedTypographyLogo.png";
 import FlagIcon from "../assets/icons/Flag Icon.png";
 import MobileNav from "./MobileNav";
 import SqueakyCleanButton from "./SqueakyCleanButton";
@@ -37,7 +36,11 @@ export default function Nav() {
         {/* Logo */}
         <div>
           <Link to="/">
-            <img src={RuggedRedLogo} alt="RuggedRed Logo" className="h-16 lg:h-20" />
+            <img 
+              src="/images/RuggedRedTypographyLogo-InterlockDynamic.png" 
+              alt="RuggedRed Logo" 
+              className="h-16 lg:h-20" 
+            />
           </Link>
         </div>
 
